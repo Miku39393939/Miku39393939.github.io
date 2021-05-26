@@ -18,7 +18,7 @@
 <meta property="og:description" content="介绍假如我们在制作柱状图时，不能确定数据的变化范围，或者数据变化过大，就可以使用比例尺。 比例尺，顾名思义，就是把一组数据映射到一个集合中。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-05-25T10:59:45.000Z">
-<meta property="article:modified_time" content="2021-05-26T14:10:20.976Z">
+<meta property="article:modified_time" content="2021-05-26T14:11:07.571Z">
 <meta property="article:author" content="水蓝络合物">
 <meta property="article:tag" content="教程">
 <meta property="article:tag" content="d3">
@@ -247,7 +247,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">826字</span>
+      <span class="post-count">953字</span>
     </span>
   </span>
 
@@ -256,7 +256,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">3分</span>
+      <span class="post-count">4分</span>
     </span>
   </span>
 </div>
@@ -286,55 +286,9 @@
 
 <p>想要换成y轴也很简单,只需把axisBottom换成axisLeft(数字在坐标轴左侧)，或者axisRight(数字在坐标轴右侧)</p>
 <p>与此同时，想要改变数字递增的方向也很简单，只需把range中两个数字调换一下位置即可。</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><body>
-<svg></svg>
-<script>
-    var margin = {top: 80, bottom: 60, left: 70, right: 60};
-    var dataset = [21893095,13866009,74610235,34915616,24049155,42591407,24073453,31850088,24870895,84748016,64567588,
-        61027171,41540086,45188635,101527453,99365519,57752557,66444864,126012510,10081232,32054159,38562148,83674866,
-        47209277,39528999,25019831,5923957,7202654,25823445];
-    var datax = ['北京','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江','上海','江苏','浙江','安徽','福建',
-        '江西','山东','河南','湖北','湖南','广东','海南','重庆','贵州','四川','云南','陕西','甘肃','青海','宁夏','新疆'];
-    var svg = d3.select("svg") // svg画布充斥整个网页
-        .attr("width", window.innerWidth)
-        .attr("height", window.innerHeight);
-    var g = svg.append("g") //设计画布的左上角位置
-            .attr("transform", "translate(" + margin.top + "," + margin.left + ")");
-    var height = 0.8 * window.innerHeight, width = 0.9 * window.innerWidth; // 用于计算柱状宽度和长度
-    var rectWidth = width / dataset.length;
-    var scaleLinear = d3.scaleLinear() // 比例尺，把高度作为比例尺的起始数据
-        .domain([0, d3.max(dataset)])
-        .range([0, height]);
-    g.selectAll("rect")
-        .data(dataset)
-        .enter()
-        .append("rect")
-        .attr("x", function (d, i) {
-            return i * rectWidth;
-        })
-        .attr("y", function (d, i){//由于高度是从上往下延伸的，所以柱子y轴开始的地方应该是它的顶端
-            return height - scaleLinear(d);
-        })
-        .attr("width", rectWidth * 0.9)
-        .attr("height", function (d) {
-            return scaleLinear(d);
-        })
-        .attr("fill", "blue");//颜色
-    var yScale = d3.scaleLinear() //添加y轴
-        .domain([0, d3.max(dataset)])
-        .range([height, 0]); //原本是坐标轴数据从上往下递增的，所以要反着来
-    var yAxis = d3.axisLeft(yScale)
-        .ticks(10);
-    var lineX = 0, lineY = margin.top;
-    g.append("g")
-        .attr("transform", "translate(" + lineX + "," + 0  + ")")
-        .call(yAxis);
-</script>
-</body>
-</html>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> margin = &#123;<span class="attr">top</span>: <span class="number">80</span>, <span class="attr">bottom</span>: <span class="number">60</span>, <span class="attr">left</span>: <span class="number">70</span>, <span class="attr">right</span>: <span class="number">60</span>&#125;;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> dataset = [<span class="number">21893095</span>,<span class="number">13866009</span>,<span class="number">74610235</span>,<span class="number">34915616</span>,<span class="number">24049155</span>,<span class="number">42591407</span>,<span class="number">24073453</span>,<span class="number">31850088</span>,<span class="number">24870895</span>,<span class="number">84748016</span>,<span class="number">64567588</span>,</span></span><br><span class="line"><span class="javascript">        <span class="number">61027171</span>,<span class="number">41540086</span>,<span class="number">45188635</span>,<span class="number">101527453</span>,<span class="number">99365519</span>,<span class="number">57752557</span>,<span class="number">66444864</span>,<span class="number">126012510</span>,<span class="number">10081232</span>,<span class="number">32054159</span>,<span class="number">38562148</span>,<span class="number">83674866</span>,</span></span><br><span class="line"><span class="javascript">        <span class="number">47209277</span>,<span class="number">39528999</span>,<span class="number">25019831</span>,<span class="number">5923957</span>,<span class="number">7202654</span>,<span class="number">25823445</span>];</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> datax = [<span class="string">&#x27;北京&#x27;</span>,<span class="string">&#x27;天津&#x27;</span>,<span class="string">&#x27;河北&#x27;</span>,<span class="string">&#x27;山西&#x27;</span>,<span class="string">&#x27;内蒙古&#x27;</span>,<span class="string">&#x27;辽宁&#x27;</span>,<span class="string">&#x27;吉林&#x27;</span>,<span class="string">&#x27;黑龙江&#x27;</span>,<span class="string">&#x27;上海&#x27;</span>,<span class="string">&#x27;江苏&#x27;</span>,<span class="string">&#x27;浙江&#x27;</span>,<span class="string">&#x27;安徽&#x27;</span>,<span class="string">&#x27;福建&#x27;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;江西&#x27;</span>,<span class="string">&#x27;山东&#x27;</span>,<span class="string">&#x27;河南&#x27;</span>,<span class="string">&#x27;湖北&#x27;</span>,<span class="string">&#x27;湖南&#x27;</span>,<span class="string">&#x27;广东&#x27;</span>,<span class="string">&#x27;海南&#x27;</span>,<span class="string">&#x27;重庆&#x27;</span>,<span class="string">&#x27;贵州&#x27;</span>,<span class="string">&#x27;四川&#x27;</span>,<span class="string">&#x27;云南&#x27;</span>,<span class="string">&#x27;陕西&#x27;</span>,<span class="string">&#x27;甘肃&#x27;</span>,<span class="string">&#x27;青海&#x27;</span>,<span class="string">&#x27;宁夏&#x27;</span>,<span class="string">&#x27;新疆&#x27;</span>];</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> svg = d3.select(<span class="string">&quot;svg&quot;</span>) <span class="comment">// svg画布充斥整个网页</span></span></span><br><span class="line"><span class="javascript">        .attr(<span class="string">&quot;width&quot;</span>, <span class="built_in">window</span>.innerWidth)</span></span><br><span class="line"><span class="javascript">        .attr(<span class="string">&quot;height&quot;</span>, <span class="built_in">window</span>.innerHeight);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> g = svg.append(<span class="string">&quot;g&quot;</span>) <span class="comment">//设计画布的左上角位置</span></span></span><br><span class="line"><span class="javascript">            .attr(<span class="string">&quot;transform&quot;</span>, <span class="string">&quot;translate(&quot;</span> + margin.top + <span class="string">&quot;,&quot;</span> + margin.left + <span class="string">&quot;)&quot;</span>);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> height = <span class="number">0.8</span> * <span class="built_in">window</span>.innerHeight, width = <span class="number">0.9</span> * <span class="built_in">window</span>.innerWidth; <span class="comment">// 用于计算柱状宽度和长度</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> rectWidth = width / dataset.length;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> scaleLinear = d3.scaleLinear() <span class="comment">// 比例尺，把高度作为比例尺的起始数据</span></span></span><br><span class="line"><span class="javascript">        .domain([<span class="number">0</span>, d3.max(dataset)])</span></span><br><span class="line"><span class="javascript">        .range([<span class="number">0</span>, height]);</span></span><br><span class="line"><span class="javascript">    g.selectAll(<span class="string">&quot;rect&quot;</span>)</span></span><br><span class="line"><span class="javascript">        .data(dataset)</span></span><br><span class="line"><span class="javascript">        .enter()</span></span><br><span class="line"><span class="javascript">        .append(<span class="string">&quot;rect&quot;</span>)</span></span><br><span class="line"><span class="javascript">        .attr(<span class="string">&quot;x&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">d, i</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> i * rectWidth;</span></span><br><span class="line"><span class="javascript">        &#125;)</span></span><br><span class="line"><span class="javascript">        .attr(<span class="string">&quot;y&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">d, i</span>)</span>&#123;<span class="comment">//由于高度是从上往下延伸的，所以柱子y轴开始的地方应该是它的顶端</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> height - scaleLinear(d);</span></span><br><span class="line"><span class="javascript">        &#125;)</span></span><br><span class="line"><span class="javascript">        .attr(<span class="string">&quot;width&quot;</span>, rectWidth * <span class="number">0.9</span>)</span></span><br><span class="line"><span class="javascript">        .attr(<span class="string">&quot;height&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">d</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> scaleLinear(d);</span></span><br><span class="line"><span class="javascript">        &#125;)</span></span><br><span class="line"><span class="javascript">        .attr(<span class="string">&quot;fill&quot;</span>, <span class="string">&quot;blue&quot;</span>);<span class="comment">//颜色</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> yScale = d3.scaleLinear() <span class="comment">//添加y轴</span></span></span><br><span class="line"><span class="javascript">        .domain([<span class="number">0</span>, d3.max(dataset)])</span></span><br><span class="line"><span class="javascript">        .range([height, <span class="number">0</span>]); <span class="comment">//原本是坐标轴数据从上往下递增的，所以要反着来</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> yAxis = d3.axisLeft(yScale)</span></span><br><span class="line"><span class="javascript">        .ticks(<span class="number">10</span>);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> lineX = <span class="number">0</span>, lineY = margin.top;</span></span><br><span class="line"><span class="javascript">    g.append(<span class="string">&quot;g&quot;</span>)</span></span><br><span class="line"><span class="javascript">        .attr(<span class="string">&quot;transform&quot;</span>, <span class="string">&quot;translate(&quot;</span> + lineX + <span class="string">&quot;,&quot;</span> + <span class="number">0</span>  + <span class="string">&quot;)&quot;</span>)</span></span><br><span class="line"><span class="javascript">        .call(yAxis);</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 
-<p>```</p>
 <p>希望这篇博客对你有所帮助~</p>
 
     
