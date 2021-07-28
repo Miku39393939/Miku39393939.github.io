@@ -6,18 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://miku39393939.github.io">
-  <title>Tag: ACM | 水蓝络合物的博客</title>
+  <title>HashFunction | 水蓝络合物的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="是一个退役OIer，现役ACMer，苦逼带学牲，正在学习AI以及制作游戏">
-<meta property="og:type" content="website">
-<meta property="og:title" content="水蓝络合物的博客">
-<meta property="og:url" content="https://miku39393939.github.io/tags/ACM/index.html">
+  <meta name="description" content="Hash Function题目大意给出n个不同的自然数$a_1,a_2,…a_n$，求出最小的自然数m，使$a_1\mod{m},\quad a_2\mod{m},…,\quad a_n\mod{m}, $依然互不相等。($n \le 500000$) 原题链接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HashFunction">
+<meta property="og:url" content="https://miku39393939.github.io/2021/07/28/HashFunction/index.html">
 <meta property="og:site_name" content="水蓝络合物的博客">
-<meta property="og:description" content="是一个退役OIer，现役ACMer，苦逼带学牲，正在学习AI以及制作游戏">
+<meta property="og:description" content="Hash Function题目大意给出n个不同的自然数$a_1,a_2,…a_n$，求出最小的自然数m，使$a_1\mod{m},\quad a_2\mod{m},…,\quad a_n\mod{m}, $依然互不相等。($n \le 500000$) 原题链接">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-28T06:20:40.000Z">
+<meta property="article:modified_time" content="2021-07-28T06:24:46.799Z">
 <meta property="article:author" content="水蓝络合物">
+<meta property="article:tag" content="ACM">
+<meta property="article:tag" content="快速傅里叶变huan">
+<meta property="article:tag" content="卷积">
+<meta property="article:tag" content="数论">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="水蓝络合物的博客" type="application/atom+xml">
@@ -209,41 +215,134 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-HashFunction" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/07/28/HashFunction/" class="archive-article-date">
-        <time datetime="2021-07-28T06:20:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-28</time>
-</a>
-
-        </div>
-    	 
+      <header class="article-header">
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/07/28/HashFunction/" target="_blank">HashFunction</a>
   
+    <h1 class="article-title" itemprop="name">
+      HashFunction
     </h1>
   
 
 
-        <div class="article-info info-on-right">
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2021/07/28/HashFunction/" class="archive-article-date">
+        <time datetime="2021-07-28T06:20:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-28</time>
+</a>
+
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">1.3k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">5分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="Hash-Function"><a href="#Hash-Function" class="headerlink" title="Hash Function"></a>Hash Function</h2><h3 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h3><p>给出n个不同的自然数$a_1,a_2,…a_n$，求出最小的自然数m，使$a_1\mod{m},\quad a_2\mod{m},…,\quad a_n\mod{m}, $依然互不相等。($n \le 500000$)</p>
+<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11166/H">原题链接</a></p>
+<span id="more"></span>
+
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
+<li><p>我们可以发现 $a_i \mod{m} \enspace \not = \enspace a_j \mod {m}$ 的充分必要条件是$|a_i - a_j| \mod {m}\enspace \not = \enspace 0$ </p>
+<p>可以证明：</p>
+<blockquote>
+<p>不妨假设  $a_j  \le a_i$</p>
+<p>显然有 ： $a_j = a_i + a_j - a_i$</p>
+<p>可以化为： $a_j = a_i + |a_j - a_i|$</p>
+<p>那么$a_j \mod{m}$ 等价于 $a_i\mod{m} \enspace +\enspace |a_j - a_i| \mod{m}$</p>
+<p>所以，只要 $|a_j - a_i| \mod{m} \not = 0$ ，那么 $a_i \mod{m} \not = a_j \mod {m}$ </p>
+<p>以上证明逐步可逆</p>
+</blockquote>
+</li>
+<li><p>所以我们的任务就变为了求出所有的$|a_i - a_j|$ ,那么如何求出它呢？这时，我们就可以利用离散卷积。</p>
+<blockquote>
+<p>考虑一下卷积的计算过程，假如有序列$f(n),g(n)$,则卷积其卷积为</p>
+<p>$y(n) =\displaystyle \sum_{i=-\infty}^{\infty}x(i) * h(n - i)$  </p>
+</blockquote>
+<p>可以看出，$y(n)$的值是序列$f, g$的所有 **自变量之和为n时,它们的函数值的乘积 **之和</p>
+<p>如果我们把给出的自然数映射到新的数组p, $p_i = 1$表示数字$i$存在，$p_i = 0$等于零表示数字$i$不存在。</p>
+<p>我们先来考虑一个类似的问题，假如给定了a,b两个自然数数组，怎么知道a,b两个数组中任意两个数相加后所得到的新数组中都有哪些数呢？</p>
+<blockquote>
+<p>前文说到，$y(n)$的值是序列$f, g$的所有 **自变量之和为n时,它们的函数值的乘积 **之和</p>
+<p>那么我们分别把a, b两个数组转换为pa, pb数组,对它们进行卷积，得到了数组P</p>
+<p>那么我们想一下数组P的每一个数是怎么求出来了，对于$P_i$,它的值为 $\sum pa_x * pa_y$    其中，$x + y = i$ ,而$pa_x, pa_y$的值只有0，1两中情况，那么 <strong>只有至少有一组$pa_x, pb_y$均为1时,$P_i$的值才不为0。</strong> </p>
+<p>所以，卷积得到的P数组，其实就是我们需要的结果，只需检查一下P数组的每一个，只要当前下标下的值大于0，那么就意味着这个数存在于新的数组。</p>
+</blockquote>
+<p>那么回到我们现在的问题，我们知道了加法，那么我们如何解决当前这个问题呢？</p>
+<p>其实很简单，我们把数组原来的所有数组取相反数，再映射到新的p数组，得到p‘（当然此时的p’数组下标均为负数），那么我们只需要把p和p‘进行卷积，得到的P数组，就是我们要的结果了。</p>
+<p>当然因为C++中不能使用负数作为下标，所以我们要做数组平移，即把下标 -x 改为 Max - x，就可以了。</p>
+</li>
+<li><p>如果我们按照定义的方法去求卷积，其复杂度为$O(n^2)$,是和暴力算法复杂度一样。<del>一直以来的努力全部木大</del>，但是，离散卷积，刚好就是快速傅里叶变换（FFT）解决多项式相乘问题中的一步。所以我们可以使用FFT来优化离散卷积过程，把时间复杂度降为$O(nlogn)$。</p>
+<blockquote>
+<p>题外话</p>
+<p>一个n阶多项式系数数组经过FFT后得到的数组F，$F_i$就是$i$阶单位根为自变量的值时，多项式的值。</p>
+</blockquote>
+</li>
+<li><p>得到了所有的$|a_i - a_j|$数组，我们只需要找一个不被它们整除的数即可，时间复杂度$O(nlogn)$。</p>
+</li>
+</ol>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;complex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> complex&lt;<span class="keyword">double</span>&gt; CP;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> lim = <span class="number">1</span> &lt;&lt; <span class="number">21</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> Pi = <span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> P = <span class="number">500001</span>;</span><br><span class="line"></span><br><span class="line">CP a[lim &lt;&lt; <span class="number">1</span>], b[lim &lt;&lt; <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> vis[lim &lt;&lt; <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">FFT</span><span class="params">(CP* x, <span class="keyword">int</span> lim, <span class="keyword">int</span> inv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> bit = <span class="number">1</span>, m;</span><br><span class="line">    CP stand, now, tmp;</span><br><span class="line">    <span class="keyword">while</span>((<span class="number">1</span> &lt;&lt; bit) &lt; lim) ++bit;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; ++i) &#123;</span><br><span class="line">        m = <span class="number">0</span>; <span class="comment">//蝴蝶变换</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; bit; ++j)</span><br><span class="line">            <span class="keyword">if</span>(i &amp; (<span class="number">1</span> &lt;&lt; j))</span><br><span class="line">                m |= (<span class="number">1</span> &lt;&lt; (bit - j - <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">if</span>(i &lt; m)</span><br><span class="line">            <span class="built_in">swap</span>(x[m], x[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> len = <span class="number">2</span>; len &lt;= lim; len &lt;&lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        m = len &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        stand = <span class="built_in">CP</span>(<span class="built_in">cos</span>(<span class="number">2</span> * Pi / len), inv * <span class="built_in">sin</span>(<span class="number">2</span> * Pi/len));</span><br><span class="line">        <span class="keyword">for</span>(CP *p = x; p != x + lim; p += len) &#123;</span><br><span class="line">            now = <span class="built_in">CP</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i, now = now * stand) &#123;</span><br><span class="line">                tmp = now * p[i + m]; <span class="comment">// 根据“递归“求解的两个子结果计算当前的</span></span><br><span class="line">                p[i + m] = p[i] - tmp;</span><br><span class="line">                p[i] = p[i] + tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(inv == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; ++i)</span><br><span class="line">            x[i].<span class="built_in">real</span>(x[i].<span class="built_in">real</span>() / lim);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = x; i &lt;= P; i += x) &#123;</span><br><span class="line">        <span class="keyword">if</span>(vis[i] == <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> x;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">        a[x] = <span class="built_in">CP</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">        b[P - x] = <span class="built_in">CP</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">1</span> &lt;&lt; <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">FFT</span>(a, num, <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">FFT</span>(b, num, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; ++i)</span><br><span class="line">        a[i] = a[i] * b[i];</span><br><span class="line">    <span class="built_in">FFT</span>(a, num, <span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> x = (<span class="keyword">int</span>)<span class="built_in">floor</span>(a[i].<span class="built_in">real</span>() + <span class="number">0.5</span>);</span><br><span class="line">        <span class="keyword">if</span>(x &gt; <span class="number">0</span>)</span><br><span class="line">            vis[<span class="built_in">abs</span>(i - P)] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n; i &lt; P + <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">check</span>(i)) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, i);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    
+
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          水蓝络合物
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https://miku39393939.github.io/2021/07/28/HashFunction/" title="HashFunction" target="_blank">https://miku39393939.github.io/2021/07/28/HashFunction/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -267,502 +366,107 @@
 		</ul>
 	</div>
 
-          
+    
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://miku39393939.github.io/2021/07/28/HashFunction/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/05/24/2021-02-20-niuke01_A/" class="archive-article-date">
-        <time datetime="2021-05-24T14:33:36.706Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-24</time>
-</a>
 
+
+<nav id="article-nav">
+  
+  
+    <a href="/2021/05/31/BilibiliBarage/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">爬取b站弹幕并做统计</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/05/24/2021-02-20-niuke01_A/" target="_blank">串</a>
-  
-    </h1>
-  
+        
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组合数学</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">递推</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/05/10/ICG/" class="archive-article-date">
-        <time datetime="2021-05-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-10</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/05/10/ICG/" target="_blank">浅谈博弈论-ICG篇</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ACM基础知识</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ACM博弈论</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ICG</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">SG函数</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/05/10/2021-02-21-niuke01_D/" class="archive-article-date">
-        <time datetime="2021-05-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-10</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/05/10/2021-02-21-niuke01_D/" target="_blank">点一成零</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ACM基础知识</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组合数学</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">并查集</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/05/10/2021-02-21-niuke01_C/" class="archive-article-date">
-        <time datetime="2021-05-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-10</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/05/10/2021-02-21-niuke01_C/" target="_blank">红与蓝</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ACM基础知识</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图论</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/05/10/2021-05-05-HDU1534/" class="archive-article-date">
-        <time datetime="2021-05-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-10</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/05/10/2021-05-05-HDU1534/" target="_blank">Schedule Problem</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ACM基础知识</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">差分约束</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/01/16/2021-01-16-YSF/" class="archive-article-date">
-        <time datetime="2021-01-15T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-16</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/01/16/2021-01-16-YSF/" target="_blank">关于约瑟夫环递推式的一些思考</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">递推</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">约瑟夫问题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/01/15/2021-01-15-HDU6351/" class="archive-article-date">
-        <time datetime="2021-01-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-15</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/01/15/2021-01-15-HDU6351/" target="_blank">HDU6351 BeautifulNow</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">一些比较妙的题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/01/15/2021-01-15-POJ1942/" class="archive-article-date">
-        <time datetime="2020-01-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-15</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/01/15/2021-01-15-POJ1942/" target="_blank">Paths on a Grid</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组合数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2019/09/04/2019-09-4-LuoGuP1156/" class="archive-article-date">
-        <time datetime="2019-09-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-04</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2019/09/04/2019-09-4-LuoGuP1156/" target="_blank">【洛谷】P1156 垃圾陷阱 解题报告</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -803,9 +507,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
