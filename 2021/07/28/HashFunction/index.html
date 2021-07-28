@@ -6,24 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://miku39393939.github.io">
-  <title>HashFunction | 水蓝络合物的博客</title>
+  <title>Hash Function | 水蓝络合物的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Hash Function题目大意给出n个不同的自然数$a_1,a_2,…a_n$，求出最小的自然数m，使$a_1\mod{m},\quad a_2\mod{m},…,\quad a_n\mod{m}, $依然互不相等。($n \le 500000$) 原题链接">
+  <meta name="description" content="Hash Function 题目大意 给出n个不同的自然数\(a_1,a_2,...a_n\)，求出最小的自然数m，使$a_1,a_2,...,a_n, \(依然互不相等。(\)n $) 原题链接">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HashFunction">
+<meta property="og:title" content="Hash Function">
 <meta property="og:url" content="https://miku39393939.github.io/2021/07/28/HashFunction/index.html">
 <meta property="og:site_name" content="水蓝络合物的博客">
-<meta property="og:description" content="Hash Function题目大意给出n个不同的自然数$a_1,a_2,…a_n$，求出最小的自然数m，使$a_1\mod{m},\quad a_2\mod{m},…,\quad a_n\mod{m}, $依然互不相等。($n \le 500000$) 原题链接">
+<meta property="og:description" content="Hash Function 题目大意 给出n个不同的自然数\(a_1,a_2,...a_n\)，求出最小的自然数m，使$a_1,a_2,...,a_n, \(依然互不相等。(\)n $) 原题链接">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-28T06:20:40.000Z">
-<meta property="article:modified_time" content="2021-07-28T06:24:46.799Z">
+<meta property="article:modified_time" content="2021-07-28T06:56:12.413Z">
 <meta property="article:author" content="水蓝络合物">
 <meta property="article:tag" content="ACM">
-<meta property="article:tag" content="快速傅里叶变huan">
 <meta property="article:tag" content="卷积">
 <meta property="article:tag" content="数论">
+<meta property="article:tag" content="快速傅里叶变换">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="水蓝络合物的博客" type="application/atom+xml">
@@ -54,7 +54,9 @@
 
   
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
 
 <body>
   <div id="container" q-class="show:isCtnShow">
@@ -222,7 +224,7 @@
   
   
     <h1 class="article-title" itemprop="name">
-      HashFunction
+      Hash Function
     </h1>
   
 
@@ -268,50 +270,48 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="Hash-Function"><a href="#Hash-Function" class="headerlink" title="Hash Function"></a>Hash Function</h2><h3 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h3><p>给出n个不同的自然数$a_1,a_2,…a_n$，求出最小的自然数m，使$a_1\mod{m},\quad a_2\mod{m},…,\quad a_n\mod{m}, $依然互不相等。($n \le 500000$)</p>
-<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11166/H">原题链接</a></p>
-<span id="more"></span>
-
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
-<li><p>我们可以发现 $a_i \mod{m} \enspace \not = \enspace a_j \mod {m}$ 的充分必要条件是$|a_i - a_j| \mod {m}\enspace \not = \enspace 0$ </p>
+    <h2 id="hash-function">Hash Function</h2>
+<h3 id="题目大意">题目大意</h3>
+<p>给出n个不同的自然数<span class="math inline">\(a_1,a_2,...a_n\)</span>，求出最小的自然数m，使$a_1,a_2,...,a_n, <span class="math inline">\(依然互不相等。(\)</span>n $)</p>
+<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11166/H">原题链接</a> <span id="more"></span></p>
+<h3 id="思路">思路</h3>
+<ol type="1">
+<li><p>我们可以发现 <span class="math inline">\(a_i \mod{m} \enspace \not = \enspace a_j \mod {m}\)</span> 的充分必要条件是<span class="math inline">\(|a_i - a_j| \mod {m}\enspace \not = \enspace 0\)</span></p>
 <p>可以证明：</p>
 <blockquote>
-<p>不妨假设  $a_j  \le a_i$</p>
-<p>显然有 ： $a_j = a_i + a_j - a_i$</p>
-<p>可以化为： $a_j = a_i + |a_j - a_i|$</p>
-<p>那么$a_j \mod{m}$ 等价于 $a_i\mod{m} \enspace +\enspace |a_j - a_i| \mod{m}$</p>
-<p>所以，只要 $|a_j - a_i| \mod{m} \not = 0$ ，那么 $a_i \mod{m} \not = a_j \mod {m}$ </p>
+<p>不妨假设 <span class="math inline">\(a_j \le a_i\)</span></p>
+<p>显然有 ： <span class="math inline">\(a_j = a_i + a_j - a_i\)</span></p>
+<p>可以化为： <span class="math inline">\(a_j = a_i + |a_j - a_i|\)</span></p>
+<p>那么<span class="math inline">\(a_j \mod{m}\)</span> 等价于 <span class="math inline">\(a_i\mod{m} \enspace +\enspace |a_j - a_i| \mod{m}\)</span></p>
+<p>所以，只要 <span class="math inline">\(|a_j - a_i| \mod{m} \not = 0\)</span> ，那么 <span class="math inline">\(a_i \mod{m} \not = a_j \mod {m}\)</span></p>
 <p>以上证明逐步可逆</p>
-</blockquote>
-</li>
-<li><p>所以我们的任务就变为了求出所有的$|a_i - a_j|$ ,那么如何求出它呢？这时，我们就可以利用离散卷积。</p>
+</blockquote></li>
+<li><p>所以我们的任务就变为了求出所有的<span class="math inline">\(|a_i - a_j|\)</span> ,那么如何求出它呢？这时，我们就可以利用离散卷积。</p>
 <blockquote>
-<p>考虑一下卷积的计算过程，假如有序列$f(n),g(n)$,则卷积其卷积为</p>
-<p>$y(n) =\displaystyle \sum_{i=-\infty}^{\infty}x(i) * h(n - i)$  </p>
+<p>考虑一下卷积的计算过程，假如有序列<span class="math inline">\(f(n),g(n)\)</span>,则卷积其卷积为</p>
+<p><span class="math inline">\(y(n) =\displaystyle \sum_{i=-\infty}^{\infty}x(i) * h(n - i)\)</span></p>
 </blockquote>
-<p>可以看出，$y(n)$的值是序列$f, g$的所有 **自变量之和为n时,它们的函数值的乘积 **之和</p>
-<p>如果我们把给出的自然数映射到新的数组p, $p_i = 1$表示数字$i$存在，$p_i = 0$等于零表示数字$i$不存在。</p>
+<p>可以看出，<span class="math inline">\(y(n)\)</span>的值是序列<span class="math inline">\(f, g\)</span>的所有 <strong>自变量之和为n时,它们的函数值的乘积 </strong>之和</p>
+<p>如果我们把给出的自然数映射到新的数组p, <span class="math inline">\(p_i = 1\)</span>表示数字<span class="math inline">\(i\)</span>存在，<span class="math inline">\(p_i = 0\)</span>等于零表示数字<span class="math inline">\(i\)</span>不存在。</p>
 <p>我们先来考虑一个类似的问题，假如给定了a,b两个自然数数组，怎么知道a,b两个数组中任意两个数相加后所得到的新数组中都有哪些数呢？</p>
 <blockquote>
-<p>前文说到，$y(n)$的值是序列$f, g$的所有 **自变量之和为n时,它们的函数值的乘积 **之和</p>
+<p>前文说到，<span class="math inline">\(y(n)\)</span>的值是序列<span class="math inline">\(f, g\)</span>的所有 <strong>自变量之和为n时,它们的函数值的乘积 </strong>之和</p>
 <p>那么我们分别把a, b两个数组转换为pa, pb数组,对它们进行卷积，得到了数组P</p>
-<p>那么我们想一下数组P的每一个数是怎么求出来了，对于$P_i$,它的值为 $\sum pa_x * pa_y$    其中，$x + y = i$ ,而$pa_x, pa_y$的值只有0，1两中情况，那么 <strong>只有至少有一组$pa_x, pb_y$均为1时,$P_i$的值才不为0。</strong> </p>
+<p>那么我们想一下数组P的每一个数是怎么求出来了，对于<span class="math inline">\(P_i\)</span>,它的值为 <span class="math inline">\(\sum pa_x * pa_y\)</span> 其中，<span class="math inline">\(x + y = i\)</span> ,而<span class="math inline">\(pa_x, pa_y\)</span>的值只有0，1两中情况，那么 <strong>只有至少有一组<span class="math inline">\(pa_x, pb_y\)</span>均为1时,<span class="math inline">\(P_i\)</span>的值才不为0。</strong></p>
 <p>所以，卷积得到的P数组，其实就是我们需要的结果，只需检查一下P数组的每一个，只要当前下标下的值大于0，那么就意味着这个数存在于新的数组。</p>
 </blockquote>
 <p>那么回到我们现在的问题，我们知道了加法，那么我们如何解决当前这个问题呢？</p>
 <p>其实很简单，我们把数组原来的所有数组取相反数，再映射到新的p数组，得到p‘（当然此时的p’数组下标均为负数），那么我们只需要把p和p‘进行卷积，得到的P数组，就是我们要的结果了。</p>
-<p>当然因为C++中不能使用负数作为下标，所以我们要做数组平移，即把下标 -x 改为 Max - x，就可以了。</p>
-</li>
-<li><p>如果我们按照定义的方法去求卷积，其复杂度为$O(n^2)$,是和暴力算法复杂度一样。<del>一直以来的努力全部木大</del>，但是，离散卷积，刚好就是快速傅里叶变换（FFT）解决多项式相乘问题中的一步。所以我们可以使用FFT来优化离散卷积过程，把时间复杂度降为$O(nlogn)$。</p>
+<p>当然因为C++中不能使用负数作为下标，所以我们要做数组平移，即把下标 -x 改为 Max - x，就可以了。</p></li>
+<li><p>如果我们按照定义的方法去求卷积，其复杂度为<span class="math inline">\(O(n^2)\)</span>,是和暴力算法复杂度一样。<del>一直以来的努力全部木大</del>，但是，离散卷积，刚好就是快速傅里叶变换（FFT）解决多项式相乘问题中的一步。所以我们可以使用FFT来优化离散卷积过程，把时间复杂度降为<span class="math inline">\(O(nlogn)\)</span>。</p>
 <blockquote>
 <p>题外话</p>
-<p>一个n阶多项式系数数组经过FFT后得到的数组F，$F_i$就是$i$阶单位根为自变量的值时，多项式的值。</p>
-</blockquote>
-</li>
-<li><p>得到了所有的$|a_i - a_j|$数组，我们只需要找一个不被它们整除的数即可，时间复杂度$O(nlogn)$。</p>
-</li>
+<p>一个n阶多项式系数数组经过FFT后得到的数组F，<span class="math inline">\(F_i\)</span>就是<span class="math inline">\(i\)</span>阶单位根为自变量的值时，多项式的值。</p>
+</blockquote></li>
+<li><p>得到了所有的<span class="math inline">\(|a_i - a_j|\)</span>数组，我们只需要找一个不被它们整除的数即可，时间复杂度<span class="math inline">\(O(nlogn)\)</span>。</p></li>
 </ol>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;complex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> complex&lt;<span class="keyword">double</span>&gt; CP;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> lim = <span class="number">1</span> &lt;&lt; <span class="number">21</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> Pi = <span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> P = <span class="number">500001</span>;</span><br><span class="line"></span><br><span class="line">CP a[lim &lt;&lt; <span class="number">1</span>], b[lim &lt;&lt; <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> vis[lim &lt;&lt; <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">FFT</span><span class="params">(CP* x, <span class="keyword">int</span> lim, <span class="keyword">int</span> inv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> bit = <span class="number">1</span>, m;</span><br><span class="line">    CP stand, now, tmp;</span><br><span class="line">    <span class="keyword">while</span>((<span class="number">1</span> &lt;&lt; bit) &lt; lim) ++bit;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; ++i) &#123;</span><br><span class="line">        m = <span class="number">0</span>; <span class="comment">//蝴蝶变换</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; bit; ++j)</span><br><span class="line">            <span class="keyword">if</span>(i &amp; (<span class="number">1</span> &lt;&lt; j))</span><br><span class="line">                m |= (<span class="number">1</span> &lt;&lt; (bit - j - <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">if</span>(i &lt; m)</span><br><span class="line">            <span class="built_in">swap</span>(x[m], x[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> len = <span class="number">2</span>; len &lt;= lim; len &lt;&lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        m = len &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        stand = <span class="built_in">CP</span>(<span class="built_in">cos</span>(<span class="number">2</span> * Pi / len), inv * <span class="built_in">sin</span>(<span class="number">2</span> * Pi/len));</span><br><span class="line">        <span class="keyword">for</span>(CP *p = x; p != x + lim; p += len) &#123;</span><br><span class="line">            now = <span class="built_in">CP</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i, now = now * stand) &#123;</span><br><span class="line">                tmp = now * p[i + m]; <span class="comment">// 根据“递归“求解的两个子结果计算当前的</span></span><br><span class="line">                p[i + m] = p[i] - tmp;</span><br><span class="line">                p[i] = p[i] + tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(inv == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; ++i)</span><br><span class="line">            x[i].<span class="built_in">real</span>(x[i].<span class="built_in">real</span>() / lim);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = x; i &lt;= P; i += x) &#123;</span><br><span class="line">        <span class="keyword">if</span>(vis[i] == <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> x;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">        a[x] = <span class="built_in">CP</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">        b[P - x] = <span class="built_in">CP</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">1</span> &lt;&lt; <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">FFT</span>(a, num, <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">FFT</span>(b, num, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; ++i)</span><br><span class="line">        a[i] = a[i] * b[i];</span><br><span class="line">    <span class="built_in">FFT</span>(a, num, <span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> x = (<span class="keyword">int</span>)<span class="built_in">floor</span>(a[i].<span class="built_in">real</span>() + <span class="number">0.5</span>);</span><br><span class="line">        <span class="keyword">if</span>(x &gt; <span class="number">0</span>)</span><br><span class="line">            vis[<span class="built_in">abs</span>(i - P)] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n; i &lt; P + <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">check</span>(i)) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, i);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="代码">代码</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;complex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> complex&lt;<span class="keyword">double</span>&gt; CP;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> lim = <span class="number">1</span> &lt;&lt; <span class="number">21</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> Pi = <span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> P = <span class="number">500001</span>;</span><br><span class="line"></span><br><span class="line">CP a[lim &lt;&lt; <span class="number">1</span>], b[lim &lt;&lt; <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> vis[lim &lt;&lt; <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">FFT</span><span class="params">(CP* x, <span class="keyword">int</span> lim, <span class="keyword">int</span> inv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> bit = <span class="number">1</span>, m;</span><br><span class="line">    CP stand, now, tmp;</span><br><span class="line">    <span class="keyword">while</span>((<span class="number">1</span> &lt;&lt; bit) &lt; lim) ++bit;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; ++i) &#123;</span><br><span class="line">        m = <span class="number">0</span>; <span class="comment">//蝴蝶变换</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; bit; ++j)</span><br><span class="line">            <span class="keyword">if</span>(i &amp; (<span class="number">1</span> &lt;&lt; j))</span><br><span class="line">                m |= (<span class="number">1</span> &lt;&lt; (bit - j - <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">if</span>(i &lt; m)</span><br><span class="line">            <span class="built_in">swap</span>(x[m], x[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> len = <span class="number">2</span>; len &lt;= lim; len &lt;&lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        m = len &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        stand = <span class="built_in">CP</span>(<span class="built_in">cos</span>(<span class="number">2</span> * Pi / len), inv * <span class="built_in">sin</span>(<span class="number">2</span> * Pi/len));</span><br><span class="line">        <span class="keyword">for</span>(CP *p = x; p != x + lim; p += len) &#123;</span><br><span class="line">            now = <span class="built_in">CP</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i, now = now * stand) &#123;</span><br><span class="line">                tmp = now * p[i + m]; <span class="comment">// 根据“递归“求解的两个子结果计算当前的</span></span><br><span class="line">                p[i + m] = p[i] - tmp;</span><br><span class="line">                p[i] = p[i] + tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(inv == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; ++i)</span><br><span class="line">            x[i].<span class="built_in">real</span>(x[i].<span class="built_in">real</span>() / lim);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = x; i &lt;= P; i += x) &#123;</span><br><span class="line">        <span class="keyword">if</span>(vis[i] == <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> x;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">        a[x] = <span class="built_in">CP</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">        b[P - x] = <span class="built_in">CP</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">1</span> &lt;&lt; <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">FFT</span>(a, num, <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">FFT</span>(b, num, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; ++i)</span><br><span class="line">        a[i] = a[i] * b[i];</span><br><span class="line">    <span class="built_in">FFT</span>(a, num, <span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lim; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> x = (<span class="keyword">int</span>)<span class="built_in">floor</span>(a[i].<span class="built_in">real</span>() + <span class="number">0.5</span>);</span><br><span class="line">        <span class="keyword">if</span>(x &gt; <span class="number">0</span>)</span><br><span class="line">            vis[<span class="built_in">abs</span>(i - P)] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n; i &lt; P + <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">check</span>(i)) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, i);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     
 
@@ -326,7 +326,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://miku39393939.github.io/2021/07/28/HashFunction/" title="HashFunction" target="_blank">https://miku39393939.github.io/2021/07/28/HashFunction/</a>
+          <a href="https://miku39393939.github.io/2021/07/28/HashFunction/" title="Hash Function" target="_blank">https://miku39393939.github.io/2021/07/28/HashFunction/</a>
         </li>
         
         <li>
@@ -352,15 +352,15 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">快速傅里叶变huan</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">卷积</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数论</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">快速傅里叶变换</a>
         		</li>
       		
 		</ul>
@@ -716,15 +716,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">快速傅里叶变huan</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">卷积</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">快速傅里叶变换</a>
               </li>
             
             <div class="clearfix"></div>
