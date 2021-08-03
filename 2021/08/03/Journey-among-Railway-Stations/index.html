@@ -6,22 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://miku39393939.github.io">
-  <title>Game of Swapping Numbers | 水蓝络合物的博客</title>
+  <title>Journey among Railway Stations | 水蓝络合物的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="题目大意 给出有n个数的数组a，b，以及自然数k，你必须恰好交换a中任意两个数k次，且在此基础上，使\(\sum |a_i - b_i|\)​最大。 思路  我们可以先考虑考虑什么情况下，交换两个数会使结果更优。 我们可以在纸上画一个数轴，在这里我就用字符表示了。  对于下面这种情况 -----a1-------b1-------a2------b2------&gt; \(|a">
+  <meta name="description" content="题目大意 n个点在一条直线上，每个点到下一个点需要\(t_i\)时间，每个点允许通过的时间段是\([u_i,v_i]\)。 接下来有m个操作，分为以下三类：  问从x点是否能到达y点。 将第i个点到下一个点的时间更改为\(t_i&#96;\) 将第i个点的允许通过时间改为\([u_i&#96;,v_i&#96;]\)​  题目链接 思路 事实上，我们可以把两个点合并为一个点（注意这是本题非常重要的思想">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Game of Swapping Numbers">
-<meta property="og:url" content="https://miku39393939.github.io/2021/07/28/Game-of-Swapping-Numbers/index.html">
+<meta property="og:title" content="Journey among Railway Stations">
+<meta property="og:url" content="https://miku39393939.github.io/2021/08/03/Journey-among-Railway-Stations/index.html">
 <meta property="og:site_name" content="水蓝络合物的博客">
-<meta property="og:description" content="题目大意 给出有n个数的数组a，b，以及自然数k，你必须恰好交换a中任意两个数k次，且在此基础上，使\(\sum |a_i - b_i|\)​最大。 思路  我们可以先考虑考虑什么情况下，交换两个数会使结果更优。 我们可以在纸上画一个数轴，在这里我就用字符表示了。  对于下面这种情况 -----a1-------b1-------a2------b2------&gt; \(|a">
+<meta property="og:description" content="题目大意 n个点在一条直线上，每个点到下一个点需要\(t_i\)时间，每个点允许通过的时间段是\([u_i,v_i]\)。 接下来有m个操作，分为以下三类：  问从x点是否能到达y点。 将第i个点到下一个点的时间更改为\(t_i&#96;\) 将第i个点的允许通过时间改为\([u_i&#96;,v_i&#96;]\)​  题目链接 思路 事实上，我们可以把两个点合并为一个点（注意这是本题非常重要的思想">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-07-28T12:23:54.000Z">
-<meta property="article:modified_time" content="2021-07-28T15:04:27.251Z">
+<meta property="article:published_time" content="2021-08-03T02:57:36.000Z">
+<meta property="article:modified_time" content="2021-08-03T12:37:05.611Z">
 <meta property="article:author" content="水蓝络合物">
-<meta property="article:tag" content="数学">
-<meta property="article:tag" content="贪心">
+<meta property="article:tag" content="线段树">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="水蓝络合物的博客" type="application/atom+xml">
@@ -215,14 +214,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Game-of-Swapping-Numbers" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Journey-among-Railway-Stations" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      Game of Swapping Numbers
+      Journey among Railway Stations
     </h1>
   
 
@@ -234,8 +233,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2021/07/28/Game-of-Swapping-Numbers/" class="archive-article-date">
-        <time datetime="2021-07-28T12:23:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-28</time>
+<a href="/2021/08/03/Journey-among-Railway-Stations/" class="archive-article-date">
+        <time datetime="2021-08-03T02:57:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-03</time>
 </a>
 
   
@@ -248,7 +247,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">989字</span>
+      <span class="post-count">1.3k字</span>
     </span>
   </span>
 
@@ -257,7 +256,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">4分</span>
+      <span class="post-count">5分</span>
     </span>
   </span>
 </div>
@@ -269,53 +268,38 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h3 id="题目大意">题目大意</h3>
-<p>给出有n个数的数组a，b，以及自然数k，你必须恰好交换a中任意两个数k次，且在此基础上，使<span class="math inline">\(\sum |a_i - b_i|\)</span>​最大。</p>
+<p>n个点在一条直线上，每个点到下一个点需要<span class="math inline">\(t_i\)</span>时间，每个点允许通过的时间段是<span class="math inline">\([u_i,v_i]\)</span>。</p>
+<p>接下来有m个操作，分为以下三类：</p>
+<ul>
+<li>问从x点是否能到达y点。</li>
+<li>将第i个点到下一个点的时间更改为<span class="math inline">\(t_i`\)</span></li>
+<li>将第i个点的允许通过时间改为<span class="math inline">\([u_i`,v_i`]\)</span>​</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11166/J">题目链接</a></p>
 <h3 id="思路">思路</h3>
-<ol type="1">
-<li><p>我们可以先考虑考虑什么情况下，交换两个数会使结果更优。</p>
-<p>我们可以在纸上画一个数轴，在这里我就用字符表示了。</p>
-<blockquote>
-<p>对于下面这种情况</p>
-<p>-----a1-------b1-------a2------b2------&gt;</p>
-<p><span class="math inline">\(|a_1 - b_1|\)</span>与可以看作 <span class="math inline">\(a_1\)</span> 与$ b_1$​​的距离 ，</p>
-<p>不难发现，如果此时交换b1，a2，那么就会变为</p>
-<p>-----a1-------a2-------b1------b2------&gt;</p>
-<p>那么<span class="math inline">\(|a_1 - b_1|+ |a_2- b_2\)</span>​| ​显然就会变大。</p>
-<p>而这个变大的值，就是<span class="math inline">\(2 * |a2 - b1|\)</span></p>
-<p>进一步我们发现，如果原本的情况是</p>
-<p>-----b1-------a1-------b2------a2------&gt; (间距与最开始情况一样，只是顺序变了)</p>
-<p>那么其实交换后，增大的值是一样的。</p>
-<p>其实就是 <strong>a1，b1 与 a2,b2最接近的部分的两倍</strong>，用数学语言表示，就是:</p>
-<p><span class="math inline">\(2* (min(a_2, b_2) - max(a_1, b_1))\)</span>​</p>
-<p>而一旦 <span class="math inline">\((min(a_2, b_2) \le max(a_1, b_1))\)</span> ,那么交换不会使 结果更优，甚至在<span class="math inline">\((min(a_2, b_2) &lt; max(a_1, b_1))\)</span>情况下交换还会使结果更差。​</p>
-</blockquote></li>
-<li><p>那么我们就需要知道怎么利用这k次交换。我们先来考虑一下最优的情况是什么。</p>
-<p>我们考虑$ n &gt; 2$的情况：</p>
-<p>首先，最优的情况一定是a，b数组中，按照从大到小排序，用前面一半的数，减去后面一半的数。</p>
-<p>比如如下数组:</p>
-<blockquote>
-<p>a 2 4 8</p>
-<p>b 3 7 1</p>
-</blockquote>
-<p>那么结果显然为 <span class="math inline">\(8 + 7 + 4 - 3 - 2 - 1\)</span>​，它可由以下结果得出​</p>
-<blockquote>
-<p><span class="math inline">\(|8 - 3| + |7 - 3| + |4 - 1|\)</span>得到</p>
-<p>也可由 <span class="math inline">\(|8 - 2| + |7 - 1| + |4 - 2|\)</span>得到</p>
-</blockquote>
-<p>假如我们已经得到了最优的情况，我们可以任意地交换在后一半的数,结果还是不会变的。（因为绝对值符号内的数正负没有改变，所以绝对值的和也不会改变），所以我们就能得出结论:</p>
-<p><strong><span class="math inline">\(n &gt; 2\)</span> 时,只要我们已经得到了最优解，那么无论再操作多少次，我们都能得到最优解</strong></p>
-<p>而 <span class="math inline">\(n = 2\)</span> 时，因为无法保证可以交换在排序中属于后半部分的，所以得到了最优解，那么如果再交换一次，就只能得到非最优解</p>
-<p>比如:</p>
-<blockquote>
-<p>a 1 8</p>
-<p>b 2 6</p>
-</blockquote>
-<p>最优解显然为<span class="math inline">\(|8 - 2| + |6 - 1|\)</span>，但是再交换时，在排序中为后半部分的1,2却无法交换，所以只能交换1,8，从而结果就会变小。</p>
-<p>（而 $ n &gt; 2$​ 时，那么肯定可以找到两个属于前半部分，或者同时属于后半部分的两个数）</p></li>
-<li><p>那么我们具体做的时候，若$ n &gt; 2<span class="math inline">\(,则只需计算\)</span>min(a_i, a_j), max(b_i, b_j)<span class="math inline">\(​​​数组，然后从min数组中最大的开始，去从小到大减max数组中的数(这样可以保证在k不够用的时候尽量扩大结果)，就可以了。\)</span>n = 2$​时，单独判断即可。</p></li>
-</ol>
+<p>事实上，我们可以把两个点合并为一个点（注意这是本题非常重要的思想）</p>
+<p>对于每个点，我们需要维护这三个值:</p>
+<ul>
+<li><p>允许通过的最晚时间lstArtTime</p></li>
+<li><p>这个点最快什么时候（即 <strong>时间点</strong>）到下一个点nxtArTime</p></li>
+<li><p>这个点到下一个点所需的<strong>时间</strong> （注意与上一个做区分）dis</p></li>
+</ul>
+<p>对于<span class="math inline">\(l, r\)</span>两个点，假如从<span class="math inline">\(l\)</span>点的最早允许通过的点出发，都无法在<span class="math inline">\(r\)</span>点最迟允许通过的时间点前到达，那么就无法从<span class="math inline">\(l\)</span>走到<span class="math inline">\(r\)</span>​。（即 l.nxtArTime &gt; r.lstArTime）</p>
+<p>如果能到达，我们可以把他们合并为1个点，设它为N。那么我们的任务就是求出N点的数值。</p>
+<ul>
+<li><p>N点的最迟到达时间：首先是不能晚于<span class="math inline">\(l\)</span>点的最迟到达时间，其次，还要有足够的时间从<span class="math inline">\(l\)</span>走到<span class="math inline">\(r\)</span>点，即<span class="math inline">\(r\)</span>点的最迟通过时间减去从<span class="math inline">\(l\)</span>到<span class="math inline">\(r\)</span>​点所需的时间。N.lstArTime = max(l.lstArTime, r.lstArTime - l.dis)</p></li>
+<li><p>N点最快到达下一个点的时间: 即<span class="math inline">\(l\)</span>最快到<span class="math inline">\(r\)</span>的时间点再加上<span class="math inline">\(r\)</span>​到下一个点所需的时间，与从<span class="math inline">\(r\)</span>最快到下一个点的时间点取一个最大值。</p>
+<p>（之所以要比较，是因为从<span class="math inline">\(l\)</span>走到<span class="math inline">\(r\)</span>，再走到下一个点时，不一定满足 <strong>r能够最快到达下一个点时，所需要的条件</strong>）。</p>
+<p>N.nxtArTime = max(l.nxtArTime + r.dis, r.nxtArTime)</p></li>
+<li><p>N点到下一个点所需时间，那么就简单了，把<span class="math inline">\(l\)</span>到<span class="math inline">\(r\)</span>的距离，加上<span class="math inline">\(r\)</span>​到下一个点的距离。N.dis = l.dis + r.dis。</p></li>
+</ul>
+<p>所以题目就变成如何动态的维护这些点，并且我们已经知道了怎么合并这些点，那么我们就<del>很容易</del>想到利用线段树来维护：</p>
+<ul>
+<li>每次查询其实就是查询[l,r]之间的点是否合法，因为其中有一个地方无法通过，那么整个区间就会不合法</li>
+<li>对于修改操作，对于线段树来说就是单点修改。</li>
+</ul>
 <h3 id="代码">代码</h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">5e5</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, k, a[maxN], b[maxN], l[maxN], r[maxN];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp1</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x &lt; y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp2</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x &gt; y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;k);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;b[i]);</span><br><span class="line">        l[i] = <span class="built_in">min</span>(a[i], b[i]);</span><br><span class="line">        r[i] = <span class="built_in">max</span>(a[i], b[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(k % <span class="number">2</span>)</span><br><span class="line">            <span class="built_in">swap</span>(a[<span class="number">1</span>], a[<span class="number">2</span>]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">abs</span>(a[<span class="number">1</span>] - b[<span class="number">1</span>]) + <span class="built_in">abs</span>(a[<span class="number">2</span>] - b[<span class="number">2</span>]));</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">sort</span>(l + <span class="number">1</span>, l + <span class="number">1</span> + n, cmp2);</span><br><span class="line">    <span class="built_in">sort</span>(r + <span class="number">1</span>, r + <span class="number">1</span> + n, cmp1);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        ans += <span class="built_in">abs</span>(a[i] - b[i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="built_in">min</span>(n, k); i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (r[i] &lt; l[i]) &#123;</span><br><span class="line">            ans += (l[i] - r[i]) &lt;&lt; <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">2e6</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, q, T;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> u[maxN], v[maxN], d[maxN];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SegmentTree</span> &#123;</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> lstArTime, nxtArTime, dis;</span><br><span class="line">&#125;t[maxN &lt;&lt; <span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">SegmentTree <span class="keyword">operator</span> +(SegmentTree l, SegmentTree r) &#123; <span class="comment">//把合并操作转变为+，十分方便(确信)</span></span><br><span class="line">    <span class="keyword">if</span> (l.nxtArTime &gt; r.lstArTime) &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123; <span class="number">-1</span>, INF, INF&#125;; <span class="comment">//不合法就是-1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="built_in">max</span>(<span class="built_in">min</span>(l.lstArTime, r.lstArTime - l.dis), <span class="number">-1LL</span>), </span><br><span class="line">        <span class="built_in">min</span>(<span class="built_in">max</span>(l.nxtArTime + r.dis, r.nxtArTime), INF), <span class="comment">//需要和最大值作比较，方便不合法情况的合并</span></span><br><span class="line">        <span class="built_in">min</span>(l.dis + r.dis, INF)</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> x)</span> <span class="comment">//据说这叫ZKW线段树(%ZKW)，就是建树和单点修改都可以使用这个函数。</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">1</span>, r = n,k = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(l != r) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(x &lt;= mid) &#123;</span><br><span class="line">            k &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">            r = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            l = mid + <span class="number">1</span>;</span><br><span class="line">            k  = k &lt;&lt; <span class="number">1</span> | <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        t[k] = &#123;v[x], <span class="built_in">min</span>(u[x] + d[x], INF), d[x]&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(k &gt;&gt;= <span class="number">1</span>)</span><br><span class="line">        t[k] = t[k &lt;&lt; <span class="number">1</span>] + t[k &lt;&lt; <span class="number">1</span> | <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//接下来是查询操作，把要查询的点[l, r - 1]合并为一个点，来看这个点是否合法，以及是否可以到达下一个点。</span></span><br><span class="line"><span class="comment">//之所以这么做，是因为我们不需要知道r点到达下一个点的时间，只需知道是否可以到达r点</span></span><br><span class="line">SegmentTree now; <span class="comment">//把所有点合并到now</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ql, qr; <span class="comment">//题目要求查询的区间。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(ql &lt;= l &amp;&amp; qr &gt;= r) &#123;</span><br><span class="line">        now = now + t[k];</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(ql &lt;= mid)</span><br><span class="line">        <span class="built_in">dfs</span>(k &lt;&lt; <span class="number">1</span>, l, mid);</span><br><span class="line">    <span class="keyword">if</span>(qr &gt; mid)</span><br><span class="line">        <span class="built_in">dfs</span>(k &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l == r)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    ql = l;</span><br><span class="line">    qr = r - <span class="number">1</span>;</span><br><span class="line">    now = &#123;INF, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>, <span class="number">1</span>, n);</span><br><span class="line">    <span class="keyword">return</span> now.nxtArTime &lt;= v[r];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;u[i]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;v[i]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;d[i]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="built_in">init</span>(i);<span class="comment">//建树</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;q);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= q; ++i) &#123;</span><br><span class="line">            <span class="keyword">int</span> typ, l, r, pos, c;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;typ);</span><br><span class="line">            <span class="keyword">if</span>(typ == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;l, &amp;r);</span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">query</span>(l, r))</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(typ == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;pos, &amp;c);</span><br><span class="line">                d[pos] = c;</span><br><span class="line">                <span class="built_in">init</span>(pos); <span class="comment">//修改点</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(typ == <span class="number">2</span>) &#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;pos, &amp;l, &amp;r);</span><br><span class="line">                u[pos] = l; v[pos] = r;</span><br><span class="line">                <span class="built_in">init</span>(pos);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     
 
@@ -330,7 +314,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://miku39393939.github.io/2021/07/28/Game-of-Swapping-Numbers/" title="Game of Swapping Numbers" target="_blank">https://miku39393939.github.io/2021/07/28/Game-of-Swapping-Numbers/</a>
+          <a href="https://miku39393939.github.io/2021/08/03/Journey-among-Railway-Stations/" title="Journey among Railway Stations" target="_blank">https://miku39393939.github.io/2021/08/03/Journey-among-Railway-Stations/</a>
         </li>
         
         <li>
@@ -352,11 +336,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线段树</a>
         		</li>
       		
 		</ul>
@@ -412,7 +392,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://miku39393939.github.io/2021/07/28/Game-of-Swapping-Numbers/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://miku39393939.github.io/2021/08/03/Journey-among-Railway-Stations/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -427,18 +407,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2021/07/30/Increasing-Subsequence/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Increasing Subsequence
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/07/28/HashFunction/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hash Function</div>
+    <a href="/2021/07/30/Increasing-Subsequence/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Increasing Subsequence</div>
       <i class="icon-circle-right"></i>
     </a>
   

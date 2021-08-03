@@ -218,6 +218,124 @@
             
 
   
+    <article id="post-Journey-among-Railway-Stations" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/08/03/Journey-among-Railway-Stations/" target="_blank">Journey among Railway Stations</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/08/03/Journey-among-Railway-Stations/" class="archive-article-date">
+        <time datetime="2021-08-03T02:57:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-03</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="题目大意">题目大意</h3>
+<p>n个点在一条直线上，每个点到下一个点需要<span class="math inline">\(t_i\)</span>时间，每个点允许通过的时间段是<span class="math inline">\([u_i,v_i]\)</span>。</p>
+<p>接下来有m个操作，分为以下三类：</p>
+<ul>
+<li>问从x点是否能到达y点。</li>
+<li>将第i个点到下一个点的时间更改为<span class="math inline">\(t_i`\)</span></li>
+<li>将第i个点的允许通过时间改为<span class="math inline">\([u_i`,v_i`]\)</span>​</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11166/J">题目链接</a></p>
+<h3 id="思路">思路</h3>
+<p>事实上，我们可以把两个点合并为一个点（注意这是本题非常重要的思想）</p>
+<p>对于每个点，我们需要维护这三个值:</p>
+<ul>
+<li><p>允许通过的最晚时间lstArtTime</p></li>
+<li><p>这个点最快什么时候（即 <strong>时间点</strong>）到下一个点nxtArTime</p></li>
+<li><p>这个点到下一个点所需的<strong>时间</strong> （注意与上一个做区分）dis</p></li>
+</ul>
+<p>对于<span class="math inline">\(l, r\)</span>两个点，假如从<span class="math inline">\(l\)</span>点的最早允许通过的点出发，都无法在<span class="math inline">\(r\)</span>点最迟允许通过的时间点前到达，那么就无法从<span class="math inline">\(l\)</span>走到<span class="math inline">\(r\)</span>​。（即 l.nxtArTime &gt; r.lstArTime）</p>
+<p>如果能到达，我们可以把他们合并为1个点，设它为N。那么我们的任务就是求出N点的数值。</p>
+<ul>
+<li><p>N点的最迟到达时间：首先是不能晚于<span class="math inline">\(l\)</span>点的最迟到达时间，其次，还要有足够的时间从<span class="math inline">\(l\)</span>走到<span class="math inline">\(r\)</span>点，即<span class="math inline">\(r\)</span>点的最迟通过时间减去从<span class="math inline">\(l\)</span>到<span class="math inline">\(r\)</span>​点所需的时间。N.lstArTime = max(l.lstArTime, r.lstArTime - l.dis)</p></li>
+<li><p>N点最快到达下一个点的时间: 即<span class="math inline">\(l\)</span>最快到<span class="math inline">\(r\)</span>的时间点再加上<span class="math inline">\(r\)</span>​到下一个点所需的时间，与从<span class="math inline">\(r\)</span>最快到下一个点的时间点取一个最大值。</p>
+<p>（之所以要比较，是因为从<span class="math inline">\(l\)</span>走到<span class="math inline">\(r\)</span>，再走到下一个点时，不一定满足 <strong>r能够最快到达下一个点时，所需要的条件</strong>）。</p>
+<p>N.nxtArTime = max(l.nxtArTime + r.dis, r.nxtArTime)</p></li>
+<li><p>N点到下一个点所需时间，那么就简单了，把<span class="math inline">\(l\)</span>到<span class="math inline">\(r\)</span>的距离，加上<span class="math inline">\(r\)</span>​到下一个点的距离。N.dis = l.dis + r.dis。</p></li>
+</ul>
+<p>所以题目就变成如何动态的维护这些点，并且我们已经知道了怎么合并这些点，那么我们就<del>很容易</del>想到利用线段树来维护：</p>
+<ul>
+<li>每次查询其实就是查询[l,r]之间的点是否合法，因为其中有一个地方无法通过，那么整个区间就会不合法</li>
+<li>对于修改操作，对于线段树来说就是单点修改。</li>
+</ul>
+<h3 id="代码">代码</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">2e6</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, q, T;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> u[maxN], v[maxN], d[maxN];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SegmentTree</span> &#123;</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> lstArTime, nxtArTime, dis;</span><br><span class="line">&#125;t[maxN &lt;&lt; <span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">SegmentTree <span class="keyword">operator</span> +(SegmentTree l, SegmentTree r) &#123; <span class="comment">//把合并操作转变为+，十分方便(确信)</span></span><br><span class="line">    <span class="keyword">if</span> (l.nxtArTime &gt; r.lstArTime) &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123; <span class="number">-1</span>, INF, INF&#125;; <span class="comment">//不合法就是-1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="built_in">max</span>(<span class="built_in">min</span>(l.lstArTime, r.lstArTime - l.dis), <span class="number">-1LL</span>), </span><br><span class="line">        <span class="built_in">min</span>(<span class="built_in">max</span>(l.nxtArTime + r.dis, r.nxtArTime), INF), <span class="comment">//需要和最大值作比较，方便不合法情况的合并</span></span><br><span class="line">        <span class="built_in">min</span>(l.dis + r.dis, INF)</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> x)</span> <span class="comment">//据说这叫ZKW线段树(%ZKW)，就是建树和单点修改都可以使用这个函数。</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">1</span>, r = n,k = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(l != r) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(x &lt;= mid) &#123;</span><br><span class="line">            k &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">            r = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            l = mid + <span class="number">1</span>;</span><br><span class="line">            k  = k &lt;&lt; <span class="number">1</span> | <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        t[k] = &#123;v[x], <span class="built_in">min</span>(u[x] + d[x], INF), d[x]&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(k &gt;&gt;= <span class="number">1</span>)</span><br><span class="line">        t[k] = t[k &lt;&lt; <span class="number">1</span>] + t[k &lt;&lt; <span class="number">1</span> | <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//接下来是查询操作，把要查询的点[l, r - 1]合并为一个点，来看这个点是否合法，以及是否可以到达下一个点。</span></span><br><span class="line"><span class="comment">//之所以这么做，是因为我们不需要知道r点到达下一个点的时间，只需知道是否可以到达r点</span></span><br><span class="line">SegmentTree now; <span class="comment">//把所有点合并到now</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ql, qr; <span class="comment">//题目要求查询的区间。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(ql &lt;= l &amp;&amp; qr &gt;= r) &#123;</span><br><span class="line">        now = now + t[k];</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(ql &lt;= mid)</span><br><span class="line">        <span class="built_in">dfs</span>(k &lt;&lt; <span class="number">1</span>, l, mid);</span><br><span class="line">    <span class="keyword">if</span>(qr &gt; mid)</span><br><span class="line">        <span class="built_in">dfs</span>(k &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l == r)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    ql = l;</span><br><span class="line">    qr = r - <span class="number">1</span>;</span><br><span class="line">    now = &#123;INF, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>, <span class="number">1</span>, n);</span><br><span class="line">    <span class="keyword">return</span> now.nxtArTime &lt;= v[r];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;u[i]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;v[i]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;d[i]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="built_in">init</span>(i);<span class="comment">//建树</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;q);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= q; ++i) &#123;</span><br><span class="line">            <span class="keyword">int</span> typ, l, r, pos, c;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;typ);</span><br><span class="line">            <span class="keyword">if</span>(typ == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;l, &amp;r);</span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">query</span>(l, r))</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(typ == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;pos, &amp;c);</span><br><span class="line">                d[pos] = c;</span><br><span class="line">                <span class="built_in">init</span>(pos); <span class="comment">//修改点</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(typ == <span class="number">2</span>) &#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;pos, &amp;l, &amp;r);</span><br><span class="line">                u[pos] = l; v[pos] = r;</span><br><span class="line">                <span class="built_in">init</span>(pos);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线段树</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/08/03/Journey-among-Railway-Stations/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Increasing-Subsequence" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1194,110 +1312,9 @@ a_1\mod{m},\quad a_2\mod{m},...,\quad a_n\mod{m},
 
 
   
-    <article id="post-2021-02-21-niuke01_C" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/05/10/2021-02-21-niuke01_C/" target="_blank">红与蓝</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/05/10/2021-02-21-niuke01_C/" class="archive-article-date">
-        <time datetime="2021-05-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-10</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>链接：<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/9981/C">https://ac.nowcoder.com/acm/contest/9981/C</a></p>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>你拿到了一棵树，请你给每个顶点染成红色或蓝色。<br>要求：每个红点周围有且仅有一个红点，每个蓝点周围有且仅有一个蓝点。<br>“周围”的定义：某点周围的点指通过邻边直接连接的点。<br>所谓树，即没有自环、重边和回路的无向连通图。</p>
-    
-    <a class="article-more-a" href="/2021/05/10/2021-02-21-niuke01_C/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ACM基础知识</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图论</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/05/10/2021-02-21-niuke01_C/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1566,6 +1583,10 @@ a_1\mod{m},\quad a_2\mod{m},...,\quad a_n\mod{m},
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">期望DP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
             
             <div class="clearfix"></div>
