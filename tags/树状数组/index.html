@@ -6,22 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://miku39393939.github.io">
-  <title>Increasing Subsequence | 水蓝络合物的博客</title>
+  <title>Tag: 树状数组 | 水蓝络合物的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="题目大意 给定一个n个数的排列a（从1到n，每个数都会出现且仅有一次），Alice和Bob轮流选一个数，Alice先选。 每次选数需要满足以下要求：  当前选的数必须在当前选数的人上次选的数的右面。 当前选的数的大小，必须比 所有人选出来的数 要大。  如果有多个数同时满足要求，那么每个数被选的概率是均等的。 求 两人进行选数的期望次数，如果结果是A&#x2F;B，那么就写成 \(A \ti">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Increasing Subsequence">
-<meta property="og:url" content="https://miku39393939.github.io/2021/07/30/Increasing-Subsequence/index.html">
+  <meta name="description" content="是一个退役OIer，现役ACMer，苦逼带学牲，正在学习AI以及制作游戏">
+<meta property="og:type" content="website">
+<meta property="og:title" content="水蓝络合物的博客">
+<meta property="og:url" content="https://miku39393939.github.io/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/index.html">
 <meta property="og:site_name" content="水蓝络合物的博客">
-<meta property="og:description" content="题目大意 给定一个n个数的排列a（从1到n，每个数都会出现且仅有一次），Alice和Bob轮流选一个数，Alice先选。 每次选数需要满足以下要求：  当前选的数必须在当前选数的人上次选的数的右面。 当前选的数的大小，必须比 所有人选出来的数 要大。  如果有多个数同时满足要求，那么每个数被选的概率是均等的。 求 两人进行选数的期望次数，如果结果是A&#x2F;B，那么就写成 \(A \ti">
+<meta property="og:description" content="是一个退役OIer，现役ACMer，苦逼带学牲，正在学习AI以及制作游戏">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-07-30T03:15:22.000Z">
-<meta property="article:modified_time" content="2021-07-30T09:01:41.410Z">
 <meta property="article:author" content="水蓝络合物">
-<meta property="article:tag" content="ACM">
-<meta property="article:tag" content="期望DP">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="水蓝络合物的博客" type="application/atom+xml">
@@ -215,253 +211,73 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Increasing-Subsequence" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
+            
+  
+  
     
-      <header class="article-header">
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2021" class="archive-year">2021</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
+<a href="/2021/08/04/Inverse-Pair/" class="archive-article-date">
+        <time datetime="2021-08-04T12:33:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-04</time>
+</a>
+
+        </div>
+    	 
   
+    <h1 itemprop="name">
+	
+	  <a class="archive-article-title" href="/2021/08/04/Inverse-Pair/" target="_blank">Inverse Pair</a>
   
-    <h1 class="article-title" itemprop="name">
-      Increasing Subsequence
     </h1>
   
 
 
-  
-  
-        
-        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-
-<a href="/2021/07/30/Increasing-Subsequence/" class="archive-article-date">
-        <time datetime="2021-07-30T03:15:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-30</time>
-</a>
-
-  
-  
-    
-<div style="margin-top:10px;">
-  <span class="post-time">
-    <span class="post-meta-item-icon">
-      <!-- fonts.scss -->
-      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
-      <i class="icon-statistics"></i>
-      <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.3k字</span>
-    </span>
-  </span>
-
-  <span class="post-time">
-    &nbsp; | &nbsp;
-    <span class="post-meta-item-icon">
-      <i class="icon-book icon"></i>
-      <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">5分</span>
-    </span>
-  </span>
-</div>
-
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="题目大意">题目大意</h2>
-<p>给定一个n个数的排列a（从1到n，每个数都会出现且仅有一次），Alice和Bob轮流选一个数，Alice先选。</p>
-<p>每次选数需要满足以下要求：</p>
-<ul>
-<li><p>当前选的数必须在<strong>当前选数的人</strong>上次选的数的右面。</p></li>
-<li><p>当前选的数的大小，必须比 <strong>所有人选出来的数</strong> 要大。</p></li>
-</ul>
-<p>如果有多个数同时满足要求，那么每个数被选的概率是均等的。</p>
-<p>求 两人进行选数的期望次数，如果结果是A/B，那么就写成 <span class="math inline">\(A \times B^{998244351} \% 998244353\)</span>​​。的形式。</p>
-<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11166/I">原题来自牛客竞赛</a></p>
-<h3 id="思路">思路</h3>
-<ol type="1">
-<li><p>这种题目一看就是期望DP，那么我们第一步就显然是设计状态，我们可以利用把它转化为“拓扑图”的那种思路，即：</p>
-<ul>
-<li><p>找到所有的结束状态</p></li>
-<li><p>建立各个状态的联系</p></li>
-<li><p>从结束状态往前递推</p></li>
-</ul>
-<p>那么这道题的结束状态无非是两种情况：1.当前取到的数是最大的 2.当前取到的数是最右边的数。</p>
-<p><strong>也就是说，我们在不同关系的转移的时候，就要以这两个为转移的起点。</strong></p>
-<p>我们注意到了以下几点:</p>
-<ul>
-<li><p>每个人取数的位置只需要在这个人上一次取的数的右边，即<strong>影响可能的结果的位置因素只有这一个。</strong></p></li>
-<li><p>这是一个排列，即数组下标代表的数字与下标形成的集合是一样的。</p></li>
-</ul>
-<p>那么我们不妨设 <strong>f[i][j]代表当前取的数字大小是i，下一个取的数字大小是j时，选数操作的期望次数</strong>。</p></li>
-<li><p>设置转移方程</p>
-<p>我们设pos[i]表示数字i出现在序列的位置。根据上文提到的内容，f[i][j] -&gt; f[j][k]，要满足<span class="math inline">\(k &gt; j\)</span>且<span class="math inline">\(pos[k] &gt; pos[i]\)</span>​ 。(注意<span class="math inline">\(i &gt; j\)</span>​，所以不用对比k和i的大小了)。</p>
-<p>事实上，我们在进行循环转移的时候，不用专门设置pos数组，只需按照a[n] -&gt;a[1]的顺序，记录一下当前满足<span class="math inline">\(k &gt; j\)</span>且<span class="math inline">\(pos[k] &gt; pos[i]\)</span>​的数的个数。然后进行转移。（一些细节会写在代码注释中）</p></li>
-</ol>
-<h3 id="代码">代码</h3>
-<h5 id="一些细节">一些细节</h5>
-<ul>
-<li>1部分是转移的重点部分，其中sum表示 <strong>如果当前位置为i，且i可以被选的话，那么之后的序列为它提供的期望长度。</strong>cnt表示当前比j要大的数的个数，即选了j之后，还可以选哪些。</li>
-<li>这个dp的过程其实就是 <strong>向后统计，向前转移</strong>，dp顺序的第一次循环是按照照数的大小来的的，它是从n到1的，而第二个循环是按照数字的位置来的(注意与状态f[i][j]的含义做区分)。</li>
-<li>我们在转移的时候，因为这次选的数大小为j，那么下次选的数只需要比j大即可。所以我们可以直接把它加入到sum中（向后统计）。进而去下一步的转移（向前转移）。我们不需要担心在j之后选的数会在pos[a[i]]之前，因为每次往f[a[i]][j]转移的时候，当前加入到sum中的数都在pos[a[i]]的右边（前面的数还没有被统计到）。(这就是为什么我们把位置循环放在了第二层循环)</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">5005</span>, mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> eps = <span class="number">1e-7</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line">ll a[maxN], inv[maxN], f[maxN][maxN];</span><br><span class="line">ll n;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">qsm</span><span class="params">(ll a,ll n)</span></span>&#123;</span><br><span class="line">    ll res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(n)&#123;</span><br><span class="line">        <span class="keyword">if</span>(n&amp;  <span class="number">1</span>) res = (ll) res *a % mod;</span><br><span class="line">        a=(ll)a * a % mod;</span><br><span class="line">        n &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        inv[i] = <span class="built_in">qsm</span>(i, mod - <span class="number">2</span>);  <span class="comment">//预处理出除以1,2,3,4的结果（因为题目要求是转化为乘法）</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = n; j &gt;= <span class="number">0</span>; --j) &#123; <span class="comment">//1</span></span><br><span class="line">        ll cnt = <span class="number">0</span>, sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n; i &gt;= <span class="number">0</span>; --i) &#123; <span class="comment">//向后统计</span></span><br><span class="line">            <span class="keyword">if</span>(a[i] &gt; j) &#123;</span><br><span class="line">                ++cnt;</span><br><span class="line">                sum = (sum + f[j][a[i]]) % mod;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(a[i] &lt; j) &#123; <span class="comment">//往前递推</span></span><br><span class="line">                f[a[i]][j] = <span class="number">1</span>; <span class="comment">//此时f[a[i]][j]第一次被更新到，那么它初始期望长度就是1</span></span><br><span class="line">                <span class="keyword">if</span>(!cnt) <span class="comment">//假如在当前位置，向后统计的时候，存在选了j之后还可以被选的数，</span></span><br><span class="line">                    <span class="keyword">continue</span>; <span class="comment">//那么就能更新f[a[i]][j]的期望长度(毕竟可以继续往后选了嘛)，如果没有，那就跳过。</span></span><br><span class="line">                f[a[i]][j] = (f[a[i]][j] + sum * inv[cnt] % mod) % mod;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ll res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        res = (res + f[<span class="number">0</span>][i]) % mod;<span class="comment">//那么将最终答案就是把每次第一个选的数的期望长度加起来</span></span><br><span class="line">    res = (res * inv[n]) % mod;<span class="comment">//每个数作为第一次被选的可能性都为1/n.</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, res);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-    
-
-    
-
-    
-    <div class="declare"> 
-      <ul class="post-copyright">
-        <li>
-          <strong>本文作者：</strong>
-          水蓝络合物
-        </li>
-        <li>
-          <strong>本文链接：</strong>
-          <a href="https://miku39393939.github.io/2021/07/30/Increasing-Subsequence/" title="Increasing Subsequence" target="_blank">https://miku39393939.github.io/2021/07/30/Increasing-Subsequence/</a>
-        </li>
-        
-        <li>
-          <strong>版权声明： </strong>
+        <div class="article-info info-on-right">
           
-          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
-        </li>
-        
-      </ul>
-    </div>
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">树状数组</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">期望DP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">归并排序</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">逆序</a>
         		</li>
       		
 		</ul>
 	</div>
 
-    
+          
 
-    
-
-    
-    
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a> -->
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://miku39393939.github.io/2021/07/30/Increasing-Subsequence/" alt="微信分享二维码"> -->
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-
-    
-    <div class="clearfix"></div>
-  </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-
-<nav id="article-nav">
-  
-    <a href="/2021/08/03/Journey-among-Railway-Stations/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Journey among Railway Stations
-        
-      </div>
-    </a>
   
   
-    <a href="/2021/07/28/Game-of-Swapping-Numbers/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Game of Swapping Numbers</div>
-      <i class="icon-circle-right"></i>
-    </a>
+    </div></section>
   
-</nav>
 
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
           </div>
@@ -502,9 +318,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
