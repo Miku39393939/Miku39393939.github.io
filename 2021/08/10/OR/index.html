@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="题目大意给定两个非负数组$b[2…n],c[2…n]$，构造出数组$a[1…n]$满足：$a[i-1]|a[i] &#x3D; b[i],a[i-1]+a[i]&#x3D;c[i]$。求出满足要求的数组$a$的数量。$(1\le n \le 10^5, 1\le b[i],c[i] \le 10^9)$ 思路直接枚举$a[1]$​然后检测的话，会TLE，因为每一位都有两种选择，且由于$c$​​​​数组的存在，导致**">
+  <meta name="description" content="题目大意 给定两个非负数组\(b[2...n],c[2...n]\)，构造出数组\(a[1...n]\)满足：\(a[i-1]|a[i] &#x3D; b[i],a[i-1]+a[i]&#x3D;c[i]\)。求出满足要求的数组\(a\)的数量。\((1\le n \le 10^5, 1\le b[i],c[i] \le 10^9)\) 思路 直接枚举\(a[1]\)​然后检测的话，会TLE，因为每一位都有两种">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OR">
 <meta property="og:url" content="https://miku39393939.github.io/2021/08/10/OR/index.html">
 <meta property="og:site_name" content="水蓝络合物的博客">
-<meta property="og:description" content="题目大意给定两个非负数组$b[2…n],c[2…n]$，构造出数组$a[1…n]$满足：$a[i-1]|a[i] &#x3D; b[i],a[i-1]+a[i]&#x3D;c[i]$。求出满足要求的数组$a$的数量。$(1\le n \le 10^5, 1\le b[i],c[i] \le 10^9)$ 思路直接枚举$a[1]$​然后检测的话，会TLE，因为每一位都有两种选择，且由于$c$​​​​数组的存在，导致**">
+<meta property="og:description" content="题目大意 给定两个非负数组\(b[2...n],c[2...n]\)，构造出数组\(a[1...n]\)满足：\(a[i-1]|a[i] &#x3D; b[i],a[i-1]+a[i]&#x3D;c[i]\)。求出满足要求的数组\(a\)的数量。\((1\le n \le 10^5, 1\le b[i],c[i] \le 10^9)\) 思路 直接枚举\(a[1]\)​然后检测的话，会TLE，因为每一位都有两种">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-10T02:26:51.000Z">
-<meta property="article:modified_time" content="2021-08-10T03:04:08.886Z">
+<meta property="article:modified_time" content="2021-08-10T03:59:50.171Z">
 <meta property="article:author" content="水蓝络合物">
 <meta property="article:tag" content="位运算">
 <meta name="twitter:card" content="summary">
@@ -267,40 +267,39 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h3 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h3><p>给定两个非负数组$b[2…n],c[2…n]$，构造出数组$a[1…n]$满足：$a[i-1]|a[i] = b[i],a[i-1]+a[i]=c[i]$。求出满足要求的数组$a$的数量。$(1\le n \le 10^5, 1\le b[i],c[i] \le 10^9)$</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>直接枚举$a[1]$​然后检测的话，会TLE，因为每一位都有两种选择，且由于$c$​​​​数组的存在，导致**二进制下的每一位都不是独立的(因为有进位的存在)**。比如我们认为答案可能在000~111（二进制下）之间。我们必须从000一直枚举到111。</p>
-<p>假如我们可以让每一位都独立的话，就可以单独检验$a[1]$​每一位是否可以为0或1。</p>
+    <h3 id="题目大意">题目大意</h3>
+<p>给定两个非负数组<span class="math inline">\(b[2...n],c[2...n]\)</span>，构造出数组<span class="math inline">\(a[1...n]\)</span>满足：<span class="math inline">\(a[i-1]|a[i] = b[i],a[i-1]+a[i]=c[i]\)</span>。求出满足要求的数组<span class="math inline">\(a\)</span>的数量。<span class="math inline">\((1\le n \le 10^5, 1\le b[i],c[i] \le 10^9)\)</span></p>
+<h3 id="思路">思路</h3>
+<p>直接枚举<span class="math inline">\(a[1]\)</span>​然后检测的话，会TLE，因为每一位都有两种选择，且由于<span class="math inline">\(c\)</span>​​​​数组的存在，导致<strong>二进制下的每一位都不是独立的(因为有进位的存在)</strong>。比如我们认为答案可能在000~111（二进制下）之间。我们必须从000一直枚举到111。</p>
+<p>假如我们可以让每一位都独立的话，就可以单独检验<span class="math inline">\(a[1]\)</span>​每一位是否可以为0或1。</p>
 <p>事实上，加法运算有一个位运算的转化<del>（这个不知道大概就寄了，比如我）</del></p>
-<p><strong>$a+b = (a|b)+(a&amp;b)$</strong></p>
+<p><strong><span class="math inline">\(a+b = (a|b)+(a\&amp;b)\)</span></strong></p>
 <p>很好验证，那么</p>
 <blockquote>
-<p> $c[i] = a[i-1] + a[i]$​​</p>
-<p>=&gt; $c[i] = (a[i-1] | a[i]) + (a[i-1]&amp;a[i])$​​ </p>
-<p>=&gt; $c[i] = b[i] + (a[i - 1] &amp; a[i])$</p>
-<p>令 $d[i] = a[i]&amp;a[i - 1]$</p>
-<p>=&gt; $d[i] = c[i]-b[i]$</p>
+<p><span class="math inline">\(c[i] = a[i-1] + a[i]\)</span>​​</p>
+<p>=&gt; <span class="math inline">\(c[i] = (a[i-1] | a[i]) + (a[i-1]\&amp;a[i])\)</span>​​</p>
+<p>=&gt; <span class="math inline">\(c[i] = b[i] + (a[i - 1] \&amp; a[i])\)</span></p>
+<p>令 <span class="math inline">\(d[i] = a[i]\&amp;a[i - 1]\)</span></p>
+<p>=&gt; <span class="math inline">\(d[i] = c[i]-b[i]\)</span></p>
 </blockquote>
-<p>现在我们有$b,d$​两个数组了，注意$d$​和$b$​的区别:<strong>$b$​​数组是通过加法运算来限制$a$​数组的，而$d$​数组是通过“按位与”运算来限制$a$数组的，是没有进位操作的，所以对于d数组，二进制下每一位是相互独立的</strong></p>
+<p>现在我们有<span class="math inline">\(b,d\)</span>​两个数组了，注意<span class="math inline">\(d\)</span>​和<span class="math inline">\(b\)</span>​的区别:<strong><span class="math inline">\(b\)</span>​​数组是通过加法运算来限制<span class="math inline">\(a\)</span>​数组的，而<span class="math inline">\(d\)</span>​数组是通过“按位与”运算来限制<span class="math inline">\(a\)</span>数组的，是没有进位操作的，所以对于d数组，二进制下每一位是相互独立的</strong></p>
 <p>也就是说，<strong>因为每一位是相互独立的，我们可以单独枚举每一位的可能值，然后用乘法原理把结果相乘。</strong></p>
 <p>比如我们认为答案可能在000到111之间，那么我们只用枚举第一位是否可以为0，1，第二位是否可为0，1，第三位可否为0，1.然后把结果数量相乘即可。</p>
 <p>那么如何验证呢？</p>
-<p>对于每一位，都有$b[i] = a[i]|a[i-1],d[i] = a[i-1]&amp;a[i-1]$ 。</p>
+<p>对于每一位，都有<span class="math inline">\(b[i] = a[i]|a[i-1],d[i] = a[i-1]\&amp;a[i-1]\)</span> 。</p>
 <p>那么无非是这三种情况：</p>
 <ul>
-<li>$b[i]$这一位是$1$，$d[i]$这一位是$1$，那么$a[i],a[i-1]$这一位必须是1。</li>
-<li>$b[i]$​​这一位是$1$​​，$d[i]$​​这一位是$0$​​，那么$a[i]$​这一位可以为$0$​的前提就是$a[i-1]$​这一位可以为$1$​，同理，$a[i]$​这一位可以为$1$的前提就是$a[i-1]$这一位可以为$0$​​​。（它们或起来为1，与起来为0，那么肯定一个1一个0）</li>
-<li>$b[i]$​​​这一位是$0$​​​，$d[i]$​​​这一位是$0$​，那么显然$a[i],a[i-1]$均为0。<h3 id="具体做法"><a href="#具体做法" class="headerlink" title="具体做法"></a>具体做法</h3></li>
+<li><span class="math inline">\(b[i]\)</span>这一位是<span class="math inline">\(1\)</span>，<span class="math inline">\(d[i]\)</span>这一位是<span class="math inline">\(1\)</span>，那么<span class="math inline">\(a[i],a[i-1]\)</span>这一位必须是1。</li>
+<li><span class="math inline">\(b[i]\)</span>​​这一位是<span class="math inline">\(1\)</span>​​，<span class="math inline">\(d[i]\)</span>​​这一位是<span class="math inline">\(0\)</span>​​，那么<span class="math inline">\(a[i]\)</span>​这一位可以为<span class="math inline">\(0\)</span>​的前提就是<span class="math inline">\(a[i-1]\)</span>​这一位可以为<span class="math inline">\(1\)</span>​，同理，<span class="math inline">\(a[i]\)</span>​这一位可以为<span class="math inline">\(1\)</span>的前提就是<span class="math inline">\(a[i-1]\)</span>这一位可以为<span class="math inline">\(0\)</span>​​​。（它们或起来为1，与起来为0，那么肯定一个1一个0）</li>
+<li><span class="math inline">\(b[i]\)</span>​​​这一位是<span class="math inline">\(0\)</span>​​​，<span class="math inline">\(d[i]\)</span>​​​这一位是<span class="math inline">\(0\)</span>​，那么显然<span class="math inline">\(a[i],a[i-1]\)</span>​均为0。</li>
+<li><del>怎么会有两个数与起来为<span class="math inline">\(1\)</span>但是或起来为<span class="math inline">\(0\)</span>呢</del> ### 具体做法</li>
 </ul>
-<p>我们求出$d$数组后，按位枚举，对于每一位枚举$a[1]$第$i$位是否可以为0，1然后对于每一个数$j$进行检验。</p>
-<p>检验时，用preBit0表示上一个数的这一位（即$a[j-1]$的第$i$位）可否为0，用preBit1表示上一个数的这一位可否为1（0为不可以，1为可以）。</p>
-<p>用nowBit0表示这个数的这一位（即$a[j]$的第$i$​位）可否为0，nowBit1表示这个数的这一位可否为1。</p>
+<p>我们求出<span class="math inline">\(d\)</span>数组后，按位枚举，对于每一位枚举<span class="math inline">\(a[1]\)</span>第<span class="math inline">\(i\)</span>位是否可以为0，1然后对于每一个数<span class="math inline">\(j\)</span>进行检验。</p>
+<p>检验时，用preBit0表示上一个数的这一位（即<span class="math inline">\(a[j-1]\)</span>的第<span class="math inline">\(i\)</span>位）可否为0，用preBit1表示上一个数的这一位可否为1（0为不可以，1为可以）。</p>
+<p>用nowBit0表示这个数的这一位（即<span class="math inline">\(a[j]\)</span>的第<span class="math inline">\(i\)</span>​位）可否为0，nowBit1表示这个数的这一位可否为1。</p>
 <p>然后进行递推即可。</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">1e5</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> b[maxN], c[maxN], d[maxN];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;b[i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;c[i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">        d[i] = c[i] - b[i];</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">31</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> preBit0 = <span class="number">1</span>, preBit1 = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">2</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">            <span class="keyword">int</span> nowBit0 = <span class="number">0</span>, nowBit1 = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> x = d[j] &gt;&gt; i &amp; <span class="number">1</span>, y = b[j] &gt;&gt; i &amp; <span class="number">1</span>; <span class="comment">//第j个数的第i位</span></span><br><span class="line">            <span class="keyword">if</span>(x == <span class="number">0</span> &amp;&amp; y == <span class="number">0</span>)	<span class="comment">//上一个数能为0，那这个数也能为0，（这一位不能为1了，所以nowBit1就还是0）</span></span><br><span class="line">                nowBit0 = preBit0; <span class="comment">//如果上一个数不能为0，那么显然就不合法了，那么对答案的贡献就是0了。</span></span><br><span class="line">            <span class="keyword">if</span>(x == <span class="number">0</span> &amp;&amp; y == <span class="number">1</span>) &#123;</span><br><span class="line">                nowBit0 = preBit1;</span><br><span class="line">                nowBit1 = preBit0;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(x == <span class="number">1</span> &amp;&amp; y == <span class="number">1</span>)</span><br><span class="line">                nowBit1 = preBit1;<span class="comment">//上一个数能为1，那这个数也能为1，（这一位不能为1了，所以nowBit0就还是0）</span></span><br><span class="line">            preBit0 = nowBit0;</span><br><span class="line">            preBit1 = nowBit1;</span><br><span class="line">        &#125;</span><br><span class="line">        ans *= preBit0 + preBit1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
+<h3 id="代码">代码</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">1e5</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> b[maxN], c[maxN], d[maxN];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;b[i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;c[i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">        d[i] = c[i] - b[i];</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">31</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> preBit0 = <span class="number">1</span>, preBit1 = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">2</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">            <span class="keyword">int</span> nowBit0 = <span class="number">0</span>, nowBit1 = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> x = d[j] &gt;&gt; i &amp; <span class="number">1</span>, y = b[j] &gt;&gt; i &amp; <span class="number">1</span>; <span class="comment">//第j个数的第i位</span></span><br><span class="line">            <span class="keyword">if</span>(x == <span class="number">0</span> &amp;&amp; y == <span class="number">0</span>)	<span class="comment">//上一个数能为0，那这个数也能为0，（这一位不能为1了，所以nowBit1就还是0）</span></span><br><span class="line">                nowBit0 = preBit0; <span class="comment">//如果上一个数不能为0，那么显然就不合法了，那么对答案的贡献就是0了。</span></span><br><span class="line">            <span class="keyword">if</span>(x == <span class="number">0</span> &amp;&amp; y == <span class="number">1</span>) &#123;</span><br><span class="line">                nowBit0 = preBit1;</span><br><span class="line">                nowBit1 = preBit0;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(x == <span class="number">1</span> &amp;&amp; y == <span class="number">1</span>)</span><br><span class="line">                nowBit1 = preBit1;<span class="comment">//上一个数能为1，那这个数也能为1，（这一位不能为1了，所以nowBit0就还是0）</span></span><br><span class="line">            preBit0 = nowBit0;</span><br><span class="line">            preBit1 = nowBit1;</span><br><span class="line">        &#125;</span><br><span class="line">        ans *= preBit0 + preBit1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     
 
@@ -407,6 +406,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2021/08/11/KingOfRange/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          KingOfRange
+        
+      </div>
+    </a>
   
   
     <a href="/2021/08/07/Tree-Xor/" id="article-nav-older" class="article-nav-link-wrap">
@@ -734,6 +742,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">位运算</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">单调队列</a>
               </li>
             
             <div class="clearfix"></div>
