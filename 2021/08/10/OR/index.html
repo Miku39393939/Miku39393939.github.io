@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="题目大意 给定两个非负数组\(b[2...n],c[2...n]\)，构造出数组\(a[1...n]\)满足：\(a[i-1]|a[i] &#x3D; b[i],a[i-1]+a[i]&#x3D;c[i]\)。求出满足要求的数组\(a\)的数量。\((1\le n \le 10^5, 1\le b[i],c[i] \le 10^9)\) 思路 直接枚举\(a[1]\)​然后检测的话，会TLE，因为每一位都有两种">
+  <meta name="description" content="题目大意 给定两个非负数组\(b[2...n],c[2...n]\)，构造出数组\(a[1...n]\)满足：\(a[i-1]|a[i] &#x3D; b[i],a[i-1]+a[i]&#x3D;c[i]\)。求出满足要求的数组\(a\)的数量。\((1\le n \le 10^5, 1\le b[i],c[i] \le 10^9)\)​">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OR">
 <meta property="og:url" content="https://miku39393939.github.io/2021/08/10/OR/index.html">
 <meta property="og:site_name" content="水蓝络合物的博客">
-<meta property="og:description" content="题目大意 给定两个非负数组\(b[2...n],c[2...n]\)，构造出数组\(a[1...n]\)满足：\(a[i-1]|a[i] &#x3D; b[i],a[i-1]+a[i]&#x3D;c[i]\)。求出满足要求的数组\(a\)的数量。\((1\le n \le 10^5, 1\le b[i],c[i] \le 10^9)\) 思路 直接枚举\(a[1]\)​然后检测的话，会TLE，因为每一位都有两种">
+<meta property="og:description" content="题目大意 给定两个非负数组\(b[2...n],c[2...n]\)，构造出数组\(a[1...n]\)满足：\(a[i-1]|a[i] &#x3D; b[i],a[i-1]+a[i]&#x3D;c[i]\)。求出满足要求的数组\(a\)的数量。\((1\le n \le 10^5, 1\le b[i],c[i] \le 10^9)\)​">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-10T02:26:51.000Z">
-<meta property="article:modified_time" content="2021-08-10T03:59:50.171Z">
+<meta property="article:modified_time" content="2021-08-15T02:19:15.043Z">
 <meta property="article:author" content="水蓝络合物">
 <meta property="article:tag" content="位运算">
 <meta name="twitter:card" content="summary">
@@ -268,7 +268,8 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h3 id="题目大意">题目大意</h3>
-<p>给定两个非负数组<span class="math inline">\(b[2...n],c[2...n]\)</span>，构造出数组<span class="math inline">\(a[1...n]\)</span>满足：<span class="math inline">\(a[i-1]|a[i] = b[i],a[i-1]+a[i]=c[i]\)</span>。求出满足要求的数组<span class="math inline">\(a\)</span>的数量。<span class="math inline">\((1\le n \le 10^5, 1\le b[i],c[i] \le 10^9)\)</span></p>
+<p>给定两个非负数组<span class="math inline">\(b[2...n],c[2...n]\)</span>，构造出数组<span class="math inline">\(a[1...n]\)</span>满足：<span class="math inline">\(a[i-1]|a[i] = b[i],a[i-1]+a[i]=c[i]\)</span>。求出满足要求的数组<span class="math inline">\(a\)</span>的数量。<span class="math inline">\((1\le n \le 10^5, 1\le b[i],c[i] \le 10^9)\)</span>​</p>
+<span id="more"></span>
 <h3 id="思路">思路</h3>
 <p>直接枚举<span class="math inline">\(a[1]\)</span>​然后检测的话，会TLE，因为每一位都有两种选择，且由于<span class="math inline">\(c\)</span>​​​​数组的存在，导致<strong>二进制下的每一位都不是独立的(因为有进位的存在)</strong>。比如我们认为答案可能在000~111（二进制下）之间。我们必须从000一直枚举到111。</p>
 <p>假如我们可以让每一位都独立的话，就可以单独检验<span class="math inline">\(a[1]\)</span>​每一位是否可以为0或1。</p>
@@ -754,6 +755,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">DP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数学期望</a>
               </li>
             
             <div class="clearfix"></div>

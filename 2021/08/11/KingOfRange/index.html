@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="题目大意 给定一个\(n\)个数的序列\(a_i\)。有\(q\)次询问，每次询问是一个非负整数\(k\)，求出有多少对\((l, r)\)，满足\(max(a[i]) - min(a[j]) &gt; k\),其中\(l\le i, j \le r\)。 思路 不难发现满足要求的序列有单调性，即如果当前区间满足最大值减去最小值大于k，那么包含这个区间的更大的区间，也一定满足。 而这一类问">
+  <meta name="description" content="题目大意 给定一个\(n\)个数的序列\(a_i\)。有\(q\)次询问，每次询问是一个非负整数\(k\)，求出有多少对\((l, r)\)，满足\(max(a[i]) - min(a[j]) &gt; k\),其中\(l\le i, j \le r\)​。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KingOfRange">
 <meta property="og:url" content="https://miku39393939.github.io/2021/08/11/KingOfRange/index.html">
 <meta property="og:site_name" content="水蓝络合物的博客">
-<meta property="og:description" content="题目大意 给定一个\(n\)个数的序列\(a_i\)。有\(q\)次询问，每次询问是一个非负整数\(k\)，求出有多少对\((l, r)\)，满足\(max(a[i]) - min(a[j]) &gt; k\),其中\(l\le i, j \le r\)。 思路 不难发现满足要求的序列有单调性，即如果当前区间满足最大值减去最小值大于k，那么包含这个区间的更大的区间，也一定满足。 而这一类问">
+<meta property="og:description" content="题目大意 给定一个\(n\)个数的序列\(a_i\)。有\(q\)次询问，每次询问是一个非负整数\(k\)，求出有多少对\((l, r)\)，满足\(max(a[i]) - min(a[j]) &gt; k\),其中\(l\le i, j \le r\)​。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-11T01:47:59.000Z">
-<meta property="article:modified_time" content="2021-08-11T06:08:35.111Z">
+<meta property="article:modified_time" content="2021-08-15T02:18:58.108Z">
 <meta property="article:author" content="水蓝络合物">
 <meta property="article:tag" content="单调队列">
 <meta property="article:tag" content="尺取法">
@@ -269,7 +269,8 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h3 id="题目大意">题目大意</h3>
-<p>给定一个<span class="math inline">\(n\)</span>个数的序列<span class="math inline">\(a_i\)</span>。有<span class="math inline">\(q\)</span>次询问，每次询问是一个非负整数<span class="math inline">\(k\)</span>，求出有多少对<span class="math inline">\((l, r)\)</span>，满足<span class="math inline">\(max(a[i]) - min(a[j]) &gt; k\)</span>,其中<span class="math inline">\(l\le i, j \le r\)</span>。</p>
+<p>给定一个<span class="math inline">\(n\)</span>个数的序列<span class="math inline">\(a_i\)</span>。有<span class="math inline">\(q\)</span>次询问，每次询问是一个非负整数<span class="math inline">\(k\)</span>，求出有多少对<span class="math inline">\((l, r)\)</span>，满足<span class="math inline">\(max(a[i]) - min(a[j]) &gt; k\)</span>,其中<span class="math inline">\(l\le i, j \le r\)</span>​。</p>
+<span id="more"></span>
 <h3 id="思路">思路</h3>
 <p>不难发现满足要求的序列有单调性，即<strong>如果当前区间满足最大值减去最小值大于k，那么包含这个区间的更大的区间，也一定满足</strong>。</p>
 <p>而这一类问题，通常可以采用尺取法。即：</p>
@@ -739,6 +740,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">DP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数学期望</a>
               </li>
             
             <div class="clearfix"></div>

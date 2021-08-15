@@ -6,22 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://miku39393939.github.io">
-  <title>Tree-Xor | 水蓝络合物的博客</title>
+  <title>Boxes | 水蓝络合物的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="题目大意给定一棵有n个节点的树，每个节点的权值$a[i]$​​​​未知，满足$l[i]\le a[i]\le r[i]$​​​​，其中$l[i],r[i]$​​​​为给定数值。每条边的权值为已知，其值为它连接的两个边的权值的异或值。求出满足条件的$a[i](1\le i\le n)）$​​​​​的数量。($1\le n\le 10^5, 1\le l[i] \le r[i]\le 2^{30}$​">
+  <meta name="description" content="题目大意 有\(n\)个盒子，每个盒子里装有一个球，它可能是黑色或者白色的概率均为\(1&#x2F;2\)。现在你可以花费\(C\)的价值来获得剩下的所有盒子中剩余的黑色球数量和白色球数量。还可以花费\(w[i]\)的价值去打开一个盒子。 问： 你知道所有盒子中球的颜色的期望花费是多少。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tree-Xor">
-<meta property="og:url" content="https://miku39393939.github.io/2021/08/07/Tree-Xor/index.html">
+<meta property="og:title" content="Boxes">
+<meta property="og:url" content="https://miku39393939.github.io/2021/08/15/Boxes/index.html">
 <meta property="og:site_name" content="水蓝络合物的博客">
-<meta property="og:description" content="题目大意给定一棵有n个节点的树，每个节点的权值$a[i]$​​​​未知，满足$l[i]\le a[i]\le r[i]$​​​​，其中$l[i],r[i]$​​​​为给定数值。每条边的权值为已知，其值为它连接的两个边的权值的异或值。求出满足条件的$a[i](1\le i\le n)）$​​​​​的数量。($1\le n\le 10^5, 1\le l[i] \le r[i]\le 2^{30}$​">
+<meta property="og:description" content="题目大意 有\(n\)个盒子，每个盒子里装有一个球，它可能是黑色或者白色的概率均为\(1&#x2F;2\)。现在你可以花费\(C\)的价值来获得剩下的所有盒子中剩余的黑色球数量和白色球数量。还可以花费\(w[i]\)的价值去打开一个盒子。 问： 你知道所有盒子中球的颜色的期望花费是多少。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-08-07T06:26:27.000Z">
-<meta property="article:modified_time" content="2021-08-09T02:56:34.888Z">
+<meta property="article:published_time" content="2021-08-15T08:27:50.000Z">
+<meta property="article:modified_time" content="2021-08-15T08:55:18.688Z">
 <meta property="article:author" content="水蓝络合物">
-<meta property="article:tag" content="数学">
-<meta property="article:tag" content="线段树">
+<meta property="article:tag" content="数学期望">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="水蓝络合物的博客" type="application/atom+xml">
@@ -215,14 +214,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Tree-Xor" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Boxes" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      Tree-Xor
+      Boxes
     </h1>
   
 
@@ -234,8 +233,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2021/08/07/Tree-Xor/" class="archive-article-date">
-        <time datetime="2021-08-07T06:26:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-07</time>
+<a href="/2021/08/15/Boxes/" class="archive-article-date">
+        <time datetime="2021-08-15T08:27:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-15</time>
 </a>
 
   
@@ -248,7 +247,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.4k字</span>
+      <span class="post-count">786字</span>
     </span>
   </span>
 
@@ -257,7 +256,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">6分</span>
+      <span class="post-count">3分</span>
     </span>
   </span>
 </div>
@@ -268,36 +267,31 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h3 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h3><p>给定一棵有n个节点的树，每个节点的权值$a[i]$​​​​未知，满足$l[i]\le a[i]\le r[i]$​​​​，其中$l[i],r[i]$​​​​为给定数值。每条边的权值为已知，其值为它连接的两个边的权值的异或值。求出满足条件的$a[i](1\le i\le n)）$​​​​​的数量。($1\le n\le 10^5, 1\le l[i] \le r[i]\le 2^{30}$​​​)</p>
+    <h3 id="题目大意">题目大意</h3>
+<p>有<span class="math inline">\(n\)</span>个盒子，每个盒子里装有一个球，它可能是黑色或者白色的概率均为<span class="math inline">\(1/2\)</span>。现在你可以花费<span class="math inline">\(C\)</span>的价值来获得<strong>剩下的所有盒子中剩余的黑色球数量和白色球数量</strong>。还可以花费<span class="math inline">\(w[i]\)</span>的价值去打开一个盒子。</p>
+<p>问： 你知道所有盒子中球的颜色的期望花费是多少。</p>
 <span id="more"></span>
-<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11255/E">题目链接</a></p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>由于每条边的值为给定值，所以只要确定了一个点的值，剩下的点的值也就被确定了，遍历整个树需要$O(n)$​的时间，所以枚举$min{r[i] - l[i]}$​的点，也会TLE。所以我们不能通过枚举可行值来计算答案。</p>
-<ol>
-<li><p>我们首先假设$a[1] = 0$​，那么剩下所有的点都会被确定为$a[i]$</p>
-<p> 那么假设我们把$a[1]$的值修改为了$x$，那么剩下的点都为被改为$a[i]\oplus x$。</p>
-<p> 显然剩下的点也需要满足$l[i]\le a[i]\oplus x\le r[i]$。</p>
-<p> 假如不等式两边可以同时异或的话，那么上式就可以转化为$l[i] \oplus a[i] \le x \le r[i] \oplus a[i]$</p>
-<p> 那么问题就转换为，对于$n$​个上式的不等式，求出$x$​的可行解。</p>
-</li>
-<li><p>但是对于一个不等式，是不能够直接异或的，因为对于一个区间，异或上一个数后，得到的新的区间，<strong>不一定</strong>是连续的。注意用词，是<strong>不一定</strong>连续，假如我们可以<strong>把区间分解为几个在异或一个数之后，仍然为连续的区间</strong>的话，那么问题就会转变为<strong>对于多个形如上式的不等式，求出$x$​​​的可行解</strong>。所以我们来寻找什么样的区间，可以满足这个条件。</p>
-<blockquote>
-<p>二进制下，只要满足000，001，010，011 …..111之间的每个数都存在，那么这个区间异或上一个数之后，还是一个连续的区间。(大家可以试一试)</p>
-<p>进一步来说，假如某个区间的所有数，在二进制下为n位，前面k位数都一样，且剩下的位数，刚好满足从0到2^(n - k+1) -1的每个数都有，那么这个区间异或上一个数之后也还为连续的，因为异或之后的每个数，前面k位依然相同，后面的数异或后也是一个连续的区间，那么连起来依然是一个连续的区间。</p>
-</blockquote>
-</li>
-</ol>
-<p>3.那么我们就可以统计以下每个区间异或之后的新区间，统计有哪些地方被覆盖的次数超过$n$次（即满足 $n$​个不等式）。我们可以用类似于<strong>权值线段树</strong>的形式，即<strong>每个点代表当前这个值被覆盖的次数</strong>。为什么要用线段树呢？因为如果直接对整个区间进行统计的话，就需要从1统计到2^31-1，显然是无法通过空间限制的，但是用线段树统计的时候，我们可以用<strong>打标记</strong>，即类似于区间修改的方式来提前终止递归，从而降低了空间复杂度与时间复杂度。(一个范围为W的区间最多被分为$log(W)$​个部分)</p>
-<p>4.那么代码主要就分为以下几步</p>
+<h3 id="思路">思路</h3>
+<p>首先我们需要知道我们什么情况下可以知道每个盒子中球的颜色，即<strong>剩下没开的盒子数量刚好等于剩下的盒子中某个颜色球的数量</strong></p>
+<p>（或者我们可以不询问，直接打开所有的盒子）</p>
+<p>比如：还剩下三个盒子，然后我们知道剩下的盒子中黑球的数量有3个。</p>
+<p>假如我们还无法确定，那么我们打开盒子的顺序一定是从<strong>最便宜</strong>的开始打开，且如果我们要询问，那一定是要在刚开始时询问（什么时候询问花费都一样，在最开始询问有最大的可能知道剩下的盒子中球的颜色）。</p>
+<p>我们定义<span class="math inline">\(sum[i]\)</span>为<span class="math inline">\(w[i]\)</span>从小到大排序后的前缀和，<span class="math inline">\(p[i]\)</span>表示<strong>至少打开第<span class="math inline">\(i\)</span>​个盒子才知道所有盒子球的颜色的概率。</strong></p>
+<p>那么根据数学期望的定义，询问之后再一个一个打开的数学期望就是</p>
+<p>​ <span class="math display">\[ans = \sum_{i=0}^{n}sum[i]*p[i]\]</span></p>
+<p>接下来我们来分析<span class="math inline">\(p[i]\)</span>怎么算。注意定义<strong>至少打开第<span class="math inline">\(i\)</span>​个盒子才知道所有盒子球的颜色的概率。</strong>也就是说，我们打开第<span class="math inline">\(i-1\)</span>个盒子的时候，仍然不知道，打开了第<span class="math inline">\(i\)</span>个盒子的时候，刚好就知道了。说明：</p>
 <ul>
-<li>先默认$a[1] = 0$求出每个点的初始权值</li>
-<li>把每个区间分为异或后依然连续的区间（权值线段树操作）</li>
-<li>计算异或后的区间并作统计（差分）</li>
-<li>统计合法的结果数量（对差分数组排序，求前缀和）</li>
+<li>从第<span class="math inline">\(i+1\)</span>到<span class="math inline">\(n\)</span>个盒子的颜色都相同</li>
+<li><strong>第<span class="math inline">\(i\)</span>个盒子与剩下没打开的盒子颜色不同</strong></li>
 </ul>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">1e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> n, l[maxN], r[maxN], head[maxN], cnt, W[maxN], ans, sum;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SegmentTree</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> val, laz;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> SegmentTree &amp;t)<span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(val != t.val)</span><br><span class="line">            <span class="keyword">return</span> val &lt; t.val;</span><br><span class="line">        <span class="keyword">return</span> laz &lt; t.laz;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> from, to, w;</span><br><span class="line">&#125;e[maxN &lt;&lt; <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    e[++cnt].from = head[u];</span><br><span class="line">    e[cnt].to = v;</span><br><span class="line">    e[cnt].w = w;</span><br><span class="line">    head[u] = cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> fa,<span class="keyword">int</span> val)</span> </span>&#123; <span class="comment">//第一步</span></span><br><span class="line">    W[u]  =val;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = head[u]; i; i = e[i].from) &#123;</span><br><span class="line">        <span class="keyword">int</span> v =e [i].to,p =e [i].w;</span><br><span class="line">        <span class="keyword">if</span>(v != fa)</span><br><span class="line">            <span class="built_in">dfs</span>(v, u, val ^ p);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vector&lt;SegmentTree&gt; V;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">operation</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> val)</span> <span class="comment">//求出每个区间异或后的区间并作差分</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    SegmentTree a1, a2;</span><br><span class="line">    <span class="keyword">int</span> len = r - l + <span class="number">1</span>;</span><br><span class="line">    a1.val = (l ^ (val &amp; (~(len - <span class="number">1</span>))));</span><br><span class="line">    a2.val = a1.val + len;</span><br><span class="line">    a1.laz = <span class="number">1</span>; a2.laz = <span class="number">-1</span>;</span><br><span class="line">    V.<span class="built_in">push_back</span>(a1); V.<span class="built_in">push_back</span>(a2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Search</span><span class="params">(<span class="keyword">int</span> L,<span class="keyword">int</span> R,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> val)</span> </span>&#123; <span class="comment">//第二步:分区间</span></span><br><span class="line">    <span class="keyword">if</span>(L &lt;= l &amp;&amp; R &gt;= r) &#123;</span><br><span class="line">        <span class="built_in">operation</span>(l, r, val);</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(L &lt;= mid)</span><br><span class="line">        <span class="built_in">Search</span>(L, R, l, mid, val);</span><br><span class="line">    <span class="keyword">if</span>(R &gt; mid)</span><br><span class="line">        <span class="built_in">Search</span>(L, R, mid + <span class="number">1</span>, r, val);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;l[i], &amp;r[i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> x, y, z;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;x, &amp;y, &amp;z);</span><br><span class="line">        <span class="built_in">add</span>(x, y, z); <span class="built_in">add</span>(y, x, z);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="built_in">Search</span>(l[i], r[i], <span class="number">0</span>, (<span class="number">1</span> &lt;&lt; <span class="number">30</span>) - <span class="number">1</span>, W[i]);</span><br><span class="line">    <span class="built_in">sort</span>(V.<span class="built_in">begin</span>(), V.<span class="built_in">end</span>());<span class="comment">//对差分数组进行差分</span></span><br><span class="line">    <span class="keyword">int</span> len = V.<span class="built_in">size</span>(), sum = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i) &#123; <span class="comment">//求前缀和并做统计</span></span><br><span class="line">        sum += V[i].laz;</span><br><span class="line">        <span class="keyword">if</span>(sum == n)</span><br><span class="line">            ans += V[i + <span class="number">1</span>].val - V[i].val;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
+<p>第二点有些不好想，因为假如第<span class="math inline">\(i\)</span>个盒子颜色与剩下的相同，那么我们在打开第<span class="math inline">\(i-1\)</span>个盒子的时候就已经知道剩下盒子的颜色了。</p>
+<p>剩下的盒子有<span class="math inline">\(n-i\)</span>个，<span class="math inline">\(n-i\)</span>个盒子颜色颜色相同概率为<span class="math inline">\(1/2^{n-i-1}\)</span>，而又要与第<span class="math inline">\(i\)</span>个盒子的球颜色不同，所以要再乘以<span class="math inline">\(1/2\)</span>。</p>
+<p>综上<span class="math inline">\(p[i]=1/2^{n-i}\)</span>​。</p>
+<p>还有，假如我们这么得到的期望还不如直接不询问，全部打开的话，那我们完全可以直接全部打开。</p>
+<p>所以</p>
+<p>​ <span class="math display">\[ans=max(\sum_{i=0}^{n}sum[i]*(1/2^{n-i}), sum[n])\]</span>​</p>
+<h3 id="代码">代码</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">1e5</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="keyword">double</span> a[maxN], preSum, ans, C;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x &lt; y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; C;</span><br><span class="line">    ans = C;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        cin &gt;&gt; a[i];</span><br><span class="line">    <span class="built_in">sort</span>(a + <span class="number">1</span>, a + <span class="number">1</span> + n,cmp);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        ans += preSum * <span class="built_in">pow</span>(<span class="number">0.5</span>, n - i + <span class="number">1</span>);</span><br><span class="line">        preSum += i[a];</span><br><span class="line">    &#125;</span><br><span class="line">    ans = <span class="built_in">min</span>(ans, preSum);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.7f&quot;</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     
 
@@ -312,7 +306,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://miku39393939.github.io/2021/08/07/Tree-Xor/" title="Tree-Xor" target="_blank">https://miku39393939.github.io/2021/08/07/Tree-Xor/</a>
+          <a href="https://miku39393939.github.io/2021/08/15/Boxes/" title="Boxes" target="_blank">https://miku39393939.github.io/2021/08/15/Boxes/</a>
         </li>
         
         <li>
@@ -334,11 +328,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线段树</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数学期望</a>
         		</li>
       		
 		</ul>
@@ -394,7 +384,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://miku39393939.github.io/2021/08/07/Tree-Xor/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://miku39393939.github.io/2021/08/15/Boxes/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -409,18 +399,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2021/08/10/OR/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          OR
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/08/05/Average/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Average</div>
+    <a href="/2021/08/13/Double-Strings/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Double Strings</div>
       <i class="icon-circle-right"></i>
     </a>
   
