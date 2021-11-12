@@ -6,21 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://miku39393939.github.io">
-  <title>HDU-7106 | 水蓝络合物的博客</title>
+  <title>numberCalc | 水蓝络合物的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="题目大意 定义\(g(x)\)表示\(x\)十进制下每一位数字之和，比如\(g(123)&#x3D;1+2+3&#x3D;6\)。 求\(f(x)&#x3D;Ax^2g(x)+Bx^2+Cxg^2(x)+Dxg(x)\)，在\([1,n]\)之间的最小值。（\(x\)为整数）。 其中，\(A,B,C,D,n\)为题目输入。(\(1\le n \le 10^6\))">
+  <meta name="description" content="数字计数 题目大意 给定两个正整数 \(a\) 和 \(b\)，求在 \([a,b]\)中的所有整数中，每个数码(\(0,1,2,...,8,9\))各出现了多少次。 思路 其实就是算从\(0\)到\(n\)中，每个数出现的次数，再用前缀和的方式去计算区间\([a, b]\)。 那么重点就是去计算每个数的出现次数。 Step1 我们用\(dp[i]\)表示\(0\)到有\(i\)个\(">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HDU-7106">
-<meta property="og:url" content="https://miku39393939.github.io/2021/09/06/HDU-7106/index.html">
+<meta property="og:title" content="numberCalc">
+<meta property="og:url" content="https://miku39393939.github.io/2021/11/12/numberCalc/index.html">
 <meta property="og:site_name" content="水蓝络合物的博客">
-<meta property="og:description" content="题目大意 定义\(g(x)\)表示\(x\)十进制下每一位数字之和，比如\(g(123)&#x3D;1+2+3&#x3D;6\)。 求\(f(x)&#x3D;Ax^2g(x)+Bx^2+Cxg^2(x)+Dxg(x)\)，在\([1,n]\)之间的最小值。（\(x\)为整数）。 其中，\(A,B,C,D,n\)为题目输入。(\(1\le n \le 10^6\))">
+<meta property="og:description" content="数字计数 题目大意 给定两个正整数 \(a\) 和 \(b\)，求在 \([a,b]\)中的所有整数中，每个数码(\(0,1,2,...,8,9\))各出现了多少次。 思路 其实就是算从\(0\)到\(n\)中，每个数出现的次数，再用前缀和的方式去计算区间\([a, b]\)。 那么重点就是去计算每个数的出现次数。 Step1 我们用\(dp[i]\)表示\(0\)到有\(i\)个\(">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-09-06T01:05:17.000Z">
-<meta property="article:modified_time" content="2021-10-18T10:34:35.604Z">
+<meta property="article:published_time" content="2021-11-12T00:51:56.000Z">
+<meta property="article:modified_time" content="2021-11-12T13:37:49.528Z">
 <meta property="article:author" content="水蓝络合物">
-<meta property="article:tag" content="数学">
+<meta property="article:tag" content="DP">
+<meta property="article:tag" content="数位DP">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="水蓝络合物的博客" type="application/atom+xml">
@@ -214,14 +215,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-HDU-7106" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-numberCalc" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      HDU-7106
+      numberCalc
     </h1>
   
 
@@ -233,8 +234,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2021/09/06/HDU-7106/" class="archive-article-date">
-        <time datetime="2021-09-06T01:05:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-06</time>
+<a href="/2021/11/12/numberCalc/" class="archive-article-date">
+        <time datetime="2021-11-12T00:51:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-12</time>
 </a>
 
   
@@ -247,7 +248,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">667字</span>
+      <span class="post-count">1k字</span>
     </span>
   </span>
 
@@ -256,7 +257,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">3分</span>
+      <span class="post-count">4分</span>
     </span>
   </span>
 </div>
@@ -267,27 +268,28 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h3 id="题目大意">题目大意</h3>
-<p>定义<span class="math inline">\(g(x)\)</span>表示<span class="math inline">\(x\)</span>十进制下每一位数字之和，比如<span class="math inline">\(g(123)=1+2+3=6\)</span>。</p>
-<p>求<span class="math inline">\(f(x)=Ax^2g(x)+Bx^2+Cxg^2(x)+Dxg(x)\)</span>，在<span class="math inline">\([1,n]\)</span>之间的最小值。（<span class="math inline">\(x\)</span>为整数）。</p>
-<p>其中，<span class="math inline">\(A,B,C,D,n\)</span>为题目输入。(<span class="math inline">\(1\le n \le 10^6\)</span>)</p>
-<span id="more"></span>
-<h3 id="思路">思路</h3>
-<p><span class="math inline">\(f(x)\)</span>可以转化为<span class="math inline">\(f(x)=[Ag(x)+B]x^2+[Cg^2(x)+Dg(x)]x\)</span></p>
-<p>不难发现，<span class="math inline">\(g(x)\)</span>的值域是<span class="math inline">\([1,n]\)</span>。而<span class="math inline">\(g(x)\)</span>的值一旦确定，那么<span class="math inline">\(f(x)\)</span>就成为了<strong>只能取特定自变量值得二次函数。</strong></p>
-<p>比如<span class="math inline">\(g(x)=10\)</span>时，<span class="math inline">\(x\)</span>可取<span class="math inline">\(10,19,28...\)</span>等。因为此时<span class="math inline">\(f(x)\)</span>已经是二次函数了，那么它的最小值，显然为</p>
+    <h1 id="数字计数">数字计数</h1>
+<h2 id="题目大意">题目大意</h2>
+<p>给定两个正整数 <span class="math inline">\(a\)</span> 和 <span class="math inline">\(b\)</span>，求在 <span class="math inline">\([a,b]\)</span>中的所有整数中，每个数码(<span class="math inline">\(0,1,2,...,8,9\)</span>)各出现了多少次。</p>
+<h2 id="思路">思路</h2>
+<p>其实就是算从<span class="math inline">\(0\)</span>到<span class="math inline">\(n\)</span>中，每个数出现的次数，再用前缀和的方式去计算区间<span class="math inline">\([a, b]\)</span>。 那么重点就是去计算每个数的出现次数。</p>
+<h3 id="step1">Step1</h3>
+<p>我们用<span class="math inline">\(dp[i]\)</span>表示<span class="math inline">\(0\)</span>到有<span class="math inline">\(i\)</span>个<span class="math inline">\(9\)</span>的数中，每个数码的出现个数(<strong>考虑前导<span class="math inline">\(0\)</span></strong>)，比如<span class="math inline">\(i = 3\)</span>，<span class="math inline">\(dp[i]\)</span>表示的就是<span class="math inline">\(0\)</span>到<span class="math inline">\(999\)</span>中，每个数的出现次数。</p>
+<p>显然<span class="math inline">\(dp[1] = 1\)</span> (<span class="math inline">\(0\)</span> ~ <span class="math inline">\(9\)</span>每个数都出现了一次) 对于<span class="math inline">\(i \ge 2\)</span>: * 对于一个<span class="math inline">\(i\)</span>位数,我们先考虑<span class="math inline">\([1,i-1]\)</span>位的贡献,因为第<span class="math inline">\(i\)</span>位数可以选择<span class="math inline">\(0\)</span>~<span class="math inline">\(9\)</span>中任意一个数，相当于多了<span class="math inline">\(10\)</span>种方案,所以<span class="math inline">\(dp[i] += 10 * dp[i-1]\)</span>。 * 我们再考虑第<span class="math inline">\(i\)</span>位数的贡献，对于每个数码<span class="math inline">\(x \in [0, 9]\)</span>后面<span class="math inline">\(i-1\)</span>位都可以任意选择，构成一个<span class="math inline">\(i\)</span>位数,故有<span class="math inline">\(10^{i-1}\)</span>中选择，所以<span class="math inline">\(dp[i] = 10 * dp[i - 1] + 10^{i - 1}\)</span></p>
+<p>我们就<del>轻而易举地</del>得到了<span class="math inline">\(dp\)</span>的递推式。</p>
+<h3 id="step2">Step2</h3>
+<p>那么第二步就是用这个<span class="math inline">\(dp\)</span>式去推结果。 我们先举一个例子，比如<span class="math inline">\(7432\)</span>这个数.</p>
+<p><strong>我们来尝试去构造每个在<span class="math inline">\([0,7432]\)</span>之间的数</strong>,依次作为媒介来计算。</p>
 <ul>
-<li>开口向下，两端边界值。</li>
-<li>开口向上，对称轴两侧的那两个值。</li>
+<li>如果我们在第四位上选择了<span class="math inline">\([0,6]\)</span>之间的数，那么剩下的三位数就可以任选了，那么<strong>剩下的三位数的贡献</strong>就是<span class="math inline">\(7 * dp[3]\)</span></li>
+<li>假如我们选择了<span class="math inline">\(7\)</span>这个数，那么剩下的数就不能任选了，最多选到<span class="math inline">\(432\)</span>这个数，在此条件上，我们来计算<strong>第四位数的贡献</strong>,那么显然如果选择<span class="math inline">\([0,6]\)</span>中数码,那么后面每一位上的数都可以任选,那么显然就有<span class="math inline">\(10^2\)</span>种,而选择了<span class="math inline">\(7\)</span>,那么后面三位最多选到<span class="math inline">\(432\)</span>,所以有<span class="math inline">\(433\)</span>种(因为可以全部选<span class="math inline">\(0\)</span>)</li>
+<li>此时<span class="math inline">\(4\)</span>位数已经计算过了,那么就是要计算三位数，就变成了求<span class="math inline">\([0,432]\)</span>之间的数了，所以重复上述过程即可。</li>
+<li>处理前导<span class="math inline">\(0\)</span>，四位数时,含有前导<span class="math inline">\(0\)</span>的数是<span class="math inline">\([0000,0999]\)</span>，共有<span class="math inline">\(10^3\)</span>种,<span class="math inline">\(3\)</span>位数时,有<span class="math inline">\([000,099]\)</span>,共有<span class="math inline">\(10^2\)</span>种,以此类推...</li>
 </ul>
-<p>所以我们对于<span class="math inline">\(g(x)\)</span>的每一个值，计算它的最小值，最后再比较即可。</p>
-<h3 id="具体做法">具体做法</h3>
-<ol type="1">
-<li>先与处理出<span class="math inline">\(v\)</span>数组，<span class="math inline">\(v[i][j]\)</span>表示，在满足<span class="math inline">\(g(x)=i\)</span>的所有<span class="math inline">\(x\)</span>中，从小到大的第<span class="math inline">\(j+1\)</span>个是多少。比如<span class="math inline">\(v[2][1]\)</span>显然是11(因为第一个是2)。</li>
-<li>枚举<span class="math inline">\(g(x)\)</span>从<span class="math inline">\(1\)</span>到<span class="math inline">\(54\)</span>的值，计算对称轴。计算对称轴两侧的值。（如果开口向下，那么它的最小值显然就是两侧，那么就u不需要计算对称轴两侧的值了）</li>
-</ol>
-<h3 id="代码">代码</h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">10010</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line">vector&lt;ll&gt; v[maxN];</span><br><span class="line">ll a, b, c, d, n, T;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">calcG</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll ans = <span class="number">0</span>, tmp = x;</span><br><span class="line">    <span class="keyword">while</span>(tmp) &#123;</span><br><span class="line">        ans += tmp % <span class="number">10</span>;</span><br><span class="line">        tmp /= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">calc</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll g = <span class="built_in">calcG</span>(x);</span><br><span class="line">    <span class="keyword">return</span> a * x * x * g + b * x * x + c * x * g * g + d * g * x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">1000000</span>; ++i) &#123;</span><br><span class="line">        v[<span class="built_in">calcG</span>(i)].<span class="built_in">push_back</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld%lld%lld%lld&quot;</span>, &amp;a, &amp;b, &amp;c, &amp;d, &amp;n);</span><br><span class="line">        ll ans = <span class="built_in">calc</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">54</span>; ++i) &#123;</span><br><span class="line">            ll A = a * i + b;</span><br><span class="line">            <span class="keyword">if</span>(A == <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            ll B = c * i * i + d * i;</span><br><span class="line">            ll mid = (-B) / (A + A); <span class="comment">//计算对称轴</span></span><br><span class="line">            <span class="keyword">if</span>(mid &lt;= <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            ll tmp = <span class="built_in">upper_bound</span>(v[i].<span class="built_in">begin</span>(), v[i].<span class="built_in">end</span>(), mid) - v[i].<span class="built_in">begin</span>();</span><br><span class="line">            ll bound = <span class="built_in">upper_bound</span>(v[i].<span class="built_in">begin</span>(), v[i].<span class="built_in">end</span>(), n) - v[i].<span class="built_in">begin</span>();</span><br><span class="line">            <span class="keyword">if</span>(tmp &lt; bound &amp;&amp; tmp &gt;= <span class="number">0</span> &amp;&amp; v[i][tmp] &lt;= n) ans = <span class="built_in">min</span>(<span class="built_in">calc</span>(v[i][tmp]), ans);</span><br><span class="line">            <span class="keyword">if</span>(tmp - <span class="number">1</span> &lt;bound &amp;&amp; tmp - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; v[i][tmp - <span class="number">1</span>] &lt;= n) ans = <span class="built_in">min</span>(<span class="built_in">calc</span>(v[i][tmp - <span class="number">1</span>]), ans);<span class="comment">// 计算对称轴两侧的值</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">54</span>; ++i) &#123;</span><br><span class="line">            ll x1 = v[i][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">if</span>(x1 &gt; n)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            ll x2 = v[i][<span class="built_in">upper_bound</span>(v[i].<span class="built_in">begin</span>(), v[i].<span class="built_in">end</span>(), n) - v[i].<span class="built_in">begin</span>() - <span class="number">1</span>];</span><br><span class="line">            ans = <span class="built_in">min</span>(ans, <span class="built_in">min</span>(<span class="built_in">calc</span>(x1), <span class="built_in">calc</span>(x2)));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么具体地到一般情况，假设我们计算<span class="math inline">\([0,n]\)</span>中，每个数码的出现数量。 设<span class="math inline">\(ans[i]\)</span>表示数码<span class="math inline">\(i\)</span>的出现数量。 我们从<span class="math inline">\(n\)</span>的最高位(设之为<span class="math inline">\(cnt\)</span>位)开始算，设它的第<span class="math inline">\(i\)</span>位为<span class="math inline">\(a[i]\)</span></p>
+<p>对于每一位<span class="math inline">\(a[i]\)</span>(与上述例子类似): * <strong>计算第<span class="math inline">\([1, i-1]\)</span>位数的贡献</strong>:第<span class="math inline">\(i\)</span>位可选<span class="math inline">\([0, a[i]]\)</span>，剩下位数任选,所以剩下的位数的贡献是<span class="math inline">\(\forall j \in [0, 9]\)</span>,<span class="math inline">\(ans[j] += a[i] * dp[i-1]\)</span> * <strong>计算第<span class="math inline">\(i\)</span>位数对答案的贡献</strong>:当第<span class="math inline">\(i\)</span>位选择<span class="math inline">\([0, a[i]-1]\)</span>之间的数时，后面的所有数位都可以任选,所以<strong>答案可以直接计算</strong>(即不需要用<span class="math inline">\(dp\)</span>数组了),即<span class="math inline">\(\forall j \in [0, a[i] - 1]\)</span>,<span class="math inline">\(ans[j] += 10^(i-1)\)</span>;当第<span class="math inline">\(i\)</span>位选择<span class="math inline">\(a[i]\)</span>时,那么后面的数就只能从<span class="math inline">\(0\)</span>选到后面几位构成的数了(可以参考下上面的例子),设之为<span class="math inline">\(tmp\)</span>,那么<span class="math inline">\(ans[a[i]] += tmp + 1\)</span>。</p>
+<h2 id="代码">代码</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">1005</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> l, r, dp[maxN], mi[maxN], ans1[maxN], ans2[maxN], a[maxN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> n, <span class="keyword">long</span> <span class="keyword">long</span> *ans)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> tmp = n;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(tmp) &#123;</span><br><span class="line">        a[++cnt] = tmp % <span class="number">10</span>;</span><br><span class="line">        tmp /= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = cnt; i &gt;= <span class="number">1</span>; --i) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= <span class="number">9</span>; ++j)</span><br><span class="line">            ans[j] += a[i] * dp[i - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; a[i]; ++j)</span><br><span class="line">            ans[j] += mi[i - <span class="number">1</span>];</span><br><span class="line">        n -= mi[i - <span class="number">1</span>] * a[i];</span><br><span class="line">        ans[a[i]] += n + <span class="number">1</span>;</span><br><span class="line">        ans[<span class="number">0</span>] -= mi[i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld&quot;</span>, &amp;l, &amp;r);</span><br><span class="line">    mi[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">13</span>; ++i) &#123;</span><br><span class="line">        dp[i] = <span class="number">10LL</span> * dp[i - <span class="number">1</span>] + mi[i - <span class="number">1</span>];</span><br><span class="line">        mi[i] = mi[i - <span class="number">1</span>] * <span class="number">10LL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">solve</span>(r, ans1);</span><br><span class="line">    <span class="built_in">solve</span>(l - <span class="number">1</span>, ans2);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">9</span>; ++i)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%lld &quot;</span>, ans1[i] - ans2[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     
 
@@ -302,7 +304,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://miku39393939.github.io/2021/09/06/HDU-7106/" title="HDU-7106" target="_blank">https://miku39393939.github.io/2021/09/06/HDU-7106/</a>
+          <a href="https://miku39393939.github.io/2021/11/12/numberCalc/" title="numberCalc" target="_blank">https://miku39393939.github.io/2021/11/12/numberCalc/</a>
         </li>
         
         <li>
@@ -324,7 +326,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数位DP</a>
         		</li>
       		
 		</ul>
@@ -380,7 +386,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://miku39393939.github.io/2021/09/06/HDU-7106/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://miku39393939.github.io/2021/11/12/numberCalc/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -395,18 +401,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2021/09/10/IcannotICPC/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          I can not ICPC
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/08/22/Eyjafjalla/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Eyjafjalla</div>
+    <a href="/2021/10/18/codeforces-747-div2-D/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">codeforces 747 div2 D The Number of Imposters</div>
       <i class="icon-circle-right"></i>
     </a>
   
