@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="题目大意 有\(n\)个非负整数\(a_{1,2,...n}\) 有\(m\)个信息\((l,r,x)\),每一组表示\(a_l\oplus a_{l+1} \oplus ... \oplus a_r &#x3D; x\) (保证所有数都被覆盖) 求数组\(a\)的所有子序列的和。(有多种\(a\)数组的组成话,任意输出一种情况下的和即可)">
+  <meta name="description" content="题目大意有$n$个非负整数$a_{1,2,…n}$ 有$m$个信息$(l,r,x)$,每一组表示$a_l\oplus a_{l+1} \oplus … \oplus a_r &#x3D; x$ (保证所有数都被覆盖) 求数组$a$的所有子序列异或和的和。(有多种$a$数组的组成话,任意输出一种情况下的和即可) 结果对$10^9 + 7$取模">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Divan and bitwise operations">
 <meta property="og:url" content="https://miku39393939.github.io/2021/11/29/cf1614C/index.html">
 <meta property="og:site_name" content="水蓝络合物的博客">
-<meta property="og:description" content="题目大意 有\(n\)个非负整数\(a_{1,2,...n}\) 有\(m\)个信息\((l,r,x)\),每一组表示\(a_l\oplus a_{l+1} \oplus ... \oplus a_r &#x3D; x\) (保证所有数都被覆盖) 求数组\(a\)的所有子序列的和。(有多种\(a\)数组的组成话,任意输出一种情况下的和即可)">
+<meta property="og:description" content="题目大意有$n$个非负整数$a_{1,2,…n}$ 有$m$个信息$(l,r,x)$,每一组表示$a_l\oplus a_{l+1} \oplus … \oplus a_r &#x3D; x$ (保证所有数都被覆盖) 求数组$a$的所有子序列异或和的和。(有多种$a$数组的组成话,任意输出一种情况下的和即可) 结果对$10^9 + 7$取模">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-29T10:28:57.000Z">
-<meta property="article:modified_time" content="2021-11-29T11:04:53.695Z">
+<meta property="article:modified_time" content="2021-11-29T11:41:14.878Z">
 <meta property="article:author" content="水蓝络合物">
 <meta property="article:tag" content="数学">
 <meta property="article:tag" content="位运算">
@@ -248,7 +248,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">83字</span>
+      <span class="post-count">474字</span>
     </span>
   </span>
 
@@ -257,7 +257,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">2分</span>
     </span>
   </span>
 </div>
@@ -268,13 +268,19 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="题目大意">题目大意</h2>
-<p>有<span class="math inline">\(n\)</span>个非负整数<span class="math inline">\(a_{1,2,...n}\)</span></p>
-<p>有<span class="math inline">\(m\)</span>个信息<span class="math inline">\((l,r,x)\)</span>,每一组表示<span class="math inline">\(a_l\oplus a_{l+1} \oplus ... \oplus a_r = x\)</span> (保证所有数都被覆盖)</p>
-<p>求数组<span class="math inline">\(a\)</span>的所有子序列的和。(有多种<span class="math inline">\(a\)</span>数组的组成话,任意输出一种情况下的和即可)</p>
+    <h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p>有$n$个非负整数$a_{1,2,…n}$</p>
+<p>有$m$个信息$(l,r,x)$,每一组表示$a_l\oplus a_{l+1} \oplus … \oplus a_r = x$ (保证所有数都被覆盖)</p>
+<p>求数组$a$的所有子序列<strong>异或和</strong>的<strong>和</strong>。(有多种$a$数组的组成话,任意输出一种情况下的和即可)</p>
+<p>结果对$10^9 + 7$取模</p>
 <span id="more"></span>
-<h2 id="思路">思路</h2>
-
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p><del>通常这种异或和的题大概率是要<strong>按位进行计算</strong></del></p>
+<p>假设$a$数组中第$y$位上为$1$的数有$A$个,那么为了让它们在这一位异或和为$1$,我们要从中任意选出<strong>奇数</strong>个，方案数有:</p>
+<p>$C_{A}^{1}+C_{A}^{3}+…+C_{A}^{(A&amp;1) ? A:A-1} = 2^{A - 1}$,</p>
+<p>假设剩下这一位为$0$的数有$B$个,那它们可以任意选取,共有$2^B$种方案数,所以总方案数为</p>
+<p>$2^{A-1} * 2^B = 2^{n-1}$</p>
+<p>可见,某一位提供的方案数,**与这一位是$1$的数的个数无关,只要这一位是$1$的数至少有$1$个,那么它提供的方案数就是$2^{n-1}$**。如果它是第$k$位,那它的贡献就是$2 ^ {k-1} * 2 ^ {n-1}$</p>
+<p>所以,我们判断有哪一位至少出现过一次,然后加起来,乘以$2^{n-1}$,就是最终的答案了。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">2e5</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">long</span> <span class="keyword">long</span> Mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> T, n, m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">quickPow</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> a, <span class="keyword">long</span> <span class="keyword">long</span> b, <span class="keyword">long</span> <span class="keyword">long</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> tmp = a, ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(b) &#123;</span><br><span class="line">        <span class="keyword">if</span>(b &amp; <span class="number">1</span>)</span><br><span class="line">            ans = ans * tmp % c;</span><br><span class="line">        tmp = tmp * tmp % c;  </span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;  </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">            <span class="keyword">long</span> <span class="keyword">long</span> l, r, x;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld%lld&quot;</span>, &amp;l, &amp;r, &amp;x);</span><br><span class="line">            ans |= x;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans * <span class="built_in">quickPow</span>(<span class="number">2</span>, n - <span class="number">1</span>, Mod) % Mod);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     
 
     
