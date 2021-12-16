@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://miku39393939.github.io">
-  <title>Tag: 数论 | 水蓝络合物的博客</title>
+  <title>1608C | 水蓝络合物的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="是一个退役OIer，现役ACMer，苦逼带学牲，正在学习AI以及制作游戏">
-<meta property="og:type" content="website">
-<meta property="og:title" content="水蓝络合物的博客">
-<meta property="og:url" content="https://miku39393939.github.io/tags/%E6%95%B0%E8%AE%BA/index.html">
+  <meta name="description" content="题目大意 有\(n\)个人比赛,每个人有\(a,b\)两个能力值。 比赛由你组织,你可以任意挑选两个人,并且挑选他们任意的能力值来让他们比赛。能力值大的一方将会胜出,而输掉的那个人将会被淘汰。(也就是说,经过\(n-1\)次比赛后,将会决出胜者)。每个人的\(a\)能力值各不相同,\(b\)能力值各不相同。 现在请问,每个人是否有可能可以胜出呢？可以输出\(1\)，不可以输出\(0\)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1608C">
+<meta property="og:url" content="https://miku39393939.github.io/2021/12/16/CF1608C/index.html">
 <meta property="og:site_name" content="水蓝络合物的博客">
-<meta property="og:description" content="是一个退役OIer，现役ACMer，苦逼带学牲，正在学习AI以及制作游戏">
+<meta property="og:description" content="题目大意 有\(n\)个人比赛,每个人有\(a,b\)两个能力值。 比赛由你组织,你可以任意挑选两个人,并且挑选他们任意的能力值来让他们比赛。能力值大的一方将会胜出,而输掉的那个人将会被淘汰。(也就是说,经过\(n-1\)次比赛后,将会决出胜者)。每个人的\(a\)能力值各不相同,\(b\)能力值各不相同。 现在请问,每个人是否有可能可以胜出呢？可以输出\(1\)，不可以输出\(0\)。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-16T02:16:46.000Z">
+<meta property="article:modified_time" content="2021-12-16T03:14:11.326Z">
 <meta property="article:author" content="水蓝络合物">
+<meta property="article:tag" content="思维">
+<meta property="article:tag" content="排序">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="水蓝络合物的博客" type="application/atom+xml">
@@ -211,77 +215,239 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-CF1608C" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/07/28/HashFunction/" class="archive-article-date">
-        <time datetime="2021-07-28T06:20:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-28</time>
-</a>
-
-        </div>
-    	 
+      <header class="article-header">
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/07/28/HashFunction/" target="_blank">Hash Function</a>
   
+    <h1 class="article-title" itemprop="name">
+      1608C
     </h1>
   
 
 
-        <div class="article-info info-on-right">
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2021/12/16/CF1608C/" class="archive-article-date">
+        <time datetime="2021-12-16T02:16:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-16</time>
+</a>
+
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">968字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">3分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="题目大意">题目大意</h3>
+<p>有<span class="math inline">\(n\)</span>个人比赛,每个人有<span class="math inline">\(a,b\)</span>两个能力值。</p>
+<p>比赛由你组织,你可以<strong>任意挑选两个人,并且挑选他们任意的能力值</strong>来让他们比赛。能力值大的一方将会胜出,而输掉的那个人将会被淘汰。(也就是说,经过<span class="math inline">\(n-1\)</span>次比赛后,将会决出胜者)。每个人的<span class="math inline">\(a\)</span>能力值各不相同,<span class="math inline">\(b\)</span>能力值各不相同。</p>
+<p>现在请问,每个人是否有可能可以胜出呢？可以输出<span class="math inline">\(1\)</span>，不可以输出<span class="math inline">\(0\)</span>。</p>
+<span id="more"></span>
+<p><a target="_blank" rel="noopener" href="http://codeforces.com/contest/1608/problem/C">原题地址</a></p>
+<h3 id="分析">分析</h3>
+<p>我们容易想到这么一种情况,<span class="math inline">\(x\)</span>的<span class="math inline">\(a,b\)</span>能力值都不是很高,但是有个<span class="math inline">\(y\)</span>,它的能力值一个非常高,一个非常低,且刚好低于<span class="math inline">\(x\)</span>相对较高的能力值。</p>
+<p>那么我们可以先让<span class="math inline">\(y\)</span>用高的能力值把其它所有人都打败,然后在让<span class="math inline">\(x\)</span>用较高的能力值打败用低能力值的<span class="math inline">\(y\)</span>。<del>(偷偷吃鸡是吧)</del></p>
+<p>当然也有可能<span class="math inline">\(x\)</span>实在是太菜了,以至于它连<span class="math inline">\(y\)</span>的低能力值也打不过。</p>
+<h3 id="思路">思路</h3>
+<p>我们再往下分析,假设<span class="math inline">\(x\)</span>能打败<span class="math inline">\(y\)</span>,那么<span class="math inline">\(x\)</span>能“打败”的最高对手就是{<span class="math inline">\(x,y\)</span>}中能力值最高的人能打败的对手,并且这种关系是<strong>可以传递</strong>的。比如又来了一个<span class="math inline">\(z\)</span>,它可以被<span class="math inline">\(y\)</span>击败,尽管<span class="math inline">\(x\)</span>可能打不过<span class="math inline">\(z\)</span>,但是凭借<span class="math inline">\(y\)</span>,那么<span class="math inline">\(x\)</span>依然有可能是冠军。</p>
+<p>但是同时处理<span class="math inline">\(a,b\)</span>两种能力值有些困难,所以我们不妨先按照<span class="math inline">\(a\)</span>能力值大小升序排序,那么在后面的人始终可以凭借<span class="math inline">\(a\)</span>能力值去击败前面的。</p>
+<p>首先<span class="math inline">\(a\)</span>能力值最高的人是肯定可以胜出的,所以我们从后往前,依次判断这个人是否可能胜出。</p>
+<p>如果这个人可以“击败”的人中能力的最大值大于<span class="math inline">\(a\)</span>能力最高的人的能力最低值,那么他也可以“胜出”。</p>
+<p>那么前面的人就只能靠<span class="math inline">\(b\)</span>能力值去击败后面的人,注意我们不是要真正的打败后面的,而是<strong>胜出</strong>,即利用我们前面说的传递关系。</p>
+<p><strong>下面就是解决本题的最重要的结论:</strong></p>
+<ul>
+<li><p>假如第<span class="math inline">\(n-1\)</span>个人可以胜出,那么第<span class="math inline">\(n-2\)</span>个人才有可能胜出。因为第<span class="math inline">\(n-1\)</span>个人可以击败除了第<span class="math inline">\(n\)</span>个人之外的所有人,并且利用它们的能力值,也无法击败第<span class="math inline">\(n\)</span>个人,那么第<span class="math inline">\(n-2\)</span>个人也铁定无法击败<span class="math inline">\(n\)</span></p></li>
+<li><p>如果<span class="math inline">\(n-1,n-2\)</span>都可以胜出,那么<span class="math inline">\(n-3\)</span>只需要击败<span class="math inline">\(n,n-1,n-2\)</span>中任意一个人,就能够胜出。 证明: 假设击败的这个人是<span class="math inline">\(x\)</span>,那么<span class="math inline">\(x\)</span>胜出时,要么是利用了<span class="math inline">\(n-3\)</span>击败了其他人,要么没有利用<span class="math inline">\(n-3\)</span></p>
+<ul>
+<li>利用了<span class="math inline">\(n-3\)</span>,说明<span class="math inline">\(n-3\)</span>本来就可以胜出,那么本身就可以胜出</li>
+<li>没有利用<span class="math inline">\(n-3\)</span>,那么我们可以先让<span class="math inline">\(x\)</span>把其它所有人都“击败”,然后再让<span class="math inline">\(n-3\)</span>把<span class="math inline">\(x\)</span>击败</li>
+</ul></li>
+</ul>
+<h3 id="做法">做法</h3>
+<p>按照<span class="math inline">\(a\)</span>能力值排序后,</p>
+<p>我们用<span class="math inline">\(s[i][0]\)</span>记录前<span class="math inline">\(i\)</span>个人中<span class="math inline">\(b\)</span>能力值的最大值,<span class="math inline">\(s[i][1]\)</span>记录<span class="math inline">\(i\)</span>~<span class="math inline">\(n\)</span>个人中<span class="math inline">\(b\)</span>能力值的最小值。</p>
+<p>从<strong>后往前</strong>判断:</p>
+<p>如果<span class="math inline">\(s[i][1] \le s[i-1][0]\)</span>,表明第<span class="math inline">\(i-1\)</span>个人可以利用前面<span class="math inline">\(b\)</span>能力值最大的人去击败<span class="math inline">\(i\)</span>~<span class="math inline">\(n\)</span>中<span class="math inline">\(b\)</span>能力值最小的那个人,所以可以胜出</p>
+<p>而如果<span class="math inline">\(s[i][1] &gt; s[i-1][0]\)</span>,表明<span class="math inline">\(i-1\)</span>无法利用前面的人去击败任何一个后面的人,那么<span class="math inline">\(1\)</span> 到 <span class="math inline">\(i-1\)</span>中的人也就无法胜出。</p>
+<h3 id="代码">代码</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+    
+
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          水蓝络合物
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https://miku39393939.github.io/2021/12/16/CF1608C/" title="1608C" target="_blank">https://miku39393939.github.io/2021/12/16/CF1608C/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">思维</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">卷积</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数论</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">快速傅里叶变换</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+    
 
     
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://miku39393939.github.io/2021/12/16/CF1608C/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2021/12/13/CF1608B/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CF1608B Build the Permutation</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
           </div>
@@ -322,9 +488,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
