@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="题目大意 两个城市相聚\(l\)千米，要从起点城市通过一条路到达目标城市，路上有\(n\)个限速点(第一个限速点在起点),每个限速点位置在\(d_i\),值为\(b_i\),表示从这个限速点到下个限速点位置,每经过一千米需要花费\(b_i\)点单位时间。 你可以删掉不超过\(k\)个限速点，请问删除后到达目标城市的最短时间是多少？ 思路 从\(A\)限速点到达\(B\)限速点所需时间与怎么">
+  <meta name="description" content="题目大意 两个城市相聚\(l\)千米，要从起点城市通过一条路到达目标城市，路上有\(n\)个限速点(第一个限速点在起点),每个限速点位置在\(d_i\),值为\(b_i\),表示从这个限速点到下个限速点位置,每经过一千米需要花费\(b_i\)点单位时间。 你可以删掉不超过\(k\)个限速点，请问删除后到达目标城市的最短时间是多少？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Road Optimization">
 <meta property="og:url" content="https://miku39393939.github.io/2022/02/04/codeforces-1625-c/index.html">
 <meta property="og:site_name" content="水蓝络合物的博客">
-<meta property="og:description" content="题目大意 两个城市相聚\(l\)千米，要从起点城市通过一条路到达目标城市，路上有\(n\)个限速点(第一个限速点在起点),每个限速点位置在\(d_i\),值为\(b_i\),表示从这个限速点到下个限速点位置,每经过一千米需要花费\(b_i\)点单位时间。 你可以删掉不超过\(k\)个限速点，请问删除后到达目标城市的最短时间是多少？ 思路 从\(A\)限速点到达\(B\)限速点所需时间与怎么">
+<meta property="og:description" content="题目大意 两个城市相聚\(l\)千米，要从起点城市通过一条路到达目标城市，路上有\(n\)个限速点(第一个限速点在起点),每个限速点位置在\(d_i\),值为\(b_i\),表示从这个限速点到下个限速点位置,每经过一千米需要花费\(b_i\)点单位时间。 你可以删掉不超过\(k\)个限速点，请问删除后到达目标城市的最短时间是多少？">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-04T08:04:08.000Z">
-<meta property="article:modified_time" content="2022-02-04T11:45:26.241Z">
+<meta property="article:modified_time" content="2022-02-15T01:16:10.683Z">
 <meta property="article:author" content="水蓝络合物">
 <meta property="article:tag" content="DP">
 <meta name="twitter:card" content="summary">
@@ -270,6 +270,7 @@
     <h2 id="题目大意">题目大意</h2>
 <p>两个城市相聚<span class="math inline">\(l\)</span>千米，要从起点城市通过一条路到达目标城市，路上有<span class="math inline">\(n\)</span>个限速点(第一个限速点在起点),每个限速点位置在<span class="math inline">\(d_i\)</span>,值为<span class="math inline">\(b_i\)</span>,表示从这个限速点到下个限速点位置,每经过一千米需要花费<span class="math inline">\(b_i\)</span>点单位时间。</p>
 <p>你可以删掉不超过<span class="math inline">\(k\)</span>个限速点，请问删除后到达目标城市的最短时间是多少？</p>
+<span id="more"></span>
 <h2 id="思路">思路</h2>
 <p>从<span class="math inline">\(A\)</span>限速点到达<span class="math inline">\(B\)</span>限速点所需时间与怎么到<span class="math inline">\(A\)</span>没有关系，只于还有多少删除机会有关。</p>
 <p>进一步讲,到达<span class="math inline">\(A\)</span>点肯定是从<span class="math inline">\(A\)</span>点前某一个点来的，到达<span class="math inline">\(A\)</span>点之后，就和它没关系了，所以我们想到了动态规划来解决这个问题。</p>

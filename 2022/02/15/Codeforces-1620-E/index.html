@@ -6,22 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://miku39393939.github.io">
-  <title>Binary Spiders | 水蓝络合物的博客</title>
+  <title>Codeforces-1620-E | 水蓝络合物的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="题目大意 给定\(n(2 \le n \le 3\times10^5)\)个数\(a_i(0 \le k \le 2^{30}-1))\)和自然数\(k(0 \le a_i \le 2^{30}-1)\)，挑出尽可能多的数，并且使得它们的疑惑和不小于\(k\)，输出数量和挑选的数。">
+  <meta name="description" content="题目大意 给定一个初始为空的队列，有\(n\)个操作，每种操作为以下两种中的一个: * \(1\) \(x\),往队列尾部插入一个\(x\)。 * \(2\) \(x\) \(y\),使得当前队列中所有的\(x\)都变为\(y\)。 \(1 \le n,x,y \le 5 \times 10^5\) 输出所有操作之后的队列">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Binary Spiders">
-<meta property="og:url" content="https://miku39393939.github.io/2022/02/05/Codeforces-1625-D/index.html">
+<meta property="og:title" content="Codeforces-1620-E">
+<meta property="og:url" content="https://miku39393939.github.io/2022/02/15/Codeforces-1620-E/index.html">
 <meta property="og:site_name" content="水蓝络合物的博客">
-<meta property="og:description" content="题目大意 给定\(n(2 \le n \le 3\times10^5)\)个数\(a_i(0 \le k \le 2^{30}-1))\)和自然数\(k(0 \le a_i \le 2^{30}-1)\)，挑出尽可能多的数，并且使得它们的疑惑和不小于\(k\)，输出数量和挑选的数。">
+<meta property="og:description" content="题目大意 给定一个初始为空的队列，有\(n\)个操作，每种操作为以下两种中的一个: * \(1\) \(x\),往队列尾部插入一个\(x\)。 * \(2\) \(x\) \(y\),使得当前队列中所有的\(x\)都变为\(y\)。 \(1 \le n,x,y \le 5 \times 10^5\) 输出所有操作之后的队列">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-02-05T01:03:33.000Z">
-<meta property="article:modified_time" content="2022-02-15T01:16:19.561Z">
+<meta property="article:published_time" content="2022-02-15T01:14:41.000Z">
+<meta property="article:modified_time" content="2022-02-15T01:48:36.268Z">
 <meta property="article:author" content="水蓝络合物">
-<meta property="article:tag" content="数学">
-<meta property="article:tag" content="Trie">
+<meta property="article:tag" content="思维">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="水蓝络合物的博客" type="application/atom+xml">
@@ -215,14 +214,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Codeforces-1625-D" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Codeforces-1620-E" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      Binary Spiders
+      Codeforces-1620-E
     </h1>
   
 
@@ -234,8 +233,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2022/02/05/Codeforces-1625-D/" class="archive-article-date">
-        <time datetime="2022-02-05T01:03:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-05</time>
+<a href="/2022/02/15/Codeforces-1620-E/" class="archive-article-date">
+        <time datetime="2022-02-15T01:14:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-15</time>
 </a>
 
   
@@ -248,7 +247,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">979字</span>
+      <span class="post-count">413字</span>
     </span>
   </span>
 
@@ -257,7 +256,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">4分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -269,28 +268,18 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h2 id="题目大意">题目大意</h2>
-<p>给定<span class="math inline">\(n(2 \le n \le 3\times10^5)\)</span>个数<span class="math inline">\(a_i(0 \le k \le 2^{30}-1))\)</span>和自然数<span class="math inline">\(k(0 \le a_i \le 2^{30}-1)\)</span>，挑出尽可能多的数，并且使得它们的疑惑和不小于<span class="math inline">\(k\)</span>，输出数量和挑选的数。</p>
+<p>给定一个初始为空的队列，有<span class="math inline">\(n\)</span>个操作，每种操作为以下两种中的一个: * <span class="math inline">\(1\)</span> <span class="math inline">\(x\)</span>,往队列尾部插入一个<span class="math inline">\(x\)</span>。 * <span class="math inline">\(2\)</span> <span class="math inline">\(x\)</span> <span class="math inline">\(y\)</span>,使得当前队列中所有的<span class="math inline">\(x\)</span>都变为<span class="math inline">\(y\)</span>。</p>
+<p><span class="math inline">\(1 \le n,x,y \le 5 \times 10^5\)</span></p>
+<p>输出所有操作之后的队列</p>
 <span id="more"></span>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1625/problem/D">题目链接</a> ## 思路 首先需要推出一个非常重要的结论:</p>
-<p><strong>从<span class="math inline">\(n\)</span>个数中挑出两个数，使得它们的异或和最小，那么这两个数一定是把这<span class="math inline">\(n\)</span>个数排序后相邻的数。</strong></p>
-<p>证明:假设有三个数<span class="math inline">\(a &lt; b &lt; c\)</span>:</p>
-<ol type="1">
-<li><p><span class="math inline">\(a \oplus c &lt; b \oplus c\)</span>，那么我们比较一下<span class="math inline">\(b,c\)</span>，二进制下从最高位往低位找，出现的第一个不同的位数，因为<span class="math inline">\(a &lt; b &lt; c\)</span>,所以这一位肯定是<span class="math inline">\(c\)</span>这一位为<span class="math inline">\(1\)</span>,<span class="math inline">\(a,b\)</span>这一位为<span class="math inline">\(0\)</span>。所以即可推出<span class="math inline">\(a \oplus b &lt; a \oplus c\)</span></p></li>
-<li><p><span class="math inline">\(a \oplus c &gt; b \oplus c\)</span>,我们只需要比较一下$ a b,b c$即可，最小值还是出现在相邻的数中的。</p></li>
-</ol>
-<p>有了这个结论后，我们就可以继续做了，我们把<span class="math inline">\(n\)</span>个数从小到大排序后，从小到大遍历。假如我们已经找到了一个集合<span class="math inline">\(s\)</span>，我们遍历到了一个新的数<span class="math inline">\(a_i\)</span>,想要判断它能否放入这个集合中，只需判断<span class="math inline">\(a_i \oplus max(s) \ge k\)</span>即可，与集合中的其他数没有了关系。</p>
-<p>因此，我们设<span class="math inline">\(dp_i\)</span>表示以<span class="math inline">\(a_i\)</span>为最大值的集合中最多有多少个数， 可以得到状态转移方程<span class="math inline">\(dp_j = max(dp_i) + 1,\)</span> 其中 <span class="math inline">\(a_j \oplus a_i \ge k\)</span>。</p>
-<p>同时题目让我们输出每个被选中的数，所以我们在更新<span class="math inline">\(dp_j\)</span>时，要记录下它的值是从哪里继承来的<span class="math inline">\(pre[j] = i\)</span>。</p>
-<p>但是，直接进行状态转移的时间复杂度是<span class="math inline">\(O(n^2)\)</span>，会超时，由于是异或操作，我们想到用<span class="math inline">\(trie\)</span>树来进行加速。</p>
-<p>从最高位开始往树中插入。</p>
-<p>我们遍历到了<span class="math inline">\(a_i\)</span>,那么为了找到异或和大于<span class="math inline">\(k\)</span>的数，我们需要这么寻找: 设二进制下<span class="math inline">\(a_i\)</span>这一位为<span class="math inline">\(bit\)</span>,root为当前节点。</p>
-<ul>
-<li><p>如果这一位<span class="math inline">\(k\)</span>为<span class="math inline">\(1\)</span>,那么我们只能往<span class="math inline">\(trie[root][bit\oplus 1]\)</span></p></li>
-<li><p>如果这一位<span class="math inline">\(k\)</span>为<span class="math inline">\(0\)</span>,那么我们有两种选择，选择<span class="math inline">\(trie[root][bit\oplus 1]\)</span>，那么异或和就一定大于<span class="math inline">\(k\)</span>了，所以就没必要继续了，直接更新答案。或者选择<span class="math inline">\(trie[root][bit]\)</span>，继续往下寻找更新答案。</p></li>
-</ul>
-<p>更新完<span class="math inline">\(dp_i\)</span>后，我们把<span class="math inline">\(a_i\)</span>插入树中，同时我们需要更新<span class="math inline">\(f[root]\)</span>，表示经过这个点的数中，集合最大的数是多少。</p>
+<h2 id="思路">思路</h2>
+<p>我们不妨把队列中的数全部加进来，那么对于操作<span class="math inline">\(2\)</span>，就相当于把队列中相应位置左边的所有<span class="math inline">\(x\)</span>变成<span class="math inline">\(y\)</span>对应的数。而对右边没有什么影响。</p>
+<p>且这种操作是可以叠加的，如果我们直接处理左边的数，那么时间复杂度肯定会炸。</p>
+<p>那么我们想到，可不可以批量处理操作<span class="math inline">\(2\)</span>？</p>
+<p>如果我们从右往左看的话，操作<span class="math inline">\(2\)</span>是可以直接叠加的，<span class="math inline">\(2,x,y\)</span>之后，我们添加<span class="math inline">\(x\)</span>时，就直接把它替换为<span class="math inline">\(y\)</span><strong>对应的数</strong>(因为<span class="math inline">\(y\)</span>可能已经被替换过了)。</p>
+<p>每次只对某位置前的数进行操作，可以考虑这种反向的做法。</p>
 <h2 id="代码">代码</h2>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">3e5</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Num</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> val, index;</span><br><span class="line">&#125;a[maxN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(Num x, Num y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x.val &lt; y.val;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, k, pre[maxN * <span class="number">31</span>], trie[maxN * <span class="number">31</span>][<span class="number">2</span>], f[maxN * <span class="number">31</span>], d[maxN * <span class="number">31</span>], cnt = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;k);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i].val);</span><br><span class="line">        a[i].index = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">sort</span>(a + <span class="number">1</span>, a + <span class="number">1</span> + n, cmp);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>, root = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">30</span>; j &gt;= <span class="number">0</span> &amp;&amp; root; --j) &#123;</span><br><span class="line">            <span class="keyword">int</span> bit = (a[i].val &gt;&gt; j) &amp; <span class="number">1</span>, rev = bit ^ <span class="number">1</span>;;</span><br><span class="line">            <span class="keyword">if</span>((k &gt;&gt; j) &amp; <span class="number">1</span>)</span><br><span class="line">                root = trie[root][rev];</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(d[ans] &lt; d[f[trie[root][rev]]])</span><br><span class="line">                    ans = f[trie[root][rev]];</span><br><span class="line">                root = trie[root][bit];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(j == <span class="number">0</span> &amp;&amp; d[ans] &lt; d[f[root]])</span><br><span class="line">                ans = f[root];</span><br><span class="line">        &#125;</span><br><span class="line">        d[i] = d[ans] + <span class="number">1</span>; pre[i] = ans; root = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">30</span>; j &gt;= <span class="number">0</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">int</span> bit  = (a[i].val &gt;&gt; j) &amp; <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(!trie[root][bit])</span><br><span class="line">                trie[root][bit] = ++cnt;</span><br><span class="line">            root = trie[root][bit];</span><br><span class="line">            <span class="keyword">if</span>(d[f[root]] &lt; d[i])</span><br><span class="line">                f[root] = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="keyword">if</span>(d[ans] &lt; d[i])</span><br><span class="line">            ans = i;</span><br><span class="line">    <span class="keyword">if</span>(d[ans] &lt; <span class="number">2</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;-1\n&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, d[ans]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = ans; i != <span class="number">0</span>; i = pre[i])</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, a[i].index);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">5e5</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> n, t[maxN], x[maxN], y[maxN], p[maxN];</span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;t[i], &amp;x[i]);</span><br><span class="line">        <span class="keyword">if</span>(t[i] == <span class="number">2</span>)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;y[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= maxN - <span class="number">1</span>; ++i) </span><br><span class="line">        p[i] = i;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; --i) &#123;</span><br><span class="line">        <span class="keyword">if</span>(t[i] == <span class="number">1</span>)</span><br><span class="line">            ans.<span class="built_in">push_back</span>(p[x[i]]);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            p[x[i]] = p[y[i]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = ans.<span class="built_in">size</span>() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, ans[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     
 
@@ -305,7 +294,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://miku39393939.github.io/2022/02/05/Codeforces-1625-D/" title="Binary Spiders" target="_blank">https://miku39393939.github.io/2022/02/05/Codeforces-1625-D/</a>
+          <a href="https://miku39393939.github.io/2022/02/15/Codeforces-1620-E/" title="Codeforces-1620-E" target="_blank">https://miku39393939.github.io/2022/02/15/Codeforces-1620-E/</a>
         </li>
         
         <li>
@@ -327,11 +316,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Trie</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">思维</a>
         		</li>
       		
 		</ul>
@@ -387,7 +372,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://miku39393939.github.io/2022/02/05/Codeforces-1625-D/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://miku39393939.github.io/2022/02/15/Codeforces-1620-E/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -402,18 +387,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2022/02/15/Codeforces-1620-E/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/02/24/cf1635D/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Codeforces-1620-E
+          cf1635D
         
       </div>
     </a>
   
   
-    <a href="/2022/02/04/codeforces-1625-c/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Road Optimization</div>
+    <a href="/2022/02/05/Codeforces-1625-D/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Binary Spiders</div>
       <i class="icon-circle-right"></i>
     </a>
   
