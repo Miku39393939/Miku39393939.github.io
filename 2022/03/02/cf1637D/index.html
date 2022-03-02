@@ -6,22 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://miku39393939.github.io">
-  <title>Edge groups | 水蓝络合物的博客</title>
+  <title>cf1637D | 水蓝络合物的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="题目大意给定一张$n(3\le n \le 10^5)$个节点的树($n$为奇数),将这$n-1$条边两两分组, 要求:分到同一组的边有相同的顶点。 求一共有多少种方法。结果对$998244353$取模">
+  <meta name="description" content="题目大意 给定长度均为\(n(1 \le n \le 100)\)的数组\(a,b(1 \le a_i, b_i \le 100)\),可以任意交换\(a_i,b_i(1 \le i \le n)\) 求\(\sum_{i&#x3D;1}^n\sum_{j&#x3D;i+1}^n[(a_i+a_j)^2+(b_i + b_j)^2]\)的最小值。  题目地址 思路 直接计算很耗费时间且无法找到合适的求最新熬制方">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Edge groups">
-<meta property="og:url" content="https://miku39393939.github.io/2021/12/02/Edge-groups/index.html">
+<meta property="og:title" content="cf1637D">
+<meta property="og:url" content="https://miku39393939.github.io/2022/03/02/cf1637D/index.html">
 <meta property="og:site_name" content="水蓝络合物的博客">
-<meta property="og:description" content="题目大意给定一张$n(3\le n \le 10^5)$个节点的树($n$为奇数),将这$n-1$条边两两分组, 要求:分到同一组的边有相同的顶点。 求一共有多少种方法。结果对$998244353$取模">
+<meta property="og:description" content="题目大意 给定长度均为\(n(1 \le n \le 100)\)的数组\(a,b(1 \le a_i, b_i \le 100)\),可以任意交换\(a_i,b_i(1 \le i \le n)\) 求\(\sum_{i&#x3D;1}^n\sum_{j&#x3D;i+1}^n[(a_i+a_j)^2+(b_i + b_j)^2]\)的最小值。  题目地址 思路 直接计算很耗费时间且无法找到合适的求最新熬制方">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-02T02:04:11.000Z">
-<meta property="article:modified_time" content="2021-12-02T05:58:31.785Z">
+<meta property="article:published_time" content="2022-03-02T08:50:46.000Z">
+<meta property="article:modified_time" content="2022-03-02T09:33:58.718Z">
 <meta property="article:author" content="水蓝络合物">
 <meta property="article:tag" content="数学">
-<meta property="article:tag" content="DP">
+<meta property="article:tag" content="dp">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="水蓝络合物的博客" type="application/atom+xml">
@@ -215,14 +215,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Edge-groups" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-cf1637D" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      Edge groups
+      cf1637D
     </h1>
   
 
@@ -234,8 +234,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2021/12/02/Edge-groups/" class="archive-article-date">
-        <time datetime="2021-12-02T02:04:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-02</time>
+<a href="/2022/03/02/cf1637D/" class="archive-article-date">
+        <time datetime="2022-03-02T08:50:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-02</time>
 </a>
 
   
@@ -248,7 +248,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">690字</span>
+      <span class="post-count">484字</span>
     </span>
   </span>
 
@@ -268,26 +268,19 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p>给定一张$n(3\le n \le 10^5)$个节点的树($n$为奇数),将这$n-1$条边两两分组,</p>
-<p>要求:<strong>分到同一组的边有相同的顶点。</strong></p>
-<p>求一共有多少种方法。结果对$998244353$取模</p>
-<span id="more"></span>
-<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/24872/G">原题地址</a></p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>假设第一个节点是父节点。</p>
-<p>可以发现以下规律:</p>
-<ul>
-<li>对于一个节点$u$的子节点$v$,如果$v$的“可供使用”的边数(除去与$u$相连的)为偶数,那么与$u$相连的这条边对于$u$来说,就是“可供使用”的了。(“可供使用”的意思就是可以与这个节点上的其它节点结合)。</li>
-<li>对于一个节点$u$的子节点$v$,如果$v$的“可供使用”的边数(除去与$u$相连的)为奇数,那么与$u$相连的这条边就要用来与$v$相连的边组合,否则就无法成功分配。</li>
-</ul>
-<p>那么对于每个节点可供使用的边,如果是偶数,那我们就两两分组,如果是奇数,那么我们留下与父节点相连的边,剩下的两两分组。</p>
-<p>那么$n$($n$为偶数)个数两两分组的计算方式:</p>
-<p>$$\frac{C_n^2 + C_{n-2}^2 + …C_2^2}{A_{n/2}^{n/2}}$$<br>经过一番<del>高强度</del>化简之后得:<br>$$(n-1) * (n - 3) * … 3 * 1$$</p>
-<p>那么剩下就是解决<strong>可供使用</strong>的边的问题了,该如何计算呢？</p>
-<p>这个“可供使用”的边是一个“递归”定义的,我们只看一个点和它的边,是没有办法看出来它那些边是可以使用的,必须看它的子节点的可以使用的边，而它的子节点又和子节点的子节点有关系…</p>
-<p>所以我们就用类似<strong>树形DP</strong>的方法,从根节点开始dfs:</p>
-<p>那么边界条件:<strong>叶子节点没有可供使用的边,所以也算偶数,那么它和父节点相连的这条边,就可以被父亲节点使用。</strong></p>
-<p>那么剩下的就一直按照最开始分析的计算即可。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">long</span> <span class="keyword">long</span> Mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">1e5</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, d[maxN];</span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt; e[maxN];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> f[maxN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> fa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    f[x] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; e[x].<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> y = e[x][i];</span><br><span class="line">        <span class="keyword">if</span>(y == fa)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="built_in">dfs</span>(y, x))</span><br><span class="line">            cnt++;</span><br><span class="line">        f[x] = f[x] * f[y] % Mod;    </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= cnt; i +=<span class="number">2</span>)</span><br><span class="line">        f[x] = f[x] * i % Mod;</span><br><span class="line">    <span class="keyword">return</span> cnt &amp; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> x, y;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;x, &amp;y);</span><br><span class="line">        e[x].<span class="built_in">push_back</span>(y);</span><br><span class="line">        e[y].<span class="built_in">push_back</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, f[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <h2 id="题目大意">题目大意</h2>
+<p>给定长度均为<span class="math inline">\(n(1 \le n \le 100)\)</span>的数组<span class="math inline">\(a,b(1 \le a_i, b_i \le 100)\)</span>,可以任意交换<span class="math inline">\(a_i,b_i(1 \le i \le n)\)</span> 求<span class="math inline">\(\sum_{i=1}^n\sum_{j=i+1}^n[(a_i+a_j)^2+(b_i + b_j)^2]\)</span>的最小值。 <!--nmore--> <a target="_blank" rel="noopener" href="http://codeforces.com/contest/1637/problem/D">题目地址</a></p>
+<h2 id="思路">思路</h2>
+<p>直接计算很耗费时间且无法找到合适的求最新熬制方法。 所以我们试试化简这个式子。</p>
+<p>我们先看<span class="math inline">\(a\)</span>数组。 定义:<span class="math inline">\(sum_A = \sum_{i=1}^na_ik\)</span> 原式<span class="math inline">\(=(n-1)\sum_{i=1}^{n}a_i^2 + \sum_{i=1}^n(a_i*(sum_A - a_i))\)</span> <span class="math inline">\(=(n-1)\sum_{i=1}^{n}a_i^2 + \sum_{i=1}^n(a_i*sum_A - a_i * a_i)\)</span> <span class="math inline">\(=(n-2)\sum_{i=1}^{n}a_i^2 + sum_A^2\)</span></p>
+<p>所以问题就变成了求<span class="math inline">\((n-2)\sum_{i=1}^{n}(a_i^2 + b_i^2) + sum_A^2 + sum_B^2\)</span>的最小值</p>
+<p>即求<span class="math inline">\(min\{sum_A^2 + sum_B^2\}\)</span></p>
+<p>所以我们打算求出所有<span class="math inline">\(sum_A,sum_B\)</span>的可能值，来计算最小值。</p>
+<p>我们把所有<span class="math inline">\(min(a_i,b_i)\)</span>移到<span class="math inline">\(sum_A\)</span>,<span class="math inline">\(max(a_,b_i)\)</span>移到<span class="math inline">\(sum_B\)</span>。 令<span class="math inline">\(c_i = b_i-a_i\)</span>。 那么<span class="math inline">\(sum_A&#39; = sum_A + c_{i,j,k...},sum_B&#39;=sum_B - c_{i,j,k...}\)</span> 而我们可以用背包<span class="math inline">\(dp\)</span>的方式去求<span class="math inline">\(c_{i,j,k}\)</span>,由于<span class="math inline">\(c_i\)</span>的值域较小，我们可以直接用<span class="math inline">\(bitset\)</span>来简化操作。</p>
+<p>时间复杂度<span class="math inline">\(O(n^2*max\{a_i\})\)</span></p>
+<h2 id="代码">代码</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bitset&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> T, n, a[<span class="number">105</span>], b[<span class="number">105</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--) &#123;</span><br><span class="line">        <span class="keyword">int</span> minSum = <span class="number">0</span>, maxSum = <span class="number">0</span>, rSum = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;b[i]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(a[i] &gt; b[i])</span><br><span class="line">                <span class="built_in">swap</span>(a[i], b[i]);</span><br><span class="line">            minSum += a[i];</span><br><span class="line">            maxSum += b[i];</span><br><span class="line">            rSum += a[i] * a[i] + b[i] * b[i];</span><br><span class="line">        &#125;</span><br><span class="line">        bitset&lt;105 * 105&gt; dp;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            dp |= dp &lt;&lt; (b[i] - a[i]);</span><br><span class="line">        <span class="keyword">int</span> ans = maxSum * maxSum + minSum * minSum;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; maxSum - minSum; ++i)</span><br><span class="line">            <span class="keyword">if</span>(dp[i])</span><br><span class="line">                ans = <span class="built_in">min</span>(ans, (maxSum - i) * (maxSum - i) + (minSum + i) * (minSum + i));</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, (n - <span class="number">2</span>) * rSum + ans);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
     
 
     
@@ -301,7 +294,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://miku39393939.github.io/2021/12/02/Edge-groups/" title="Edge groups" target="_blank">https://miku39393939.github.io/2021/12/02/Edge-groups/</a>
+          <a href="https://miku39393939.github.io/2022/03/02/cf1637D/" title="cf1637D" target="_blank">https://miku39393939.github.io/2022/03/02/cf1637D/</a>
         </li>
         
         <li>
@@ -327,7 +320,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
         		</li>
       		
 		</ul>
@@ -383,7 +376,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://miku39393939.github.io/2021/12/02/Edge-groups/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://miku39393939.github.io/2022/03/02/cf1637D/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -398,18 +391,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2021/12/04/KruskalTree/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          KruskalTree
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/11/29/cf1614C/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Divan and bitwise operations</div>
+    <a href="/2022/03/01/cf1635E/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>
   
