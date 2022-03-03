@@ -218,6 +218,110 @@
             
 
   
+    <article id="post-BilibiliBarage" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/05/31/BilibiliBarage/" target="_blank">爬取b站弹幕并做统计</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/05/31/BilibiliBarage/" class="archive-article-date">
+        <time datetime="2021-05-30T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-31</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="弹幕获取原理"><a href="#弹幕获取原理" class="headerlink" title="弹幕获取原理"></a>弹幕获取原理</h3><ul>
+<li>b站弹幕是储存在特定的页面上，根据视频的‘cid’可以获取页面位置，所以需要先获取视频的‘cid’，再打开弹幕页面，进而处理。其弹幕储存的页面url格式为: <a target="_blank" rel="noopener" href="http://comment.bilibili.com/">http://comment.bilibili.com/</a> <strong>cid</strong> .xml  （网站一）</li>
+<li>那么如何根据BV号来确定cid呢？b站视频的很多数据都储存在某个特定网站，其中BV号就储存在其中其页面url为 <a target="_blank" rel="noopener" href="https://api.bilibili.com/x/player/pagelist?bvid=(%E6%AD%A4%E5%A4%84%E4%B8%BABV%E5%8F%B7)&amp;jsonp=jsonp">https://api.bilibili.com/x/player/pagelist?bvid=(此处为BV号)&amp;jsonp=jsonp</a> （网站二）</li>
+<li>那么具体操作就很简单了,先打开网站二。从中获得cid，然后根据cid获得弹幕储存页面，之后爬取就可以了</li>
+</ul>
+    
+    <a class="article-more-a" href="/2021/05/31/BilibiliBarage/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">BeautiSoup</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Python字符处理</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/05/31/BilibiliBarage/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-d3-scaleLinear" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1114,104 +1218,6 @@
 
 
   
-    <article id="post-2021-01-23-xlrd" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/01/23/2021-01-23-xlrd/" target="_blank">Python xlrd库常用函数</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/01/23/2021-01-23-xlrd/" class="archive-article-date">
-        <time datetime="2021-01-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-23</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><strong>xlrd需要自行安装</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install xlrd</span><br></pre></td></tr></table></figure>
-<p>如果在运行的时候，报错:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">raise XLRDError(FILE_FORMAT_DESCRIPTIONS[file_format]+‘； not supported‘)</span><br></pre></td></tr></table></figure>
-<p>则需要再安装另外一个库</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pyexcel-xls</span><br></pre></td></tr></table></figure>
-<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2>
-    
-    <a class="article-more-a" href="/2021/01/23/2021-01-23-xlrd/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Python_xlrd库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/01/23/2021-01-23-xlrd/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
@@ -1571,6 +1577,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
             
             <div class="clearfix"></div>

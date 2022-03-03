@@ -218,6 +218,101 @@
             
 
   
+    <article id="post-cf1614D1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/11/29/cf1614D1/" target="_blank">Divan and Kostomuksha (easy version)</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/11/29/cf1614D1/" class="archive-article-date">
+        <time datetime="2021-11-29T08:04:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-29</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="题目大意">题目大意</h2>
+<p>给定<span class="math inline">\(n\)</span>个正整数<span class="math inline">\(a_{1,2...n}\)</span>。</p>
+<p>可以任意改变顺序。</p>
+<p>求<span class="math inline">\(gcd(a_1) + gcd(a_1,a_2)+...+gcd(a_1,a_2,...,a_n)\)</span>的最大值。
+    
+    <a class="article-more-a" href="/2021/11/29/cf1614D1/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/29/cf1614D1/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-numberCalc" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1061,117 +1156,6 @@
 
 
   
-    <article id="post-Double-Strings" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/08/13/Double-Strings/" target="_blank">Double Strings</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/08/13/Double-Strings/" class="archive-article-date">
-        <time datetime="2021-08-13T06:44:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-13</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目大意">题目大意</h3>
-<p>给定两个字符串A，B，求出满足以下条件的子序列a,b（可以不连续）的数量 ，并对<span class="math inline">\(10^9+7\)</span>取模：</p>
-<ul>
-<li>a，b分别来自A，B，且长度<span class="math inline">\(length\)</span>相同</li>
-<li><span class="math inline">\(\exist i \in [1,length]\)</span>​​,使得<span class="math inline">\(a_i &lt; b_i\)</span>​​​</li>
-<li><span class="math inline">\(\forall j \in [1, i)\)</span>​,满足<span class="math inline">\(a_j = b_j\)</span>​​。</li>
-<li>对于<span class="math inline">\(k \in [i + 1, length]\)</span>，<span class="math inline">\(a_k,b_k\)</span>​​没有任何限制。</li>
-</ul>
-<!--more--->
-<h3 id="思路">思路</h3>
-<ul>
-<li>假如我们已经找到了<span class="math inline">\(A_{a1}...A{a_n}\)</span>，和<span class="math inline">\(B_{b_1}...B_{b_n}\)</span>相同，那么我们只需要在<span class="math inline">\(A\)</span>数组<span class="math inline">\(A_{a_n}\)</span>后面中找到一个字母<span class="math inline">\(A_{a_{n+1}}\)</span> ，在<span class="math inline">\(B\)</span>数组<span class="math inline">\(B_{b_n}\)</span>后面中找到一个字母<span class="math inline">\(B_{b_{n+1}}\)</span>，满足<span class="math inline">\(A_{a_{n+1}} &lt; B_{b_{n+1}}\)</span>​即可，那么剩下的字母就可以随便选了​。</li>
-<li>假设<span class="math inline">\(A\)</span>数组还剩<span class="math inline">\(n\)</span>个数可选，<span class="math inline">\(B\)</span>数组还剩<span class="math inline">\(m\)</span>个可选，那么利用组合数学，就可知道共有<span class="math inline">\(\sum_{i=0}^{min(n,m)} C_n^i + C_m^i\)</span>种选法。而此式子等于<span class="math inline">\(C_{n+m}^n\)</span>。（具体证明可以参照百度）。<del>（蒟蒻不太会）</del></li>
-<li>那么剩下的就是统计<span class="math inline">\(A,B\)</span>​数组有多少个字串是相同的了。我们假设<span class="math inline">\(dp[i][j]\)</span>​表示在<span class="math inline">\(A\)</span>​数组前<span class="math inline">\(i\)</span>​位，<span class="math inline">\(B\)</span>​数组的前<span class="math inline">\(j\)</span>​位中共有几个相同的字串，递推时(有点类似与最长公共子序列)：
-<ul>
-<li>如果<span class="math inline">\(A[i] \not= B[j]\)</span>​，那么它显然是由<span class="math inline">\(A\)</span>​数组前<span class="math inline">\(i-1\)</span>​个字母和<span class="math inline">\(B\)</span>​数组前<span class="math inline">\(j\)</span>​个组成，或者是<span class="math inline">\(A\)</span>​数组前<span class="math inline">\(i\)</span>​个字母和<span class="math inline">\(B\)</span>​数组前<span class="math inline">\(j-1\)</span>​个组成的。但是如果我们直接加上<span class="math inline">\(dp[i-1][j],dp[i][j-1]\)</span>​的话，会出现多加的情况，那就是<span class="math inline">\(A\)</span>​数组前<span class="math inline">\(i-1\)</span>​个字母和<span class="math inline">\(B\)</span>​数组前<span class="math inline">\(j-1\)</span>​​个组成的,所以我们要再减去<span class="math inline">\(dp[i-1][j-1]\)</span>，综上：<span class="math inline">\(dp[i][j]=dp[i-1][j]+dp[i][j-1]-dp[i-1][j-1]\)</span>​​。​</li>
-<li>如果<span class="math inline">\(A[i] = B[j]\)</span>，那么它显然也可以由<span class="math inline">\(dp[i][j]=dp[i-1][j]+dp[i][j-1]-dp[i-1][j-1]\)</span>得到一部分结果，其他的部分，就是由<span class="math inline">\(A\)</span>数组前<span class="math inline">\(i-1\)</span>个字母和<span class="math inline">\(B\)</span>数组前<span class="math inline">\(j-1\)</span>个，再加上<span class="math inline">\(A[i],B[j]\)</span>两个字母，即<span class="math inline">\(dp[i-1][j-1]\)</span>，其次<span class="math inline">\(A[i],B[j]\)</span>两个字母也可以单独作为结果计算，综上：<span class="math inline">\(dp[i][j]=dp[i-1][j]+dp[i][j-1]+1\)</span>。</li>
-</ul></li>
-<li>因为结果是要求对结果进行取模的，而且我们的计算中是存在<strong>组合数</strong>的，所以不能每次都用费马小定理，所以我们需要预处理出阶乘数组和其对应的乘法逆元数组。</li>
-</ul>
-<h3 id="代码">代码</h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">2000005</span>, mod = <span class="number">1000000007</span>;</span><br><span class="line"></span><br><span class="line">ll inv[maxN + <span class="number">1</span>], f[maxN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">string s1, s2;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> dp[<span class="number">5005</span>][<span class="number">5005</span>];</span><br><span class="line"><span class="keyword">int</span> len1, len2;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, ll &amp;x, ll &amp;y)</span> <span class="comment">//拓展欧几里得</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b == <span class="number">0</span>) &#123;</span><br><span class="line">        x = <span class="number">1</span>; y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">exgcd</span>(b, a % b, y, x);</span><br><span class="line">    y -= a / b * x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    f[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= maxN; ++i)</span><br><span class="line">        f[i] = f[i - <span class="number">1</span>] * i % mod; <span class="comment">//阶乘数组</span></span><br><span class="line">    ll x, y;</span><br><span class="line">    <span class="built_in">exgcd</span>(f[maxN], mod, x, y);</span><br><span class="line">    inv[maxN] = (x % mod + mod) % mod;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = maxN - <span class="number">1</span>; i; --i) &#123;</span><br><span class="line">        inv[i] = inv[i + <span class="number">1</span>] * (i + <span class="number">1</span>) % mod; <span class="comment">//逆元数组</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">C</span><span class="params">(ll n, ll m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n == m || m == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(m &gt; n)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> (f[n] * inv[m] % mod * inv[n - m] % mod) % mod;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin &gt;&gt; s1; cin &gt;&gt; s2;</span><br><span class="line">    len1 = s1.<span class="built_in">length</span>(); len2 = s2.<span class="built_in">length</span>();</span><br><span class="line">    s1 = <span class="string">&quot; &quot;</span> + s1; s2 = <span class="string">&quot; &quot;</span> + s2;</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len1; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= len2; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span>(s1[i] == s2[j])</span><br><span class="line">                dp[i][j] = (dp[i - <span class="number">1</span>][j] + dp[i][j - <span class="number">1</span>] + <span class="number">1</span>) % mod;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                dp[i][j] = ((dp[i - <span class="number">1</span>][j] + dp[i][j - <span class="number">1</span>]) % mod + mod - dp[i - <span class="number">1</span>][j - <span class="number">1</span>]) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len1; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= len2; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span>(s1[i] &lt; s2[j]) &#123;</span><br><span class="line">                <span class="keyword">long</span> <span class="keyword">long</span> n = len1 - i, m = len2 - j;</span><br><span class="line">                ans = (ans + (dp[i - <span class="number">1</span>][j - <span class="number">1</span>] + <span class="number">1ll</span>) * <span class="built_in">C</span>(<span class="number">1LL</span> * n + m, <span class="number">1LL</span> * <span class="built_in">min</span>(n, m)) % mod) % mod;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组合数学</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/08/13/Double-Strings/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1531,6 +1515,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
             
             <div class="clearfix"></div>
