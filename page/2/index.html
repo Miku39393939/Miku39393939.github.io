@@ -218,6 +218,618 @@
             
 
   
+    <article id="post-PythonCourse6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/03/05/PythonCourse6/" target="_blank">Python 字典 dict 教程</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/03/05/PythonCourse6/" class="archive-article-date">
+        <time datetime="2022-03-05T12:18:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-05</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <span id="more"></span>
+<h2 id="创建">创建</h2>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1</span></span><br><span class="line">keys = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>]</span><br><span class="line">values = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">dic = <span class="built_in">dict</span>(<span class="built_in">zip</span>(keys, values))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line">dic = &#123;<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;Miku&#x27;</span>, <span class="string">&#x27;number&#x27;</span>: <span class="number">39</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line">dic = <span class="built_in">dict</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4 创建指定key的空字典</span></span><br><span class="line">aDict = <span class="built_in">dict</span>.fromkeys([<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;sex&#x27;</span>])</span><br></pre></td></tr></table></figure>
+<h2 id="访问及修改">访问及修改</h2>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">aDict[<span class="string">&#x27;name&#x27;</span>] <span class="comment"># 如果存在则返回值，如果不存在则报错</span></span><br><span class="line">aDict[<span class="string">&#x27;name&#x27;</span>] = <span class="string">&#x27;Miku&#x27;</span> <span class="comment"># 如果不存在则创建，存在则修改value</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>item() : 返回dict的(key,value)对</li>
+<li>keys() : 返回dict的key</li>
+<li>values : 返回dict的value <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">aDict.get(key, val) <span class="comment"># 如果存在key则返回值，否则返回指定的val</span></span><br><span class="line">aDict.update(&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">97</span>, <span class="string">&#x27;age&#x27;</span>:<span class="number">39</span>&#125;) <span class="comment"># 存在的修改，不存在的添加</span></span><br></pre></td></tr></table></figure> ## 删除 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">del</span> aDict[<span class="string">&#x27;age&#x27;</span>] <span class="comment"># 删除</span></span><br><span class="line">aDict.popitem() <span class="comment"># 弹出并返回最后一个元素的value</span></span><br><span class="line">aDict.pop(<span class="string">&#x27;age&#x27;</span>) <span class="comment"># 弹出并返回指定key的value</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="遍历">遍历</h2>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> <span class="built_in">dict</span>.keys () <span class="comment"># 遍历key</span></span><br><span class="line"><span class="keyword">for</span> values <span class="keyword">in</span> <span class="built_in">dict</span>.values () <span class="comment"># 遍历value</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> <span class="built_in">dict</span>.items (): <span class="comment"># 遍历value-key对</span></span><br><span class="line">    key = item[<span class="number">0</span>]</span><br><span class="line">    value = item[<span class="number">1</span>]</span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> <span class="built_in">dict</span>.items (): <span class="comment"># 遍历value-key对</span></span><br></pre></td></tr></table></figure>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/03/05/PythonCourse6/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-PythonCourse5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/03/05/PythonCourse5/" target="_blank">Python tuple元组 生成器推导式 教程</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/03/05/PythonCourse5/" class="archive-article-date">
+        <time datetime="2022-03-05T08:46:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-05</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <span id="more"></span>
+<h2 id="tuple-元组">tuple 元组</h2>
+<h3 id="创建">创建</h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = (<span class="number">5</span>,) <span class="comment"># 仅有一个元素时，需要在结尾加逗号</span></span><br><span class="line">x = <span class="built_in">tuple</span>()</span><br></pre></td></tr></table></figure>
+<h3 id="访问">访问</h3>
+<p>与list完全一致</p>
+<h2 id="生成器推导式">生成器推导式</h2>
+<p>与列表推导式完全一致 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">g = ((i + <span class="number">2</span>) ** <span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>))</span><br><span class="line"><span class="built_in">tuple</span>(g) <span class="comment"># 想要查看值需要用tuple</span></span><br><span class="line">(<span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>, <span class="number">49</span>, <span class="number">64</span>, <span class="number">81</span>, <span class="number">100</span>, <span class="number">121</span>)</span><br></pre></td></tr></table></figure></p>
+<p>循环访问时，可以用for遍历，也可用next()函数， 但需要注意，<strong>访问是单向的，访问一个元素后，该元素就会从生成器中消失</strong> <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">g = ((i + <span class="number">2</span>) ** <span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>))</span><br><span class="line"><span class="built_in">tuple</span>(g)</span><br><span class="line">(<span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>, <span class="number">49</span>, <span class="number">64</span>, <span class="number">81</span>, <span class="number">100</span>, <span class="number">121</span>)</span><br><span class="line"><span class="built_in">list</span>(g)</span><br><span class="line">[]</span><br><span class="line"></span><br><span class="line">g = ((i + <span class="number">2</span>) ** <span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>))</span><br><span class="line">g.__next__()</span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="built_in">next</span>(g)</span><br><span class="line"><span class="number">9</span></span><br></pre></td></tr></table></figure></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/03/05/PythonCourse5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-PythonCourse4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/03/05/PythonCourse4/" target="_blank">Python列表推导式教程</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/03/05/PythonCourse4/" class="archive-article-date">
+        <time datetime="2022-03-05T08:26:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-05</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <span id="more"></span>
+<h3 id="示例1">示例1</h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">aList = [x * x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>, <span class="number">49</span>, <span class="number">64</span>, <span class="number">81</span>]</span><br></pre></td></tr></table></figure>
+<p>这个分为两部分: <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x * x</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>) <span class="comment"># 1</span></span><br></pre></td></tr></table></figure> 每当 #1循环一次，就把一个<span class="math inline">\(x*x\)</span>放入到list中</p>
+<h3 id="示例2">示例2</h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">freshfruit = [<span class="string">&#x27; banana&#x27;</span>, <span class="string">&#x27; loganberry&#x27;</span>, <span class="string">&#x27; passion fruit&#x27;</span>]</span><br><span class="line">aList = [w.strip() <span class="keyword">for</span> w <span class="keyword">in</span> freshfruit] <span class="comment">#1</span></span><br><span class="line">[<span class="string">&#x27;banana&#x27;</span>, <span class="string">&#x27;loganberry&#x27;</span>, <span class="string">&#x27;passion fruit&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<p>每当 #1循环一次，就把一个w.strip()放入到list中 .strip()函数会去掉字符串的前导空格</p>
+<h3 id="示例3">示例3</h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vec = [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]]</span><br><span class="line">[num <span class="keyword">for</span> elem <span class="keyword">in</span> vec <span class="keyword">for</span> num <span class="keyword">in</span> elem]  <span class="comment"># 1</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br></pre></td></tr></table></figure>
+<p>#1相当于一个两重循环 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ans = []</span><br><span class="line"><span class="keyword">for</span> elem <span class="keyword">in</span> vec:</span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> elem:</span><br><span class="line">        ans.append(num)</span><br></pre></td></tr></table></figure></p>
+<h3 id="示例4">示例4</h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">aList = [-<span class="number">1</span>, -<span class="number">4</span>, <span class="number">6</span>, <span class="number">7.5</span>, -<span class="number">2.3</span>, <span class="number">9</span>, -<span class="number">11</span>]</span><br><span class="line">[i <span class="keyword">for</span> i <span class="keyword">in</span> aList <span class="keyword">if</span> i &gt; <span class="number">0</span>]</span><br><span class="line">[<span class="number">6</span>, <span class="number">7.5</span>, <span class="number">9</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="示例5">示例5</h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randint</span><br><span class="line">x = [randint(<span class="number">1</span>, <span class="number">10</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">20</span>)]</span><br><span class="line">[<span class="number">8</span>, <span class="number">10</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">10</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">4</span>, <span class="number">10</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">7</span>]</span><br><span class="line">m = <span class="built_in">max</span>(x)</span><br><span class="line">[index <span class="keyword">for</span> index, value <span class="keyword">in</span> <span class="built_in">enumerate</span>(x) <span class="keyword">if</span> value == m] <span class="comment"># 1</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">16</span>]</span><br></pre></td></tr></table></figure>
+<p>#1相当于: <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ans = []</span><br><span class="line"><span class="keyword">for</span> index, value <span class="keyword">in</span> <span class="built_in">enumerate</span>(x):</span><br><span class="line">    <span class="keyword">if</span> value == m:</span><br><span class="line">        ans.append(index)</span><br></pre></td></tr></table></figure></p>
+<h3 id="示例6">示例6</h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[(x, y) <span class="keyword">for</span> x <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] <span class="keyword">for</span> y <span class="keyword">in</span> [<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>] <span class="keyword">if</span> x != y]</span><br><span class="line">[(<span class="number">1</span>, <span class="number">3</span>), (<span class="number">1</span>, <span class="number">4</span>), (<span class="number">2</span>, <span class="number">3</span>), (<span class="number">2</span>, <span class="number">1</span>), (<span class="number">2</span>, <span class="number">4</span>), (<span class="number">3</span>, <span class="number">1</span>), (<span class="number">3</span>, <span class="number">4</span>)]</span><br></pre></td></tr></table></figure>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/03/05/PythonCourse4/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-PythonCourse3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/03/03/PythonCourse3/" target="_blank">Python list 详解</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/03/03/PythonCourse3/" class="archive-article-date">
+        <time datetime="2022-03-03T07:35:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-03</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <span id="more"></span>
+<h2 id="创建">创建</h2>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span>((<span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>, <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span>(<span class="string">&#x27;hello world&#x27;</span>)</span><br><span class="line">[<span class="string">&#x27;h&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;l&#x27;</span>, <span class="string">&#x27;l&#x27;</span>, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;w&#x27;</span>, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;l&#x27;</span>, <span class="string">&#x27;d&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span>(&#123;<span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把key转化为列表</span></span><br><span class="line"><span class="built_in">list</span>(&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">3</span>, <span class="string">&#x27;b&#x27;</span>:<span class="number">9</span>, <span class="string">&#x27;c&#x27;</span>:<span class="number">78</span>&#125;)</span><br><span class="line">[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将&#x27;key:value&#x27;转化成列表</span></span><br><span class="line"><span class="built_in">list</span>(&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">3</span>, <span class="string">&#x27;b&#x27;</span>:<span class="number">9</span>, <span class="string">&#x27;c&#x27;</span>:<span class="number">78</span>&#125;.items())</span><br><span class="line">[(<span class="string">&#x27;a&#x27;</span>, <span class="number">3</span>), (<span class="string">&#x27;b&#x27;</span>, <span class="number">9</span>), (<span class="string">&#x27;c&#x27;</span>, <span class="number">78</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 空列表</span></span><br><span class="line">x = <span class="built_in">list</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">del</span> x删除</span><br></pre></td></tr></table></figure>
+<h2 id="访问">访问</h2>
+<p>支持双向访问 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="built_in">list</span>(<span class="string">&#x27;pyhton&#x27;</span>)</span><br><span class="line">x[<span class="number">0</span>]</span><br><span class="line"><span class="string">&#x27;p&#x27;</span></span><br><span class="line">x[-<span class="number">1</span>] <span class="comment"># 最后一个</span></span><br><span class="line"><span class="string">&#x27;n&#x27;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="插入">插入</h2>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a.append(<span class="number">4</span>) <span class="comment"># 尾部插入</span></span><br><span class="line">a.insert(index, value) <span class="comment"># 指定位置插入</span></span><br><span class="line">a.insert([<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>]) <span class="comment">#  尾部插入多个元素</span></span><br></pre></td></tr></table></figure>
+<h2 id="删除">删除</h2>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x.pop(index) <span class="comment"># 弹出并返回index处元素，默认为尾部</span></span><br><span class="line">x.remove(value) <span class="comment"># 删除首个值为value的元素</span></span><br><span class="line"><span class="keyword">del</span> x[index] <span class="comment"># 删除index处的元素</span></span><br></pre></td></tr></table></figure>
+<h2 id="其它">其它</h2>
+<ul>
+<li>clear() : 清空列表内所有对象</li>
+<li>count(value) : 返回value的出现次数</li>
+<li>index(value) : value第一次出现的位置</li>
+<li>reverse() : 反转</li>
+<li>sort() : 排序</li>
+</ul>
+<h2 id="运算符">运算符</h2>
+<p><span class="math inline">\(+, +=\)</span></p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = x + [<span class="number">4</span>] <span class="comment"># 新列表，涉及大量复制，比较慢</span></span><br><span class="line">x += [<span class="number">4</span>] <span class="comment"># 在原序列上进行操作</span></span><br></pre></td></tr></table></figure>
+<p><span class="math inline">\(*\)</span></p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = x * <span class="number">2</span> <span class="comment"># 新列表，是原列表再复制一遍到尾部</span></span><br><span class="line">x *= <span class="number">2</span> <span class="comment"># 原地址操作</span></span><br></pre></td></tr></table></figure>
+<p>关系运算符 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>] &gt; [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>] <span class="comment"># 逐位比较</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="切片">切片</h2>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[start = <span class="number">0</span>:end = length:step = <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>step为负数时，表示反向切片</p>
+<h3 id="插入-1">插入</h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">aList[<span class="built_in">len</span>(<span class="type">List</span>):] = [<span class="number">9</span>， <span class="number">8</span>] <span class="comment"># 尾部增加元素</span></span><br><span class="line">aList[:<span class="number">0</span>] = [<span class="number">1</span>,<span class="number">2</span>] <span class="comment"># b头部增加元素</span></span><br><span class="line">aList[<span class="number">4</span>:<span class="number">4</span>] = [<span class="number">5</span>] <span class="comment"># 中间插入元素</span></span><br></pre></td></tr></table></figure>
+<h3 id="修改">修改</h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">aList[:<span class="number">3</span>] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] <span class="comment"># 从0开始替换三个(需要保持长度一致)</span></span><br><span class="line">aList[<span class="number">3</span>:] = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>] <span class="comment"># 此时可以随便增加元素</span></span><br><span class="line">aList[::<span class="number">2</span>] = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>] <span class="comment"># 隔一个修改一个</span></span><br></pre></td></tr></table></figure>
+<h3 id="删除-1">删除</h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">aList[:<span class="number">3</span>] = [] <span class="comment"># 删除前三个</span></span><br><span class="line">aList[<span class="number">3</span>:<span class="number">6</span>] = [] <span class="comment"># 删除3~6的元素</span></span><br><span class="line"><span class="keyword">del</span> aList[:<span class="number">3</span>] <span class="comment"># 也可配合del</span></span><br></pre></td></tr></table></figure>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/03/03/PythonCourse3/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-PythonCourse2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/03/03/PythonCourse2/" target="_blank">Python课程笔记1</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/03/03/PythonCourse2/" class="archive-article-date">
+        <time datetime="2022-03-03T02:04:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-03</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="主要内容">主要内容</h1>
+<p>复数，测试运算符 in，集合运算符，输出间隔符，排序与逆序，枚举与迭代 enumerate函数，map()，reduce()，filter()，range()，zip().
+    
+    <a class="article-more-a" href="/2022/03/03/PythonCourse2/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/03/03/PythonCourse2/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-cf1637D" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/03/02/cf1637D/" target="_blank">cf1637D</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/03/02/cf1637D/" class="archive-article-date">
+        <time datetime="2022-03-02T08:50:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-02</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="题目大意">题目大意</h2>
+<p>给定长度均为<span class="math inline">\(n(1 \le n \le 100)\)</span>的数组<span class="math inline">\(a,b(1 \le a_i, b_i \le 100)\)</span>,可以任意交换<span class="math inline">\(a_i,b_i(1 \le i \le n)\)</span> 求<span class="math inline">\(\sum_{i=1}^n\sum_{j=i+1}^n[(a_i+a_j)^2+(b_i + b_j)^2]\)</span>的最小值。
+    
+    <a class="article-more-a" href="/2022/03/02/cf1637D/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/03/02/cf1637D/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-cf1635E" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -550,524 +1162,9 @@
 
 
   
-    <article id="post-codeforces-1625-c" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/02/04/codeforces-1625-c/" target="_blank">Road Optimization</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/02/04/codeforces-1625-c/" class="archive-article-date">
-        <time datetime="2022-02-04T08:04:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-04</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="题目大意">题目大意</h2>
-<p>两个城市相聚<span class="math inline">\(l\)</span>千米，要从起点城市通过一条路到达目标城市，路上有<span class="math inline">\(n\)</span>个限速点(第一个限速点在起点),每个限速点位置在<span class="math inline">\(d_i\)</span>,值为<span class="math inline">\(b_i\)</span>,表示从这个限速点到下个限速点位置,每经过一千米需要花费<span class="math inline">\(b_i\)</span>点单位时间。</p>
-<p>你可以删掉不超过<span class="math inline">\(k\)</span>个限速点，请问删除后到达目标城市的最短时间是多少？</p>
-    
-    <a class="article-more-a" href="/2022/02/04/codeforces-1625-c/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/02/04/codeforces-1625-c/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Codeforces-1617-E" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/02/02/Codeforces-1617-E/" target="_blank">Codeforces-1617-E</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/02/02/Codeforces-1617-E/" class="archive-article-date">
-        <time datetime="2022-02-02T02:59:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-02</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="题目大意">题目大意</h2>
-<p>有<span class="math inline">\(n(2 \le n \le 10^5)\)</span>个正整数的数组<span class="math inline">\(a_n,1 \le a_i \le 10^9\)</span>。</p>
-<p>对于每个数<span class="math inline">\(a_i\)</span>，可以进行如下操作: 找到一个自然数<span class="math inline">\(k\)</span>,满足<span class="math inline">\(2^k \ge a_i\)</span>,使<span class="math inline">\(a_i = 2^k - a_i\)</span>。</p>
-<p>通过数次这种操作,总可以使得变化后<span class="math inline">\(a_i\)</span>等于其它任意一个数<span class="math inline">\(a_j\)</span>。</p>
-<p>那么请问，把哪两个数的变成相同所需次数的最小值最大？</p>
-    
-    <a class="article-more-a" href="/2022/02/02/Codeforces-1617-E/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图论</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/02/02/Codeforces-1617-E/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Codeforces-1617-D2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/02/02/Codeforces-1617-D2/" target="_blank">Codeforces-1617-D2</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/02/02/Codeforces-1617-D2/" class="archive-article-date">
-        <time datetime="2022-02-02T01:41:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-02</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="题目大意">题目大意</h2>
-<p>此题为hard版本，与easy版本的差别在于可询问次数不一样，其余全一样。</p>
-<p>交互题，有<span class="math inline">\(n(6 \le n \le 10^4)\)</span>个玩家，其中有<span class="math inline">\(k\)</span>个<span class="math inline">\(impostors\)</span>，<span class="math inline">\(n-k\)</span>人为<span class="math inline">\(crewmates\)</span>,<strong>并且一定满足<span class="math inline">\(\frac{n}{3} &lt; k &lt; \frac{2n}{3}\)</span></strong>。</p>
-<p>可以进行至多<span class="math inline">\(n+6\)</span>次询问，每次询问时，输出<span class="math inline">\(a,b,c\)</span>，如果编号<span class="math inline">\(a,b,c\)</span>中<span class="math inline">\(impostors\)</span>较多，则会返回输入<span class="math inline">\(0\)</span>，否则，则会返回输入<span class="math inline">\(1\)</span>。</p>
-<p>请在询问输出后，输出所有玩家的身份，<span class="math inline">\(crewmates\)</span>为<span class="math inline">\(0\)</span>, <span class="math inline">\(impostors\)</span>为<span class="math inline">\(1\)</span>。
-    
-    <a class="article-more-a" href="/2022/02/02/Codeforces-1617-D2/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/02/02/Codeforces-1617-D2/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Codeforces-1617-D1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/02/02/Codeforces-1617-D1/" target="_blank">Codeforces-1617-D1 Too Many Impostors (easy version)</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/02/02/Codeforces-1617-D1/" class="archive-article-date">
-        <time datetime="2022-02-02T00:52:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-02</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="题目大意">题目大意</h2>
-<p>交互题，有<span class="math inline">\(n(6 \le n \le 10^4)\)</span>个玩家，其中有<span class="math inline">\(k\)</span>个<span class="math inline">\(impostors\)</span>，<span class="math inline">\(n-k\)</span>人为<span class="math inline">\(crewmates\)</span>,<strong>并且一定满足<span class="math inline">\(\frac{n}{3} &lt; k &lt; \frac{2n}{3}\)</span></strong>。</p>
-<p>可以进行至多<span class="math inline">\(2n\)</span>次询问，每次询问时，输出<span class="math inline">\(a,b,c\)</span>，如果编号<span class="math inline">\(a,b,c\)</span>中<span class="math inline">\(impostors\)</span>较多，则会返回输入<span class="math inline">\(0\)</span>，否则，则会返回输入<span class="math inline">\(1\)</span>。</p>
-<p>请在询问输出后，输出所有玩家的身份，<span class="math inline">\(crewmates\)</span>为<span class="math inline">\(0\)</span>, <span class="math inline">\(impostors\)</span>为<span class="math inline">\(1\)</span>。
-    
-    <a class="article-more-a" href="/2022/02/02/Codeforces-1617-D1/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/02/02/Codeforces-1617-D1/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Codeforces-1617-C" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/02/01/Codeforces-1617-C/" target="_blank">Codeforces-1617-C Paprika and Permutation</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/02/01/Codeforces-1617-C/" class="archive-article-date">
-        <time datetime="2022-02-01T09:15:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-01</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="题目大意">题目大意</h2>
-<p>给定一个<span class="math inline">\(n(1\le n \le 10^5)\)</span>个数的正整数数组<span class="math inline">\(a_n(1 \le a_i \le 10^9)\)</span>,你需要把它变成一个<span class="math inline">\(1\)</span>~<span class="math inline">\(n\)</span>的排序,可选的操作只有: 对于<span class="math inline">\(a_i\)</span>,选择一个正整数<span class="math inline">\(x(1 \le x \le a_i)\)</span>,令<span class="math inline">\(a_i = a_i \% x\)</span>。</p>
-<p>问是否可以通过任意次这种操作是数组<span class="math inline">\(a\)</span>成为一个排列。
-    
-    <a class="article-more-a" href="/2022/02/01/Codeforces-1617-C/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/02/01/Codeforces-1617-C/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Codeforces-1612-D" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>title: X-Magic Pair date: 2022-02-01 17:04:05 tags: - 数论</p>
-<h2 id="题目大意">题目大意</h2>
-<p>给定三个正整数<span class="math inline">\(a,b,x(1 \le a,b,x \le 10^{18})\)</span>,可以对<span class="math inline">\(a, b\)</span>进行两种操作: * $ a = |a - b|$ * $ b = |a - b|$</p>
-<p>问是否可以通过任意次这两种操作使得<span class="math inline">\(a = x\)</span>或者<span class="math inline">\(b = x\)</span>
-    
-    <a class="article-more-a" href="/2022/01/30/Codeforces-1612-D/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/01/30/Codeforces-1612-D/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1432,6 +1529,18 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">trie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LCA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">博弈论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">拓扑排序</a>
               </li>
             
             <div class="clearfix"></div>

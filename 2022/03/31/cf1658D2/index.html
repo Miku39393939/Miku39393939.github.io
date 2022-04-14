@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="题目大意 给定两个数\(l, r\),将\([l, l + 1,..., r-1, r]\)的一个任意排列，全部异或\(x\)，得到一个新的数组\(a\)。 给定\(l, r\)和\(a\)数组，求\(x\)。 其中$0 &lt; l r ^{17} $">
+  <meta name="description" content="题目大意给定两个数$l, r$,将$[l, l + 1,…, r-1, r]$的一个任意排列，全部异或$x$，得到一个新的数组$a$。 给定$l, r$和$a$数组，求$x$。 其中$0 &lt; l \le r \le 2^{17}$">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cf1658D2">
 <meta property="og:url" content="https://miku39393939.github.io/2022/03/31/cf1658D2/index.html">
 <meta property="og:site_name" content="水蓝络合物的博客">
-<meta property="og:description" content="题目大意 给定两个数\(l, r\),将\([l, l + 1,..., r-1, r]\)的一个任意排列，全部异或\(x\)，得到一个新的数组\(a\)。 给定\(l, r\)和\(a\)数组，求\(x\)。 其中$0 &lt; l r ^{17} $">
+<meta property="og:description" content="题目大意给定两个数$l, r$,将$[l, l + 1,…, r-1, r]$的一个任意排列，全部异或$x$，得到一个新的数组$a$。 给定$l, r$和$a$数组，求$x$。 其中$0 &lt; l \le r \le 2^{17}$">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-31T06:38:32.000Z">
-<meta property="article:modified_time" content="2022-03-31T06:47:57.555Z">
+<meta property="article:modified_time" content="2022-04-04T02:45:54.912Z">
 <meta property="article:author" content="水蓝络合物">
 <meta property="article:tag" content="数学">
 <meta property="article:tag" content="trie">
@@ -248,7 +248,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">510字</span>
+      <span class="post-count">513字</span>
     </span>
   </span>
 
@@ -268,29 +268,27 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="题目大意">题目大意</h2>
-<p>给定两个数<span class="math inline">\(l, r\)</span>,将<span class="math inline">\([l, l + 1,..., r-1, r]\)</span>的一个任意排列，全部异或<span class="math inline">\(x\)</span>，得到一个新的数组<span class="math inline">\(a\)</span>。</p>
-<p>给定<span class="math inline">\(l, r\)</span>和<span class="math inline">\(a\)</span>数组，求<span class="math inline">\(x\)</span>。</p>
-<p>其中$0 &lt; l r ^{17} $</p>
+    <h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p>给定两个数$l, r$,将$[l, l + 1,…, r-1, r]$的一个任意排列，全部异或$x$，得到一个新的数组$a$。</p>
+<p>给定$l, r$和$a$数组，求$x$。</p>
+<p>其中$0 &lt; l \le r \le 2^{17}$</p>
 <span id="more"></span>
 <p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1658/problem/D1">题目链接</a></p>
-<h2 id="思路">思路</h2>
-<p>简单版本的做法如下:</p>
-<p>我们按位处理，我们计算异或前的数组每一位<span class="math inline">\(1\)</span>的个数，设为<span class="math inline">\(cntA\)</span>，计算异或后的数组每一位<span class="math inline">\(1\)</span>的个数，记为<span class="math inline">\(cntB\)</span></p>
-<ol type="1">
-<li><p>那么一旦<span class="math inline">\(cntA_i != cntB_i\)</span>,那么就说明<span class="math inline">\(x\)</span>这一位一定为<span class="math inline">\(1\)</span></p></li>
-<li><p>对于<span class="math inline">\(cntA_i == cntB_i\)</span>一样的位数，说明这一位可以为<span class="math inline">\(1\)</span>,也可以为<span class="math inline">\(0\)</span>。</p></li>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>简单版本的做法如下:</p>
+<p>我们按位处理，我们计算异或前的数组每一位$1$的个数，设为$cntA$，计算异或后的数组每一位$1$的个数，记为$cntB$</p>
+<ol>
+<li><p>那么一旦$cntA_i != cntB_i$,那么就说明$x$这一位一定为$1$</p>
+</li>
+<li><p>对于$cntA_i == cntB_i$一样的位数，说明这一位可以为$1$,也可以为$0$。</p>
+</li>
 </ol>
-<p>因为<span class="math inline">\(l=0\)</span>,所以2.总是成立，因为异或后的数组一定有一个<span class="math inline">\(x\)</span>,异或前有个<span class="math inline">\(0\)</span>,所以<span class="math inline">\(x\)</span>某一位为<span class="math inline">\(1\)</span>，那么异或后的数这一位<span class="math inline">\(1\)</span>的数量一定会变化。</p>
-<p>而一旦<span class="math inline">\(l \not = 0\)</span>,那么就有可能<span class="math inline">\(1\)</span>变为<span class="math inline">\(0\)</span>,<span class="math inline">\(0\)</span>变为<span class="math inline">\(1\)</span>的数量相同，抵消掉了，比如<span class="math inline">\([1,2] \oplus 2 = [0,3]\)</span>,前后每一位<span class="math inline">\(1\)</span>的数量都相同。</p>
+<p>因为$l=0$,所以2.总是成立，因为异或后的数组一定有一个$x$,异或前有个$0$,所以$x$某一位为$1$，那么异或后的数这一位$1$的数量一定会变化。</p>
+<p>而一旦$l \not = 0$,那么就有可能$1$变为$0$,$0$变为$1$的数量相同，抵消掉了，比如$[1,2] \oplus 2 = [0,3]$,前后每一位$1$的数量都相同。</p>
 <p>所以我们不能再按照之前的思路。</p>
-<p>答案一定存在于<span class="math inline">\(l \oplus a_i (1 \le i \le n)\)</span>中，所以我们不妨试着验证<span class="math inline">\(l \oplus a_i\)</span>是否为答案。</p>
-<p>那么如何验证呢?</p>
-<p><span class="math inline">\(x \oplus a_i\)</span>的结果，最大值就是<span class="math inline">\(r\)</span>，最小值就是<span class="math inline">\(l\)</span></p>
-<p>求一些数异或一个值的最大最小值为多少，这个问题可以用<span class="math inline">\(trie\)</span>树解决。</p>
-<h2 id="代码">代码</h2>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">1e5</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> T, l, r, cnt1[<span class="number">53</span>], cnt2[<span class="number">53</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">calc</span><span class="params">(<span class="keyword">int</span> *cnt, <span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> now = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(x) &#123;</span><br><span class="line">        <span class="keyword">if</span>(x &amp; <span class="number">1</span>)</span><br><span class="line">            cnt[now]++;</span><br><span class="line">        now++; x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--) &#123;</span><br><span class="line">        <span class="built_in">memset</span>(cnt1, <span class="number">0</span>, <span class="keyword">sizeof</span> cnt1);</span><br><span class="line">        <span class="built_in">memset</span>(cnt2, <span class="number">0</span>, <span class="keyword">sizeof</span> cnt2);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;l, &amp;r);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = l; i &lt;= r; ++i) &#123;</span><br><span class="line">            <span class="built_in">calc</span>(cnt1, i);</span><br><span class="line">            <span class="keyword">int</span> x; <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">            <span class="built_in">calc</span>(cnt2, x);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">31</span>; ++i)</span><br><span class="line">            <span class="keyword">if</span>(cnt1[i] != cnt2[i])</span><br><span class="line">                ans |= (<span class="number">1</span> &lt;&lt; i);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>答案一定存在于$l \oplus a_i (1 \le i \le n)$中，所以我们不妨试着验证$l \oplus a_i$是否为答案。</p>
+<p>那么如何验证呢? </p>
+<p>$x \oplus a_i$的结果，最大值就是$r$，最小值就是$l$</p>
+<p>求一些数异或一个值的最大最小值为多少，这个问题可以用$trie$树解决。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">1e5</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> T, l, r, cnt1[<span class="number">53</span>], cnt2[<span class="number">53</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">calc</span><span class="params">(<span class="keyword">int</span> *cnt, <span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> now = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(x) &#123;</span><br><span class="line">        <span class="keyword">if</span>(x &amp; <span class="number">1</span>)</span><br><span class="line">            cnt[now]++;</span><br><span class="line">        now++; x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--) &#123;</span><br><span class="line">        <span class="built_in">memset</span>(cnt1, <span class="number">0</span>, <span class="keyword">sizeof</span> cnt1);</span><br><span class="line">        <span class="built_in">memset</span>(cnt2, <span class="number">0</span>, <span class="keyword">sizeof</span> cnt2);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;l, &amp;r);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = l; i &lt;= r; ++i) &#123;</span><br><span class="line">            <span class="built_in">calc</span>(cnt1, i);</span><br><span class="line">            <span class="keyword">int</span> x; <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">            <span class="built_in">calc</span>(cnt2, x);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">31</span>; ++i)</span><br><span class="line">            <span class="keyword">if</span>(cnt1[i] != cnt2[i])</span><br><span class="line">                ans |= (<span class="number">1</span> &lt;&lt; i);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     
 
     
@@ -400,6 +398,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2022/04/04/atCoder137C/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          atCoder137C
+        
+      </div>
+    </a>
   
   
     <a href="/2022/03/31/cf1658D1/" id="article-nav-older" class="article-nav-link-wrap">
@@ -799,6 +806,18 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">trie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LCA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">博弈论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">拓扑排序</a>
               </li>
             
             <div class="clearfix"></div>
