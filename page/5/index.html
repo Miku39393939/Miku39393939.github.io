@@ -218,6 +218,864 @@
             
 
   
+    <article id="post-KruskalTree" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/12/04/KruskalTree/" target="_blank">KruskalTree</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/12/04/KruskalTree/" class="archive-article-date">
+        <time datetime="2021-12-04T09:10:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-04</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="适用场合">适用场合</h2>
+<p>多次询问在一个图中,两个点之间的最短路上的最长边。 这个题有多种解法,用<span class="math inline">\(Kruskal\)</span>重构树的方法当然也能解决。</p>
+<h2 id="主要思想">主要思想</h2>
+<p>建一个新的树 * 按照Kruskal算法依次遍历边,<strong>当要进行合并时,再执行以下操作</strong></p>
+<ul>
+<li><p>把最小生成树上的边<span class="math inline">\((u,v,w)\)</span>当作新的点,权值为原来边权<span class="math inline">\(w\)</span></p></li>
+<li><p>分别两条边连向<span class="math inline">\(u\)</span>,<span class="math inline">\(v\)</span>所在的子树的根节点</p></li>
+</ul>
+<p>求两个点<span class="math inline">\(x,y\)</span>之间最短路上的最长边,等价于在新的树上<span class="math inline">\(LCA(x,y)\)</span>的权值。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/SGDBS233/article/details/121718833">这里本来应该有个图,但是出于申必原因加载不出来,可以来CSDN上康康</a></p>
+<h2 id="代码">代码</h2>
+<p>这个是用来解决<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1967">货车运输</a>的代码 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">1e5</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, q, cnt, head[maxN], fa[maxN], tot, val[maxN], f[maxN][<span class="number">21</span>], depth[maxN];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> from, to, dis;</span><br><span class="line">&#125;e[maxN &lt;&lt; <span class="number">1</span>], initEdge[maxN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    e[++cnt].from = head[u];</span><br><span class="line">    e[cnt].to = v;</span><br><span class="line">    head[u] = cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> fa[x] == x? x : fa[x] = <span class="built_in">Find</span>(fa[x]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(Edge x, Edge y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x.dis &gt; y.dis;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = e[i].from) &#123;</span><br><span class="line">        <span class="keyword">int</span> y = e[i].to;</span><br><span class="line">        f[y][<span class="number">0</span>] = x; depth[y] = depth[x] + <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">dfs</span>(y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">KruskalTree</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">sort</span>(initEdge + <span class="number">1</span>, initEdge + <span class="number">1</span> + m, cmp);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        fa[i] = i;</span><br><span class="line">    tot = n; <span class="comment">//tot记录的是新的图上点的个数   </span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> fx = <span class="built_in">Find</span>(initEdge[i].from), fy = <span class="built_in">Find</span>(initEdge[i].to);</span><br><span class="line">        <span class="keyword">if</span>(fx == fy)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        val[++tot] = initEdge[i].dis; <span class="comment">//建立新的树</span></span><br><span class="line">        fa[tot] = fa[fx] = fa[fy] = tot;</span><br><span class="line">        <span class="built_in">add</span>(tot, fx); <span class="built_in">add</span>(tot, fy);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">initLca</span><span class="params">()</span> <span class="comment">//从这开始就是普通的LCA了</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = tot; i &gt;= <span class="number">0</span>; --i) </span><br><span class="line">        <span class="keyword">if</span>(!depth[i])</span><br><span class="line">            <span class="built_in">dfs</span>(i);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; (<span class="number">1</span> &lt;&lt; j) &lt;= tot; ++j)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= tot; ++i)</span><br><span class="line">            f[i][j] = f[f[i][j - <span class="number">1</span>]][j - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Lca</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(depth[x] &lt; depth[y])</span><br><span class="line">        <span class="built_in">swap</span>(x, y);</span><br><span class="line">    <span class="keyword">int</span> t = (<span class="keyword">int</span>)(<span class="built_in">log</span>(depth[x]) / <span class="built_in">log</span>(<span class="number">2</span>)) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = t; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">        <span class="keyword">if</span>(depth[f[x][i]] &gt;= depth[y])</span><br><span class="line">            x = f[x][i];</span><br><span class="line">    <span class="keyword">if</span>(x == y)</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = t; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">        <span class="keyword">if</span>(f[x][i] != f[y][i])</span><br><span class="line">            x = f[x][i], y = f[y][i];</span><br><span class="line">    <span class="keyword">return</span> f[x][<span class="number">0</span>];             </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;initEdge[i].from, &amp;initEdge[i].to, &amp;initEdge[i].dis);</span><br><span class="line">    <span class="built_in">KruskalTree</span>();</span><br><span class="line">    <span class="built_in">initLca</span>();</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;q);</span><br><span class="line">    <span class="keyword">while</span>(q--) &#123;</span><br><span class="line">        <span class="keyword">int</span> x, y;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;x, &amp;y);</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">Find</span>(x) != <span class="built_in">Find</span>(y)) <span class="comment">//当然图可能不连通</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;-1\n&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, val[<span class="built_in">Lca</span>(x, y)]);    </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图论</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">模板</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/12/04/KruskalTree/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Edge-groups" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/12/02/Edge-groups/" target="_blank">Edge groups</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/12/02/Edge-groups/" class="archive-article-date">
+        <time datetime="2021-12-02T02:04:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-02</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p>给定一张$n(3\le n \le 10^5)$个节点的树($n$为奇数),将这$n-1$条边两两分组,</p>
+<p>要求:<strong>分到同一组的边有相同的顶点。</strong></p>
+<p>求一共有多少种方法。结果对$998244353$取模</p>
+    
+    <a class="article-more-a" href="/2021/12/02/Edge-groups/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/12/02/Edge-groups/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-cf1614C" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/11/29/cf1614C/" target="_blank">Divan and bitwise operations</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/11/29/cf1614C/" class="archive-article-date">
+        <time datetime="2021-11-29T10:28:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-29</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p>有$n$个非负整数$a_{1,2,…n}$</p>
+<p>有$m$个信息$(l,r,x)$,每一组表示$a_l\oplus a_{l+1} \oplus … \oplus a_r = x$ (保证所有数都被覆盖)</p>
+<p>求数组$a$的所有子序列<strong>异或和</strong>的<strong>和</strong>。(有多种$a$数组的组成话,任意输出一种情况下的和即可)</p>
+<p>结果对$10^9 + 7$取模</p>
+    
+    <a class="article-more-a" href="/2021/11/29/cf1614C/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">位运算</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/29/cf1614C/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-cf1614D1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/11/29/cf1614D1/" target="_blank">Divan and Kostomuksha (easy version)</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/11/29/cf1614D1/" class="archive-article-date">
+        <time datetime="2021-11-29T08:04:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-29</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="题目大意">题目大意</h2>
+<p>给定<span class="math inline">\(n\)</span>个正整数<span class="math inline">\(a_{1,2...n}\)</span>。</p>
+<p>可以任意改变顺序。</p>
+<p>求<span class="math inline">\(gcd(a_1) + gcd(a_1,a_2)+...+gcd(a_1,a_2,...,a_n)\)</span>的最大值。
+    
+    <a class="article-more-a" href="/2021/11/29/cf1614D1/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/29/cf1614D1/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-numberCalc" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/11/12/numberCalc/" target="_blank">numberCalc</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/11/12/numberCalc/" class="archive-article-date">
+        <time datetime="2021-11-12T00:51:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-12</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="数字计数"><a href="#数字计数" class="headerlink" title="数字计数"></a>数字计数</h1><h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p>给定两个正整数 $a$ 和 $b$，求在 $[a,b]$中的所有整数中，每个数码($0,1,2,…,8,9$)各出现了多少次。</p>
+    
+    <a class="article-more-a" href="/2021/11/12/numberCalc/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数位DP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/12/numberCalc/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-codeforces-747-div2-D" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/18/codeforces-747-div2-D/" target="_blank">codeforces 747 div2 D The Number of Imposters</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/18/codeforces-747-div2-D/" class="archive-article-date">
+        <time datetime="2021-10-18T00:38:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-18</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="题目大意">题目大意</h3>
+<p>有<span class="math inline">\(n\)</span>个人，每个人的身份都是以下两个中的一个：<span class="math inline">\(imposter\)</span>，<span class="math inline">\(crewmate\)</span>。</p>
+<p>一共有<span class="math inline">\(m\)</span>个陈述，形如： <span class="math inline">\(x\)</span> <span class="math inline">\(y\)</span> <span class="math inline">\(imposter/crewmate\)</span>，表示，<span class="math inline">\(x\)</span>说<span class="math inline">\(y\)</span>的身份是<span class="math inline">\(imposter/crewmate\)</span></p>
+<p>注意，<strong><span class="math inline">\(imposter\)</span>只会说谎，<span class="math inline">\(crewmate\)</span>只会说实话。</strong></p>
+<p>求：<span class="math inline">\(imposter\)</span><strong>最多</strong>可能有多少个。</p>
+    
+    <a class="article-more-a" href="/2021/10/18/codeforces-747-div2-D/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图论</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">染色法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/18/codeforces-747-div2-D/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-HDU-7136" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/12/HDU-7136/" target="_blank">HDU-7136 Jumping Monkey 题解</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/12/HDU-7136/" class="archive-article-date">
+        <time datetime="2021-10-12T06:54:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-12</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="题目大意">题目大意</h3>
+<p>给定一个有<span class="math inline">\(n\)</span>个节点的树，每个节点有一个权值<span class="math inline">\(val[i]\)</span>，一个猴子在每个节点之间进行移动，假如它在节点<span class="math inline">\(u\)</span>上，如果存在节点<span class="math inline">\(v\)</span>，<span class="math inline">\(val[v]\)</span>是从<span class="math inline">\(u\)</span>到<span class="math inline">\(v\)</span>的路径上权值最大的点，那么它就可以从<span class="math inline">\(u\)</span>移动到<span class="math inline">\(v\)</span>上。问：猴子分别从<span class="math inline">\(1\)</span>到<span class="math inline">\(n\)</span>号节点出发，分别最多能移动到多少的节点上？</p>
+    
+    <a class="article-more-a" href="/2021/10/12/HDU-7136/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">并查集</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">重构树</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">思维</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/12/HDU-7136/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-CodeForece-746-div2-C" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/11/CodeForece-746-div2-C/" target="_blank">CodeForece 746 div2 C Bakry and Partitioning 题解</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/11/CodeForece-746-div2-C/" class="archive-article-date">
+        <time datetime="2021-10-11T01:08:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-11</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="题目大意">题目大意</h3>
+<p>给定一个有<span class="math inline">\(n\)</span>个节点的图，每个点有一个权值<span class="math inline">\(val[i]\)</span>，给定<span class="math inline">\(k\)</span>，你可以删除<strong>至少<span class="math inline">\(1\)</span>个边，至多<span class="math inline">\(k-1\)</span></strong>条边，使剩下的每个连通块所包含的点的权值异或之和(用<span class="math inline">\(0\)</span>去依次异或每个点得到的值)相同。</p>
+    
+    <a class="article-more-a" href="/2021/10/11/CodeForece-746-div2-C/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/11/CodeForece-746-div2-C/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-IcannotICPC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/09/10/IcannotICPC/" target="_blank">I can not ICPC</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/09/10/IcannotICPC/" class="archive-article-date">
+        <time datetime="2021-09-10T06:26:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-10</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="关于我们20级ACM队员竟然因为军训打不了ICPC选拔赛这档事"><a href="#关于我们20级ACM队员竟然因为军训打不了ICPC选拔赛这档事" class="headerlink" title="关于我们20级ACM队员竟然因为军训打不了ICPC选拔赛这档事"></a>关于我们20级ACM队员竟然因为军训打不了ICPC选拔赛这档事</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>是我短暂的人生中遇到过最无语的事件。</p>
+<p>挺无语的，我没想到，我们竟然会因为这个，没法打选拔赛，从而影响我们整个学校的ACM队员整整21学年的参赛。</p>
+<p>还耽误了好几个小时的时间。<del>甚至打印各类证明材料还花了我10块钱，让本不富裕的我雪上加霜</del></p>
+<p>想到OIer和ACMer的传统艺能，那就写个东西纪念一下罢，就代替ICPC2021选拔赛游记了（悲）。</p>
+    
+    <a class="article-more-a" href="/2021/09/10/IcannotICPC/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂谈</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/09/10/IcannotICPC/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-HDU-7106" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -280,856 +1138,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2021/09/06/HDU-7106/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Eyjafjalla" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/08/22/Eyjafjalla/" target="_blank">Eyjafjalla</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/08/22/Eyjafjalla/" class="archive-article-date">
-        <time datetime="2021-08-22T08:26:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-22</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目大意">题目大意</h3>
-<p>一个国家有<span class="math inline">\(n\)</span>个城市，由<span class="math inline">\(n - 1\)</span>个道路彼此相连，构成一个树。其中首都（一号节点）紧挨着 艾 雅 法 拉 火山，所以温度<span class="math inline">\(a_1\)</span>最高，<strong>其它城市的温度是随着距离首都的距离而递减的</strong>（每条道路长度可以认为是相同的）。现在一种病毒在城市<span class="math inline">\(i\)</span>​爆发，它的可以存活的温度区间是<span class="math inline">\([l,r]\)</span>​​。当有道路相连的两个城市温度都可以让病毒存活，且其中一个城市已经被病毒感染，那么病毒就会传播到另一个城市。</p>
-<p>给定每个城市的温度<span class="math inline">\(a_i\)</span>和<span class="math inline">\(n-1\)</span>条道路，需要回答<span class="math inline">\(m\)</span>次询问：假如有存活温度范围为<span class="math inline">\([l,r]\)</span>的病毒在第<span class="math inline">\(i\)</span>​个城市爆发，那么病毒会传染几个城市？</p>
-    
-    <a class="article-more-a" href="/2021/08/22/Eyjafjalla/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">可持久化线段树</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">倍增</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/08/22/Eyjafjalla/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Hamburger-Steak" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/08/15/Hamburger-Steak/" target="_blank">Hamburger Steak</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/08/15/Hamburger-Steak/" class="archive-article-date">
-        <time datetime="2021-08-15T09:13:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-15</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目描述">题目描述</h3>
-<p>你有<span class="math inline">\(m\)</span>个锅和<span class="math inline">\(n\)</span>个汉堡，第<span class="math inline">\(i\)</span>个汉堡需要在锅里烹饪<span class="math inline">\(t_i\)</span>分钟。</p>
-<p>对第<span class="math inline">\(i\)</span>个汉堡，你可以一次烹饪<span class="math inline">\(t_i\)</span>分钟，也可以分别烹饪<span class="math inline">\(a_i,b_i\)</span>分钟。<span class="math inline">\((a_i+b_i=t_i)\)</span></p>
-<p>你将从第0分钟开始烹饪，并尽可能快的完成烹饪，求具体的烹饪方法。 <a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11257/F">原题地址</a></p>
-    
-    <a class="article-more-a" href="/2021/08/15/Hamburger-Steak/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/08/15/Hamburger-Steak/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Boxes" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/08/15/Boxes/" target="_blank">Boxes</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/08/15/Boxes/" class="archive-article-date">
-        <time datetime="2021-08-15T08:27:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-15</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目大意">题目大意</h3>
-<p>有<span class="math inline">\(n\)</span>个盒子，每个盒子里装有一个球，它可能是黑色或者白色的概率均为<span class="math inline">\(1/2\)</span>。现在你可以花费<span class="math inline">\(C\)</span>的价值来获得<strong>剩下的所有盒子中剩余的黑色球数量和白色球数量</strong>。还可以花费<span class="math inline">\(w[i]\)</span>的价值去打开一个盒子。</p>
-<p>问： 你知道所有盒子中球的颜色的期望花费是多少。 <a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11256/B">题目链接</a></p>
-    
-    <a class="article-more-a" href="/2021/08/15/Boxes/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数学期望</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/08/15/Boxes/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Double-Strings" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/08/13/Double-Strings/" target="_blank">Double Strings</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/08/13/Double-Strings/" class="archive-article-date">
-        <time datetime="2021-08-13T06:44:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-13</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目大意">题目大意</h3>
-<p>给定两个字符串A，B，求出满足以下条件的子序列a,b（可以不连续）的数量 ，并对<span class="math inline">\(10^9+7\)</span>取模：</p>
-<ul>
-<li>a，b分别来自A，B，且长度<span class="math inline">\(length\)</span>相同</li>
-<li><span class="math inline">\(\exist i \in [1,length]\)</span>​​,使得<span class="math inline">\(a_i &lt; b_i\)</span>​​​</li>
-<li><span class="math inline">\(\forall j \in [1, i)\)</span>​,满足<span class="math inline">\(a_j = b_j\)</span>​​。</li>
-<li>对于<span class="math inline">\(k \in [i + 1, length]\)</span>，<span class="math inline">\(a_k,b_k\)</span>​​没有任何限制。</li>
-</ul>
-<!--more--->
-<h3 id="思路">思路</h3>
-<ul>
-<li>假如我们已经找到了<span class="math inline">\(A_{a1}...A{a_n}\)</span>，和<span class="math inline">\(B_{b_1}...B_{b_n}\)</span>相同，那么我们只需要在<span class="math inline">\(A\)</span>数组<span class="math inline">\(A_{a_n}\)</span>后面中找到一个字母<span class="math inline">\(A_{a_{n+1}}\)</span> ，在<span class="math inline">\(B\)</span>数组<span class="math inline">\(B_{b_n}\)</span>后面中找到一个字母<span class="math inline">\(B_{b_{n+1}}\)</span>，满足<span class="math inline">\(A_{a_{n+1}} &lt; B_{b_{n+1}}\)</span>​即可，那么剩下的字母就可以随便选了​。</li>
-<li>假设<span class="math inline">\(A\)</span>数组还剩<span class="math inline">\(n\)</span>个数可选，<span class="math inline">\(B\)</span>数组还剩<span class="math inline">\(m\)</span>个可选，那么利用组合数学，就可知道共有<span class="math inline">\(\sum_{i=0}^{min(n,m)} C_n^i + C_m^i\)</span>种选法。而此式子等于<span class="math inline">\(C_{n+m}^n\)</span>。（具体证明可以参照百度）。<del>（蒟蒻不太会）</del></li>
-<li>那么剩下的就是统计<span class="math inline">\(A,B\)</span>​数组有多少个字串是相同的了。我们假设<span class="math inline">\(dp[i][j]\)</span>​表示在<span class="math inline">\(A\)</span>​数组前<span class="math inline">\(i\)</span>​位，<span class="math inline">\(B\)</span>​数组的前<span class="math inline">\(j\)</span>​位中共有几个相同的字串，递推时(有点类似与最长公共子序列)：
-<ul>
-<li>如果<span class="math inline">\(A[i] \not= B[j]\)</span>​，那么它显然是由<span class="math inline">\(A\)</span>​数组前<span class="math inline">\(i-1\)</span>​个字母和<span class="math inline">\(B\)</span>​数组前<span class="math inline">\(j\)</span>​个组成，或者是<span class="math inline">\(A\)</span>​数组前<span class="math inline">\(i\)</span>​个字母和<span class="math inline">\(B\)</span>​数组前<span class="math inline">\(j-1\)</span>​个组成的。但是如果我们直接加上<span class="math inline">\(dp[i-1][j],dp[i][j-1]\)</span>​的话，会出现多加的情况，那就是<span class="math inline">\(A\)</span>​数组前<span class="math inline">\(i-1\)</span>​个字母和<span class="math inline">\(B\)</span>​数组前<span class="math inline">\(j-1\)</span>​​个组成的,所以我们要再减去<span class="math inline">\(dp[i-1][j-1]\)</span>，综上：<span class="math inline">\(dp[i][j]=dp[i-1][j]+dp[i][j-1]-dp[i-1][j-1]\)</span>​​。​</li>
-<li>如果<span class="math inline">\(A[i] = B[j]\)</span>，那么它显然也可以由<span class="math inline">\(dp[i][j]=dp[i-1][j]+dp[i][j-1]-dp[i-1][j-1]\)</span>得到一部分结果，其他的部分，就是由<span class="math inline">\(A\)</span>数组前<span class="math inline">\(i-1\)</span>个字母和<span class="math inline">\(B\)</span>数组前<span class="math inline">\(j-1\)</span>个，再加上<span class="math inline">\(A[i],B[j]\)</span>两个字母，即<span class="math inline">\(dp[i-1][j-1]\)</span>，其次<span class="math inline">\(A[i],B[j]\)</span>两个字母也可以单独作为结果计算，综上：<span class="math inline">\(dp[i][j]=dp[i-1][j]+dp[i][j-1]+1\)</span>。</li>
-</ul></li>
-<li>因为结果是要求对结果进行取模的，而且我们的计算中是存在<strong>组合数</strong>的，所以不能每次都用费马小定理，所以我们需要预处理出阶乘数组和其对应的乘法逆元数组。</li>
-</ul>
-<h3 id="代码">代码</h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">2000005</span>, mod = <span class="number">1000000007</span>;</span><br><span class="line"></span><br><span class="line">ll inv[maxN + <span class="number">1</span>], f[maxN + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">string s1, s2;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> dp[<span class="number">5005</span>][<span class="number">5005</span>];</span><br><span class="line"><span class="keyword">int</span> len1, len2;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, ll &amp;x, ll &amp;y)</span> <span class="comment">//拓展欧几里得</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b == <span class="number">0</span>) &#123;</span><br><span class="line">        x = <span class="number">1</span>; y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">exgcd</span>(b, a % b, y, x);</span><br><span class="line">    y -= a / b * x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    f[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= maxN; ++i)</span><br><span class="line">        f[i] = f[i - <span class="number">1</span>] * i % mod; <span class="comment">//阶乘数组</span></span><br><span class="line">    ll x, y;</span><br><span class="line">    <span class="built_in">exgcd</span>(f[maxN], mod, x, y);</span><br><span class="line">    inv[maxN] = (x % mod + mod) % mod;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = maxN - <span class="number">1</span>; i; --i) &#123;</span><br><span class="line">        inv[i] = inv[i + <span class="number">1</span>] * (i + <span class="number">1</span>) % mod; <span class="comment">//逆元数组</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">C</span><span class="params">(ll n, ll m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n == m || m == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(m &gt; n)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> (f[n] * inv[m] % mod * inv[n - m] % mod) % mod;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin &gt;&gt; s1; cin &gt;&gt; s2;</span><br><span class="line">    len1 = s1.<span class="built_in">length</span>(); len2 = s2.<span class="built_in">length</span>();</span><br><span class="line">    s1 = <span class="string">&quot; &quot;</span> + s1; s2 = <span class="string">&quot; &quot;</span> + s2;</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len1; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= len2; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span>(s1[i] == s2[j])</span><br><span class="line">                dp[i][j] = (dp[i - <span class="number">1</span>][j] + dp[i][j - <span class="number">1</span>] + <span class="number">1</span>) % mod;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                dp[i][j] = ((dp[i - <span class="number">1</span>][j] + dp[i][j - <span class="number">1</span>]) % mod + mod - dp[i - <span class="number">1</span>][j - <span class="number">1</span>]) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len1; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= len2; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span>(s1[i] &lt; s2[j]) &#123;</span><br><span class="line">                <span class="keyword">long</span> <span class="keyword">long</span> n = len1 - i, m = len2 - j;</span><br><span class="line">                ans = (ans + (dp[i - <span class="number">1</span>][j - <span class="number">1</span>] + <span class="number">1ll</span>) * <span class="built_in">C</span>(<span class="number">1LL</span> * n + m, <span class="number">1LL</span> * <span class="built_in">min</span>(n, m)) % mod) % mod;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组合数学</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/08/13/Double-Strings/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-KingOfRange" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/08/11/KingOfRange/" target="_blank">KingOfRange</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/08/11/KingOfRange/" class="archive-article-date">
-        <time datetime="2021-08-11T01:47:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-11</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目大意">题目大意</h3>
-<p>给定一个<span class="math inline">\(n\)</span>个数的序列<span class="math inline">\(a_i\)</span>。有<span class="math inline">\(q\)</span>次询问，每次询问是一个非负整数<span class="math inline">\(k\)</span>，求出有多少对<span class="math inline">\((l, r)\)</span>，满足<span class="math inline">\(max(a[i]) - min(a[j]) &gt; k\)</span>,其中<span class="math inline">\(l\le i, j \le r\)</span>​。</p>
-    
-    <a class="article-more-a" href="/2021/08/11/KingOfRange/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">单调队列</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">尺取法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/08/11/KingOfRange/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-OR" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/08/10/OR/" target="_blank">OR</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/08/10/OR/" class="archive-article-date">
-        <time datetime="2021-08-10T02:26:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-10</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目大意">题目大意</h3>
-<p>给定两个非负数组<span class="math inline">\(b[2...n],c[2...n]\)</span>，构造出数组<span class="math inline">\(a[1...n]\)</span>满足：<span class="math inline">\(a[i-1]|a[i] = b[i],a[i-1]+a[i]=c[i]\)</span>。求出满足要求的数组<span class="math inline">\(a\)</span>的数量。<span class="math inline">\((1\le n \le 10^5, 1\le b[i],c[i] \le 10^9)\)</span>​</p>
-    
-    <a class="article-more-a" href="/2021/08/10/OR/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">位运算</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/08/10/OR/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Tree-Xor" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/08/07/Tree-Xor/" target="_blank">Tree-Xor</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/08/07/Tree-Xor/" class="archive-article-date">
-        <time datetime="2021-08-07T06:26:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h3><p>给定一棵有n个节点的树，每个节点的权值$a[i]$​​​​未知，满足$l[i]\le a[i]\le r[i]$​​​​，其中$l[i],r[i]$​​​​为给定数值。每条边的权值为已知，其值为它连接的两个边的权值的异或值。求出满足条件的$a[i](1\le i\le n)）$​​​​​的数量。($1\le n\le 10^5, 1\le l[i] \le r[i]\le 2^{30}$​​​)</p>
-    
-    <a class="article-more-a" href="/2021/08/07/Tree-Xor/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线段树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/08/07/Tree-Xor/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Average" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/08/05/Average/" target="_blank">Average</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/08/05/Average/" class="archive-article-date">
-        <time datetime="2021-08-05T02:00:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h3><p>题目等价为：给定两个分别由n和m个数的序列a，b。分别找出长度不少于x和y的连续序列，使它们的平均值之和最大。</p>
-    
-    <a class="article-more-a" href="/2021/08/05/Average/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">二分答案</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/08/05/Average/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Inverse-Pair" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/08/04/Inverse-Pair/" target="_blank">Inverse Pair</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/08/04/Inverse-Pair/" class="archive-article-date">
-        <time datetime="2021-08-04T12:33:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-04</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h3><p>给定一个1~n的排列，你可以给其中任意个数加上1，使得到的新序列的逆序对个数尽量少。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>由于是一个排列，即<strong>每个数仅会出现一次</strong>。</p>
-<p>我们考虑什么情况下把一个数X加上1之后，会让逆序对减少，那么肯定是这个数的左面存在比它大一的数，此时，把X加一之后，逆序对的数量就会减少1，因为<strong>比它大1的数只有一个，在X加上1之后，就与X相等了，比它大2及以上的数，还是比X大，而比X小的数，还是比X小</strong>。</p>
-    
-    <a class="article-more-a" href="/2021/08/04/Inverse-Pair/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">树状数组</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">归并排序</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">逆序对</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/08/04/Inverse-Pair/">展开全文 >></a>
     </p>
     
 
@@ -1538,6 +1546,18 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">拓扑排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">枚举子集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">构造</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">主席树</a>
               </li>
             
             <div class="clearfix"></div>
