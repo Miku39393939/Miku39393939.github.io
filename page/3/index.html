@@ -218,6 +218,200 @@
             
 
   
+    <article id="post-cf526C" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/03/27/cf526C/" target="_blank">cf526C</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/03/27/cf526C/" class="archive-article-date">
+        <time datetime="2022-03-27T04:53:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-27</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="题目大意">题目大意</h2>
+<p>有两类糖果，重量与美味值分别为<span class="math inline">\(w_1, h_1, w_2, h_2\)</span>。 求: 拿取重量不超过<span class="math inline">\(C\)</span>的糖果，美味值最大为多少？ <span class="math inline">\((1 \le w_1, h_1, w_2, h_2, C \le 10^9)\)</span>
+    
+    <a class="article-more-a" href="/2022/03/27/cf526C/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/03/27/cf526C/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-PythonCourse6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/03/05/PythonCourse6/" target="_blank">Python 字典 dict 教程</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/03/05/PythonCourse6/" class="archive-article-date">
+        <time datetime="2022-03-05T12:18:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-05</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <span id="more"></span>
+<h2 id="创建">创建</h2>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1</span></span><br><span class="line">keys = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>]</span><br><span class="line">values = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">dic = <span class="built_in">dict</span>(<span class="built_in">zip</span>(keys, values))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line">dic = &#123;<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;Miku&#x27;</span>, <span class="string">&#x27;number&#x27;</span>: <span class="number">39</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line">dic = <span class="built_in">dict</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4 创建指定key的空字典</span></span><br><span class="line">aDict = <span class="built_in">dict</span>.fromkeys([<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;sex&#x27;</span>])</span><br></pre></td></tr></table></figure>
+<h2 id="访问及修改">访问及修改</h2>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">aDict[<span class="string">&#x27;name&#x27;</span>] <span class="comment"># 如果存在则返回值，如果不存在则报错</span></span><br><span class="line">aDict[<span class="string">&#x27;name&#x27;</span>] = <span class="string">&#x27;Miku&#x27;</span> <span class="comment"># 如果不存在则创建，存在则修改value</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>item() : 返回dict的(key,value)对</li>
+<li>keys() : 返回dict的key</li>
+<li>values : 返回dict的value <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">aDict.get(key, val) <span class="comment"># 如果存在key则返回值，否则返回指定的val</span></span><br><span class="line">aDict.update(&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">97</span>, <span class="string">&#x27;age&#x27;</span>:<span class="number">39</span>&#125;) <span class="comment"># 存在的修改，不存在的添加</span></span><br></pre></td></tr></table></figure> ## 删除 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">del</span> aDict[<span class="string">&#x27;age&#x27;</span>] <span class="comment"># 删除</span></span><br><span class="line">aDict.popitem() <span class="comment"># 弹出并返回最后一个元素的value</span></span><br><span class="line">aDict.pop(<span class="string">&#x27;age&#x27;</span>) <span class="comment"># 弹出并返回指定key的value</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="遍历">遍历</h2>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> <span class="built_in">dict</span>.keys () <span class="comment"># 遍历key</span></span><br><span class="line"><span class="keyword">for</span> values <span class="keyword">in</span> <span class="built_in">dict</span>.values () <span class="comment"># 遍历value</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> <span class="built_in">dict</span>.items (): <span class="comment"># 遍历value-key对</span></span><br><span class="line">    key = item[<span class="number">0</span>]</span><br><span class="line">    value = item[<span class="number">1</span>]</span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> <span class="built_in">dict</span>.items (): <span class="comment"># 遍历value-key对</span></span><br></pre></td></tr></table></figure>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/03/05/PythonCourse6/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-PythonCourse5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -968,192 +1162,9 @@
 
 
   
-    <article id="post-Codeforces-1625-D" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/02/05/Codeforces-1625-D/" target="_blank">Binary Spiders</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/02/05/Codeforces-1625-D/" class="archive-article-date">
-        <time datetime="2022-02-05T01:03:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="题目大意">题目大意</h2>
-<p>给定<span class="math inline">\(n(2 \le n \le 3\times10^5)\)</span>个数<span class="math inline">\(a_i(0 \le k \le 2^{30}-1))\)</span>和自然数<span class="math inline">\(k(0 \le a_i \le 2^{30}-1)\)</span>，挑出尽可能多的数，并且使得它们的疑惑和不小于<span class="math inline">\(k\)</span>，输出数量和挑选的数。</p>
-    
-    <a class="article-more-a" href="/2022/02/05/Codeforces-1625-D/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Trie</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/02/05/Codeforces-1625-D/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-codeforces-1625-c" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/02/04/codeforces-1625-c/" target="_blank">Road Optimization</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/02/04/codeforces-1625-c/" class="archive-article-date">
-        <time datetime="2022-02-04T08:04:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-04</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="题目大意">题目大意</h2>
-<p>两个城市相聚<span class="math inline">\(l\)</span>千米，要从起点城市通过一条路到达目标城市，路上有<span class="math inline">\(n\)</span>个限速点(第一个限速点在起点),每个限速点位置在<span class="math inline">\(d_i\)</span>,值为<span class="math inline">\(b_i\)</span>,表示从这个限速点到下个限速点位置,每经过一千米需要花费<span class="math inline">\(b_i\)</span>点单位时间。</p>
-<p>你可以删掉不超过<span class="math inline">\(k\)</span>个限速点，请问删除后到达目标城市的最短时间是多少？</p>
-    
-    <a class="article-more-a" href="/2022/02/04/codeforces-1625-c/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/02/04/codeforces-1625-c/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
     </nav>
   
 
