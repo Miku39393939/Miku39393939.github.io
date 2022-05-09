@@ -218,6 +218,409 @@
             
 
   
+    <article id="post-PythonCourse9" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/05/09/PythonCourse9/" target="_blank">PythonCourse9 文件与文件夹操作</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/05/09/PythonCourse9/" class="archive-article-date">
+        <time datetime="2022-05-09T02:46:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-09</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <span id="more"></span>
+<h2 id="os模块">os模块</h2>
+<ul>
+<li>chdir(path) 把path设为当前工作目录</li>
+<li>curdir 返回当前文件夹</li>
+<li>environ 包含系统环境变量和值的字典</li>
+<li>extsep 当前操作系统所使用的文件扩展名分隔符</li>
+<li>get_exec_path() 返回可执行文件的搜索路径</li>
+<li><strong>getcwd() 返回当前工作目录</strong></li>
+<li><strong>listdir(path) 返回path目录下的文件和目录列表</strong></li>
+<li><strong>remove(path) 删除指定的文件，要求用户拥有删除文件的权限，并且文件没有只读或其他特殊属性</strong></li>
+<li><strong>rename(src, dst) 重命名文件或目录，可以实现文件的移动，若目标文件已存在则抛出异常，不能跨越磁盘或分区</strong></li>
+<li>replace(old, new) 重命名文件或目录，若目标文件已存在则直接覆盖，不能跨越磁盘或分区</li>
+<li>scandir(path='.') 返回包含指定文件夹中所有DirEntry对象的迭代对象，遍历文件夹时比listdir()更加高效</li>
+<li>sep 当前操作系统所使用的路径分隔符</li>
+<li>startfile(filepath [, operation]) 使用关联的应用程序打开指定文件或启动指定应用程序</li>
+<li><strong>system() 启动外部程序</strong></li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> os</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> os.path</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.rename(<span class="string">&#x27;C:\\dfg.txt&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;D:\\test2.txt&#x27;</span>) <span class="comment">#rename()可以实现文件的改名和移动</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[fname <span class="keyword">for</span> fname <span class="keyword">in</span> os.listdir(<span class="string">&#x27;.&#x27;</span>)<span class="keyword">if</span> fname.endswith((<span class="string">&#x27;.pyc&#x27;</span>,<span class="string">&#x27;.py&#x27;</span>,<span class="string">&#x27;.pyw&#x27;</span>))] <span class="comment">#结果略</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.getcwd() <span class="comment">#返回当前工作目录&#x27;C:\\Python35&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.mkdir(os.getcwd()+<span class="string">&#x27;\\temp&#x27;</span>) <span class="comment">#创建目录</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.makedirs(os.getcwd()+<span class="string">&#x27;\\temp&#x27;</span>, exist_ok=<span class="literal">True</span>) </span><br><span class="line"><span class="comment">#可以递归创建</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.chdir(os.getcwd()+<span class="string">&#x27;\\temp&#x27;</span>) <span class="comment">#改变当前工作目录</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.getcwd()</span><br><span class="line"><span class="string">&#x27;C:\\Python35\\temp&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.mkdir(os.getcwd()+<span class="string">&#x27;\\test&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.listdir(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">[<span class="string">&#x27;test&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.rmdir(<span class="string">&#x27;test&#x27;</span>) <span class="comment">#删除目录</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.listdir(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">[]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.environ.get(<span class="string">&#x27;path&#x27;</span>) <span class="comment">#获取系统变量path的值</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> time</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>time.strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>, time.localtime(os.stat(<span class="string">&#x27;yilaizhuru2.py&#x27;</span>).st_ctime))<span class="comment">#查看文件创建时间</span></span><br><span class="line"><span class="string">&#x27;2016-10-18 15:58:57&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.startfile(<span class="string">&#x27;notepad.exe&#x27;</span>) <span class="comment">#启动记事本程序</span></span><br></pre></td></tr></table></figure>
+<h2 id="os.path模块">os.path模块</h2>
+<ul>
+<li><strong>abspath(path) 返回给定路径的绝对路径</strong></li>
+<li>basename(path) 返回指定路径的最后一个组成部分</li>
+<li>commonpath(paths) 返回给定的多个路径的最长公共路径</li>
+<li>commonprefix(paths) 返回给定的多个路径的最长公共前缀</li>
+<li><strong>dirname(p) 返回给定路径的文件夹部分</strong></li>
+<li><strong>exists(path) 判断文件是否存在</strong></li>
+<li>getatime(filename) 返回文件的最后访问时间</li>
+<li>getctime(filename) 返回文件的创建时间</li>
+<li>getmtime(filename) 返回文件的最后修改时间</li>
+<li><strong>getsize(filename) 返回文件的大小</strong></li>
+<li><strong>isabs(path) 判断path是否为绝对路径</strong></li>
+<li><strong>isdir(path) 判断path是否为文件夹</strong></li>
+<li><strong>isfile(path) 判断path是否为文件</strong></li>
+<li>**join(path, *paths) 连接两个或多个path**</li>
+<li><strong>realpath(path) 返回给定路径的绝对路径</strong></li>
+<li><strong>relpath(path) 返回给定路径的相对路径，不能跨越磁盘驱动器或分区</strong></li>
+<li>samefile(f1, f2) 测试f1和f2这两个路径是否引用的同一个文件</li>
+<li><strong>split(path) 以路径中的最后一个斜线为分隔符把路径分隔成两部分，以元组形式返回</strong></li>
+<li><strong>splitext(path) 从路径中分隔文件的扩展名</strong></li>
+<li>splitdrive(path) 从路径中分隔驱动器的名称 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>path=</span><br><span class="line"><span class="string">&#x27;D:\\mypython_exp\\new_test.txt&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.dirname(path) <span class="comment">#返回路径的文件夹名&#x27;D:\\mypython_exp&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.basename(path) <span class="comment">#返回路径的最后一个组成部分&#x27;new_test.txt&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.split(path) <span class="comment">#切分文件路径和文件名(&#x27;D:\\mypython_exp&#x27;,&#x27;new_test.txt&#x27;)</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.split(<span class="string">&#x27;&#x27;</span>) <span class="comment">#切分结果为空字符串</span></span><br><span class="line">(<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.split(<span class="string">&#x27;C:\\windows&#x27;</span>) <span class="comment">#以最后一个斜线为分隔符</span></span><br><span class="line">(<span class="string">&#x27;C:\\&#x27;</span>,<span class="string">&#x27;windows&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.split(<span class="string">&#x27;C:\\windows\\&#x27;</span>)</span><br><span class="line">(<span class="string">&#x27;C:\\windows&#x27;</span>,<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.splitdrive(path) <span class="comment">#切分驱动器符号</span></span><br><span class="line">(<span class="string">&#x27;D:&#x27;</span>,<span class="string">&#x27;\\mypython_exp\\new_test.txt&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.splitext(path) <span class="comment">#切分文件扩展名</span></span><br><span class="line">(<span class="string">&#x27;D:\\mypython_exp\\new_test&#x27;</span>,=<span class="string">&#x27;.txt&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="使用递归法遍历指定目录下所有子目录和文件">使用递归法遍历指定目录下所有子目录和文件。</h4>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> listdir</span><br><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> join, isfile, isdir</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">listDirDepthFirst</span>(<span class="params">directory</span>):</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;深度优先遍历文件夹&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="comment">#遍历文件夹，如果是文件就直接输出</span></span><br><span class="line"><span class="comment">#如果是文件夹，就输出显示，然后递归遍历该文件夹</span></span><br><span class="line"><span class="keyword">for</span> subPath <span class="keyword">in</span> listdir(directory):</span><br><span class="line">    path = join(directory, subPath)</span><br><span class="line">    <span class="keyword">if</span> isfile(path):</span><br><span class="line">        <span class="built_in">print</span>(path)</span><br><span class="line">    <span class="keyword">elif</span> isdir(path):</span><br><span class="line">        <span class="built_in">print</span>(path)</span><br><span class="line">        listDirDepthFirst(path)</span><br></pre></td></tr></table></figure>
+<h2 id="shutil模块">shutil模块</h2>
+<ul>
+<li><strong>copy(src, dst) 复制文件，新文件具有同样的文件属性，如果目标文件已存在则抛出异常</strong></li>
+<li>copy2(src, dst) 复制文件，新文件具有原文件完全一样的属性，包括创建时间、修改时间和最后访问时间等等，如果目标文件已存在则抛出异常</li>
+<li><strong>copyfile(src, dst) 复制文件，不复制文件属性，如果目标文件已存在则直接覆盖</strong></li>
+<li>copyfileobj(fsrc, fdst) 在两个文件对象之间复制数据，例如 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copyfileobj(<span class="built_in">open</span>(<span class="string">&#x27;123.txt&#x27;</span>),<span class="built_in">open</span>(<span class="string">&#x27;456.txt&#x27;</span>,<span class="string">&#x27;a&#x27;</span>))</span><br></pre></td></tr></table></figure></li>
+<li>copymode(src, dst) 把src的模式位（mode bit）复制到dst上，之后二者具有相同的模式</li>
+<li>copystat(src, dst) 把src的模式位、访问时间等所有状态都复制到dst上</li>
+<li><strong>copytree(src, dst) 递归复制文件夹</strong></li>
+<li>disk_usage(path) 查看磁盘使用情况</li>
+<li><strong>move(src, dst) 移动文件或递归移动文件夹，也可以给文件和文件夹重命名</strong></li>
+<li><strong>rmtree(path) 递归删除文件夹</strong></li>
+<li><strong>make_archive(base_name,format, root_dir=None,base_dir=None) 创建tar或zip格式的压缩文件</strong></li>
+<li><strong>unpack_archive(filename,extract_dir=None,format=None) 解压缩压缩文件</strong></li>
+</ul>
+<h3 id="使用例">使用例</h3>
+<p><strong>如何使用标准库shutil的copyfile()方法复制文件</strong> <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> shutil <span class="comment">#导入shutil模块</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>shutil.copyfile(<span class="string">&#x27;C:\\dir.txt&#x27;</span>,<span class="string">&#x27;C:\\dir1.txt&#x27;</span>) <span class="comment">#复制文件</span></span><br></pre></td></tr></table></figure> <strong>将C::.zip文件：将C::.zip文件：</strong></p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>shutil.make_archive(<span class="string">&#x27;D:\\a&#x27;</span>,<span class="string">&#x27;zip&#x27;</span>,<span class="string">&#x27;C:\\Python35&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;Dlls&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;D:\\a.zip&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>**将刚压缩得到的文件D:.zip解压缩至D:_unpack文件夹：<strong> <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>shutil.unpack_archive(<span class="string">&#x27;D:\\a.zip&#x27;</span>,<span class="string">&#x27;D:\\a_unpack&#x27;</span>)</span><br></pre></td></tr></table></figure> </strong>下面的代码使用shutil模块的方法删除刚刚解压缩得到的文件夹<strong> <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>shutil.rmtree(<span class="string">&#x27;D:\\a_unpack&#x27;</span>)</span><br></pre></td></tr></table></figure> </strong>码使用shutil的copytree()函数递归复制文件夹，并忽略扩展名为pyc的文件和以“新”字开头的文件和子文件夹：** <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> shutil <span class="keyword">import</span> copytree, ignore_patterns</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>copytree(<span class="string">&#x27;C:\\python35\\test&#x27;</span>,<span class="string">&#x27;D:\\des_test&#x27;</span>ignore=ignore_patterns(<span class="string">&#x27;*.pyc&#x27;</span>,<span class="string">&#x27;新*&#x27;</span>))</span><br></pre></td></tr></table></figure></p>
+<h2 id="实践">实践</h2>
+<h4 id="把指定文件夹中的所有文件名批量随机化保持文件类型不变">把指定文件夹中的所有文件名批量随机化，保持文件类型不变。</h4>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> string <span class="keyword">import</span> ascii_letters</span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> listdir, rename</span><br><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> splitext, join</span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> choice, randint</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">randomFilename</span>(<span class="params">directory</span>):</span></span><br><span class="line"><span class="keyword">for</span> fn <span class="keyword">in</span> listdir(directory):</span><br><span class="line">    <span class="comment">#切分，得到文件名和扩展名</span></span><br><span class="line">    name, ext = splitext(fn)</span><br><span class="line">    n = randint(<span class="number">5</span>, <span class="number">20</span>)</span><br><span class="line">    <span class="comment">#生成随机字符串作为新文件名</span></span><br><span class="line">    newName = <span class="string">&#x27;&#x27;</span>.join((choice(ascii_letters) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n)))</span><br><span class="line">    <span class="comment">#修改文件名</span></span><br><span class="line">    rename(join(directory, fn), join(directory, newName+ext))</span><br><span class="line">randomFilename(<span class="string">&#x27;C:\\test&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="编写程序统计指定文件夹大小以及文件和子文件夹数量">编写程序，统计指定文件夹大小以及文件和子文件夹数量。</h4>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">totalSize = <span class="number">0</span></span><br><span class="line">fileNum = <span class="number">0</span></span><br><span class="line">dirNum = <span class="number">0</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">visitDir</span>(<span class="params">path</span>):</span></span><br><span class="line"><span class="keyword">global</span> totalSize</span><br><span class="line">    <span class="keyword">global</span> fileNum</span><br><span class="line">    <span class="keyword">global</span> dirNum</span><br><span class="line">    <span class="keyword">for</span> lists <span class="keyword">in</span> os.listdir(path):</span><br><span class="line">        sub_path = os.path.join(path, lists)</span><br><span class="line">        <span class="keyword">if</span> os.path.isfile(sub_path):</span><br><span class="line">            fileNum = fileNum+<span class="number">1</span> <span class="comment">#统计文件数量</span></span><br><span class="line">            totalSize = totalSize+os.path.getsize(sub_path) <span class="comment">#统计文件总大小</span></span><br><span class="line">        <span class="keyword">elif</span> os.path.isdir(sub_path):</span><br><span class="line">            dirNum = dirNum+<span class="number">1</span> <span class="comment">#统计文件夹数量</span></span><br><span class="line">visitDir(sub_path) <span class="comment">#递归遍历子文件夹</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.isdir(path):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Error:&quot;&#x27;</span>, path,<span class="string">&#x27;&quot; is not a directory or does notexist.&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    visitDir(path)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sizeConvert</span>(<span class="params">size</span>):</span> <span class="comment">#单位换算</span></span><br><span class="line">    K, M, G = <span class="number">1024</span>, <span class="number">1024</span>**<span class="number">2</span>, <span class="number">1024</span>**<span class="number">3</span></span><br><span class="line">    <span class="keyword">if</span> size &gt;= G:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span>(size/G)+<span class="string">&#x27;G Bytes&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> size &gt;= M:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span>(size/M)+<span class="string">&#x27;M Bytes&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> size &gt;= K:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span>(size/K)+<span class="string">&#x27;K Bytes&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span>(size)+<span class="string">&#x27;Bytes&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">output</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;The total size of &#x27;</span>+path+<span class="string">&#x27; is:&#x27;</span>+sizeConvert(totalSize)+<span class="string">&#x27;(&#x27;</span>+<span class="built_in">str</span>(totalSize)+<span class="string">&#x27; Bytes)&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;The total number of files in &#x27;</span>+path+<span class="string">&#x27; is:&#x27;</span>,fileNum)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;The total number of directories in &#x27;</span>+path+<span class="string">&#x27; is:&#x27;</span>,dirNum)</span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    path = <span class="string">&#x27;C:\\text_dir&#x27;</span></span><br><span class="line">    main(path)</span><br><span class="line">    output(path)</span><br></pre></td></tr></table></figure>
+<h4 id="编写程序递归删除指定文件夹中指定类型的文件和大小为0的文件">编写程序，递归删除指定文件夹中指定类型的文件和大小为0的文件。</h4>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> isdir, join, splitext</span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> remove, listdir, chmod, stat</span><br><span class="line">filetypes = (<span class="string">&#x27;.tmp&#x27;</span>, <span class="string">&#x27;.log&#x27;</span>, <span class="string">&#x27;.obj&#x27;</span>, <span class="string">&#x27;.txt&#x27;</span>) <span class="comment">#指定要删除的文件类型</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delCertainFiles</span>(<span class="params">directory</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> isdir(directory):</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">for</span> filename <span class="keyword">in</span> listdir(directory):</span><br><span class="line">        temp = join(directory, filename)</span><br><span class="line">        <span class="keyword">if</span> isdir(temp):</span><br><span class="line">            delCertainFiles(temp) <span class="comment">#递归调用</span></span><br><span class="line">        <span class="keyword">elif</span> splitext(temp)[<span class="number">1</span>] <span class="keyword">in</span> filetypes <span class="keyword">or</span> stat(temp).st_size==<span class="number">0</span>:</span><br><span class="line">            chmod(temp, <span class="number">0o777</span>) <span class="comment">#修改文件属性，获取删除权限</span></span><br><span class="line">            remove(temp) <span class="comment">#删除文件</span></span><br><span class="line">            <span class="built_in">print</span>(temp, <span class="string">&#x27; deleted....&#x27;</span>)</span><br><span class="line">delCertainFiles(<span class="string">r&#x27;C:\test&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/05/09/PythonCourse9/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-PythonCourse8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/05/09/PythonCourse8/" target="_blank">PythonCourse8 文件内容操作</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/05/09/PythonCourse8/" class="archive-article-date">
+        <time datetime="2022-05-09T00:21:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-09</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <span id="more"></span>
+<h2 id="文件的分类">文件的分类</h2>
+<ul>
+<li>文本文件:储存的是<strong>常规字符串文件</strong>，通常以''作为每行的结尾。(<strong>常规字符串指的是其他编辑器可以直接编辑，且人类可以直接阅读的文本，如英文字母、汉字、数字字符串</strong>)</li>
+<li>二进制文件: <strong>二进制文件把对象内容以字节串(bytes)进行存储，无法用记事本或其他普通字处理软件直接进行编辑</strong>，通常也无法被人类直接阅读和理解，需要使用专门的软件进行解码后读取、显示、修改或执行。常见的如图形图像文件、音视频文件、可执行文件、资源文件、各种数据库文件、各类office文档等都属于二进制文件。</li>
+</ul>
+<h4 id="文件操作基本流程">文件操作基本流程</h4>
+<p>四个主要步骤: 打开。操作，保存，关闭。</p>
+<h2 id="内置函数open">内置函数open</h2>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">open</span>(file, mode=<span class="string">&#x27;r&#x27;</span>, buffering=-<span class="number">1</span>, encoding=<span class="literal">None</span>, errors=<span class="literal">None</span>,newline=<span class="literal">None</span>, closefd=<span class="literal">True</span>, opener=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>file参数指定了被打开的文件名称。</li>
+<li>mode参数指定了打开文件后的处理方式。</li>
+<li>buffering参数指定了读写文件的缓存模式。0表示不缓存，1表示缓存，如大于1则表示缓冲区的大小。默认值是缓存模式。</li>
+<li>encoding参数指定对文本进行编码和解码的方式，<strong>只适用于文本模式</strong>，可以使用Python支持的任何格式，如GBK、utf8、CP936等等。</li>
+</ul>
+<h3 id="文件打开模式">文件打开模式</h3>
+<ul>
+<li>r: 读模式（默认模式，可省略），如果文件不存在则抛出异常</li>
+<li>w: 写模式，如果文件已存在，先清空原有内容</li>
+<li>x: 写模式，创建新文件，如果文件已存在则抛出异常</li>
+<li>a: 追加模式，不覆盖文件中原有内容</li>
+<li>b: 二进制模式（可与其他模式组合使用）</li>
+<li>t: 文本模式（默认模式，可省略）</li>
+<li>+:读、写模式（可与其他模式组合使用）</li>
+<li>r+：可读可写，若文件不存在，报错；w+: 可读可写，若文件不存在，创建</li>
+</ul>
+<h3 id="open函数">open函数</h3>
+<p>如果执行正常，open()函数返回1个文件对象，通过该文件对象可以对文件进行读写操作。如果指定文件不存在、访问权限不够、磁盘空间不足或其他原因导致创建文件对象失败则抛出异常。</p>
+<p>当对文件内容操作完以后，<strong>一定要关闭文件对象</strong>，这样才能保证所做的任何修改都确实被保存到文件中。 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f1 = <span class="built_in">open</span>( <span class="string">&#x27;file1.txt&#x27;</span>,<span class="string">&#x27;r&#x27;</span> ) <span class="comment"># 以读模式打开文件</span></span><br><span class="line">f1.close()</span><br></pre></td></tr></table></figure></p>
+<h3 id="文件对象属性与常用方法">文件对象属性与常用方法</h3>
+<ul>
+<li>close() 把缓冲区的内容写入文件，同时关闭文件，并释放文件对象</li>
+<li>flush() 把缓冲区的内容写入文件，但不关闭文件</li>
+<li>read([size]) 从文本文件中读取size个字符（Python 3.x）的内容作为结果返回，或从二进制文件中读取指定数量的字节并返回，如果省略size则表示读取所有内容</li>
+<li>readline() 从文本文件中读取一行内容作为结果返回</li>
+<li>readlines() 把文本文件中的每行文本作为一个字符串存入列表中，返回该列表</li>
+<li>seek(offset[,whence])把文件指针移动到新的字节位置，offset表示相对于whence的位置。whence为0表示从文件头开始计算，1表示从当前位置开始计算，2表示从文件尾开始计算，默认为0</li>
+<li>tell() 返回文件指针的当前位置</li>
+<li>write(s) 把s的内容写入文件</li>
+<li>writelines(s) 把字符串列表写入文本文件，不添加换行符</li>
+</ul>
+<h2 id="上下文管理语句with">上下文管理语句with</h2>
+<p>在实际开发中，读写文件应优先考虑使用上下文管理语句with，关键字with可以自动管理资源，不论因为什么原因（哪怕是代码引发了异常）跳出with块，<strong>总能保证文件被正确关闭</strong>，并且可以在代码块执行完毕后自动还原进入该代码块时的上下文，常用于<strong>文件操作、数据库连接、网络连接、多线程与多进程同步时的锁对象管理</strong>等场合。 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(filename, mode, encoding) <span class="keyword">as</span> fp:</span><br></pre></td></tr></table></figure></p>
+<h2 id="操作示例">操作示例</h2>
+<h4 id="向文本文件中写入内容然后再读出">向文本文件中写入内容，然后再读出</h4>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s =<span class="string">&#x27;Hello world\n我永远喜欢鹿乃\nmikudaisuki\n&#x27;</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;sample.txt&#x27;</span>,<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> fp: <span class="comment">#默认使用cp936编码</span></span><br><span class="line">    fp.write(s)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;sample.txt&#x27;</span>) <span class="keyword">as</span> fp: <span class="comment">#默认使用cp936编码</span></span><br><span class="line">    <span class="built_in">print</span>(fp.read())</span><br></pre></td></tr></table></figure>
+<h4 id="遍历并输出文本文件的所有行内容">遍历并输出文本文件的所有行内容。</h4>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;sample.txt&#x27;</span>) <span class="keyword">as</span> fp: <span class="comment">#假设文件采用CP936编码</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> fp: <span class="comment">#文件对象可以直接迭代</span></span><br><span class="line">        <span class="built_in">print</span>(line)</span><br></pre></td></tr></table></figure>
+<h4 id="假设文件data.txt中有若干整数每行一个整数编写程序读取所有整数将其按降序排序后再写入文本文件data_asc.txt中">假设文件data.txt中有若干整数，每行一个整数，编写程序读取所有整数，将其按降序排序后再写入文本文件data_asc.txt中。</h4>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;data.txt&#x27;</span>,<span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    data = fp.readlines() <span class="comment">#读取所有行，存入列表</span></span><br><span class="line">data = [<span class="built_in">int</span>(item) <span class="keyword">for</span> item <span class="keyword">in</span> data] <span class="comment">#列表推导式，转换为数字</span></span><br><span class="line">data.sort(reverse=<span class="literal">True</span>) <span class="comment">#降序排序</span></span><br><span class="line">data = [<span class="built_in">str</span>(item)+<span class="string">&#x27;\n&#x27;</span> <span class="keyword">for</span> item <span class="keyword">in</span> data] <span class="comment">#将结果转换为字符串</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;data_desc.txt&#x27;</span>,<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> fp: <span class="comment">#将结果写入文件</span></span><br><span class="line">    fp.writelines(data)</span><br></pre></td></tr></table></figure>
+<h4 id="统计文本文件中最长行的长度和该行的内容">统计文本文件中最长行的长度和该行的内容。</h4>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;sample.txt&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    result = [<span class="number">0</span>,<span class="string">&#x27;&#x27;</span>]</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> fp:</span><br><span class="line">        t = <span class="built_in">len</span>(line)</span><br><span class="line">        <span class="keyword">if</span> t &gt; result[<span class="number">0</span>]:</span><br><span class="line">            result = [t, line]</span><br><span class="line"><span class="built_in">print</span>(result)</span><br></pre></td></tr></table></figure>
+<h2 id="二进制文件操作">二进制文件操作</h2>
+<p>对于二进制文件，不能使用记事本或其他文本编辑软件直接进行正常读写，也不能通过Python的文件对象直接读取和理解二进制文件的内容。必须<strong>正确理解二进制文件结构和序列化规则，然后设计正确的反序列化规则</strong>，才能准确地理解二进制文件内容。 所谓序列化，简单地说就是把内存中的数据在不丢失其类型信息的情况下转成二进制形式的过程，<strong>对象序列化后的数据经过正确的反序列化过程应该能够准确无误地恢复为原来的对象。</strong></p>
+<h3 id="pickle模块">pickle模块</h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 写入</span></span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line">data = (<span class="string">&quot;胡桃&quot;</span>, <span class="number">2333</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;sample_pickle.dat&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        pickle.dump(<span class="built_in">len</span>(data), f) <span class="comment">#要序列化的对象个数</span></span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> data:</span><br><span class="line">            pickle.dump(item, f) <span class="comment">#序列化数据并写入文件</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;写文件异常&#x27;</span>)</span><br><span class="line"><span class="comment"># 读取</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;sample_pickle.dat&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    n = pickle.load(f)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        x = pickle.load(f) <span class="comment">#读取并反序列化每个数据</span></span><br><span class="line">        <span class="built_in">print</span>(x) </span><br></pre></td></tr></table></figure>
+<h3 id="struct模块">struct模块</h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> struct</span><br><span class="line">sn = struct.pack(<span class="string">&#x27;if?&#x27;</span>, <span class="number">123</span>, <span class="number">114.514</span>, <span class="literal">True</span>) </span><br><span class="line">s = <span class="string">&quot;胡桃我真的好喜欢你啊！&quot;</span></span><br><span class="line"><span class="comment"># 序列化，i表示整数，f表示实数，?表示逻辑值</span></span><br><span class="line"><span class="comment"># i -&gt; i, f -&gt; 114.514 , ? -&gt; True</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;sample_struct.dat&#x27;</span>,<span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(sn)</span><br><span class="line">    f.write(s.encode()) <span class="comment">#字符串需要编码为字节串再写入文件</span></span><br></pre></td></tr></table></figure>
+<p>读取 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;sample_struct.dat&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    sn = f.read(<span class="number">9</span>)</span><br><span class="line">    n, x, b1 = struct.unpack(<span class="string">&#x27;if?&#x27;</span>, sn) <span class="comment">#使用指定格式反序列化</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;n=&#x27;</span>,n,<span class="string">&#x27;x=&#x27;</span>,x， <span class="string">&#x27;b1=&#x27;</span>, b1)</span><br><span class="line">    s = f.read(<span class="number">9</span>).decode()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;s=&#x27;</span>, s)</span><br></pre></td></tr></table></figure></p>
+<h3 id="shelve模块">shelve模块</h3>
+<p>写入 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> shelve</span><br><span class="line">zhangsan = &#123;<span class="string">&#x27;age&#x27;</span>:<span class="number">38</span>,<span class="string">&#x27;sex&#x27;</span>:<span class="string">&#x27;Male&#x27;</span>,<span class="string">&#x27;address&#x27;</span>:<span class="string">&#x27;SDIBT&#x27;</span>&#125;</span><br><span class="line">lisi = &#123;<span class="string">&#x27;age&#x27;</span>:<span class="number">40</span>,<span class="string">&#x27;sex&#x27;</span>:<span class="string">&#x27;Male&#x27;</span>,<span class="string">&#x27;qq&#x27;</span>:<span class="string">&#x27;1234567&#x27;</span>,<span class="string">&#x27;tel&#x27;</span>:<span class="string">&#x27;7654321&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">with</span> shelve.<span class="built_in">open</span>(<span class="string">&#x27;shelve_test.dat&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    fp[<span class="string">&#x27;zhangsan&#x27;</span>] = zhangsan <span class="comment"># 像操作字典一样把数据写入文件</span></span><br><span class="line">    fp[<span class="string">&#x27;lisi&#x27;</span>] = lisi</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        fp[<span class="built_in">str</span>(i)] = <span class="built_in">str</span>(i)</span><br></pre></td></tr></table></figure> 读取 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> shelve.<span class="built_in">open</span>(<span class="string">&#x27;shelve_test.dat&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    <span class="built_in">print</span>(fp[<span class="string">&#x27;zhangsan&#x27;</span>]) <span class="comment">#读取并显示文件内容</span></span><br><span class="line">    <span class="built_in">print</span>(fp[<span class="string">&#x27;zhangsan&#x27;</span>][<span class="string">&#x27;age&#x27;</span>])</span><br><span class="line">    <span class="built_in">print</span>(fp[<span class="string">&#x27;lisi&#x27;</span>][<span class="string">&#x27;qq&#x27;</span>])</span><br><span class="line">    <span class="built_in">print</span>(fp[<span class="string">&#x27;3&#x27;</span>])</span><br></pre></td></tr></table></figure> 结果 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#x27;sex&#x27;: &#x27;Male&#x27;,&#x27;address&#x27;: &#x27;SDIBT&#x27;,&#x27;age&#x27;: 38&#125;</span><br><span class="line">38</span><br><span class="line">1234567</span><br><span class="line">3</span><br></pre></td></tr></table></figure></p>
+<h3 id="marshal模块">marshal模块</h3>
+<p>写入 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> marshal <span class="comment">#导入模块</span></span><br><span class="line">x = [<span class="number">30</span>, <span class="number">5.0</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], (<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>), &#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">3</span>&#125;, &#123;<span class="number">8</span>, <span class="number">9</span>, <span class="number">7</span>&#125;]</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;test.dat&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> fp: <span class="comment">#创建二进制文件</span></span><br><span class="line">    marshal.dump(<span class="built_in">len</span>(x), fp) <span class="comment">#先写入对象个数</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> x:</span><br><span class="line">        marshal.dump(item,fp) <span class="comment">#把列表中的对象依次序列化并写入文件</span></span><br></pre></td></tr></table></figure> 读取 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;test.dat&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> fp: <span class="comment">#打开二进制文件</span></span><br><span class="line">    n = marshal.load(fp) <span class="comment">#获取对象个数</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="built_in">print</span>(marshal.load(fp)) <span class="comment">#反序列化，输出结果</span></span><br></pre></td></tr></table></figure> 结果 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">30</span><br><span class="line">5.0</span><br><span class="line">[1, 2, 3]</span><br><span class="line">(4, 5, 6)</span><br><span class="line">&#123;&#x27;a&#x27;: 1,</span><br><span class="line">&#x27;b&#x27;: 2,</span><br><span class="line">&#x27;c&#x27;: 3&#125;</span><br><span class="line">&#123;8, 9, 7&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="操作excel文件">操作Excel文件</h2>
+<h3 id="使用扩展库openpyxl读写excel-2007以及更高版本的文件">使用扩展库openpyxl读写Excel 2007以及更高版本的文件。</h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> openpyxl</span><br><span class="line"><span class="keyword">from</span> openpyxl <span class="keyword">import</span> Workbook</span><br><span class="line">fn = <span class="string">r&#x27;f:\test.xlsx&#x27;</span> <span class="comment">#文件名</span></span><br><span class="line">wb = Workbook() <span class="comment">#创建工作簿</span></span><br><span class="line">ws = wb.create_sheet(title=<span class="string">&#x27;你好，世界&#x27;</span>) <span class="comment">#创建工作表</span></span><br><span class="line">ws[<span class="string">&#x27;A1&#x27;</span>] = <span class="string">&#x27;这是第一个单元格&#x27;</span> <span class="comment">#单元格赋值</span></span><br><span class="line">ws[<span class="string">&#x27;B1&#x27;</span>] = <span class="number">3.1415926</span></span><br><span class="line">wb.save(fn) <span class="comment">#保存Excel文件</span></span><br><span class="line">wb = openpyxl.load_workbook(fn) <span class="comment">#打开已有的Excel文件</span></span><br><span class="line">ws = wb.worksheets[<span class="number">1</span>] <span class="comment">#打开指定索引的工作表</span></span><br><span class="line"><span class="built_in">print</span>(ws[<span class="string">&#x27;A1&#x27;</span>].value) <span class="comment">#读取并输出指定单元格的值ws.append([1,2,3,4,5]) #添加一行数据</span></span><br><span class="line">ws.merge_cells(<span class="string">&#x27;F2:F3&#x27;</span>) <span class="comment">#合并单元格</span></span><br><span class="line">ws[<span class="string">&#x27;F2&#x27;</span>] = <span class="string">&quot;=sum(A2:E2)&quot;</span> <span class="comment">#写入公式</span></span><br><span class="line"><span class="keyword">for</span> r <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>,<span class="number">15</span>):</span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>,<span class="number">8</span>):</span><br><span class="line">ws.cell(row=r, column=c, value=r*c) <span class="comment">#写入单元格数据</span></span><br><span class="line">wb.save(fn)</span><br></pre></td></tr></table></figure>
+<h3 id="把记事本文件test.txt转换成excel-2007文件假设test.txt文件中第一行为表头从第二行开始是实际数据并且表头和数据行中的不同字段信息都是用逗号分隔">把记事本文件test.txt转换成Excel 2007+文件。假设test.txt文件中第一行为表头，从第二行开始是实际数据，并且表头和数据行中的不同字段信息都是用逗号分隔。</h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> openpyxl <span class="keyword">import</span> Workbook</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>(<span class="params">txtFileName</span>):</span></span><br><span class="line">    new_XlsxFileName = txtFileName[:-<span class="number">3</span>] + <span class="string">&#x27;xlsx&#x27;</span></span><br><span class="line">    wb = Workbook()</span><br><span class="line">    ws = wb.worksheets[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(txtFileName) <span class="keyword">as</span> fp:</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> fp:</span><br><span class="line">            line = line.strip().split(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">            ws.append(line)</span><br><span class="line">    wb.save(new_XlsxFileName)</span><br><span class="line">main(<span class="string">&#x27;test.txt&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/05/09/PythonCourse8/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-CS-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/05/08/CS-1/" target="_blank">C# 值类型，引用类型</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/05/08/CS-1/" class="archive-article-date">
+        <time datetime="2022-05-08T11:29:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-08</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="值类型与引用类型">值类型与引用类型</h2>
+<ul>
+<li>值类型: 枚举， 结构体，13种基本数据类型</li>
+<li>引用类型: 自定义类 数组 string 接口等</li>
+</ul>
+<p>两者区别: * 值类型储存的是具体数据，引用类型变量是数据的引用 * 值类型变量储存在栈区，而引用类型变量在堆区(引用的变量本身是在栈区的)。 ### 创建时 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">teacher</span> &#123;</span></span><br><span class="line">    ;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Student s = <span class="keyword">new</span> <span class="built_in">Student</span>(); <span class="comment">//相当于创建了一个引用</span></span><br><span class="line">Student.<span class="built_in">print</span>(); <span class="comment">// 调用静态成员</span></span><br><span class="line">teacher t; <span class="comment">// 相当于创建了一个变量</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="数组创建">数组创建</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] arr1 = <span class="keyword">new</span> <span class="keyword">int</span> [<span class="number">233</span>];</span><br><span class="line"><span class="keyword">int</span>[,] arr2 = <span class="keyword">new</span> <span class="keyword">int</span> [<span class="number">233</span>, <span class="number">233</span>];<span class="comment">//二维数组</span></span><br></pre></td></tr></table></figure>
+<h3 id="string">string</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s1; <span class="comment">//特殊引用类型</span></span><br><span class="line">string s = <span class="string">&quot;胡桃,刻晴,甘雨&quot;</span>;</span><br><span class="line">string[] arr = s.<span class="built_in">Split</span>(<span class="string">&#x27;,&#x27;</span>); <span class="comment">// 分割</span></span><br></pre></td></tr></table></figure>
+<h3 id="控制台输入输出">控制台输入输出</h3>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Console.WriteLine(<span class="string">&quot;233&quot;</span>); <span class="comment">// 换行输出</span></span><br><span class="line">Console.Write(<span class="string">&quot;233&quot;</span>);  <span class="comment">//不换行输出</span></span><br><span class="line">Console.Write(<span class="string">&quot;&#123;1&#125;&#123;2&#125;&quot;</span>,<span class="number">233</span>, <span class="number">2333</span>); <span class="comment">//格式化输出</span></span><br></pre></td></tr></table></figure>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/05/08/CS-1/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-POJ2828" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -814,348 +1217,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2022/04/23/ICPC2022KunMingF/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ICPC2022KunMingK" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/04/23/ICPC2022KunMingK/" target="_blank">ICPC 2022 KunMing K</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/04/23/ICPC2022KunMingK/" class="archive-article-date">
-        <time datetime="2022-04-23T03:22:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-23</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="题目大意">题目大意</h2>
-<p>G准备玩<span class="math inline">\(n\)</span>场游戏，它心中有个胜率<span class="math inline">\(x = \frac{a}{b}\)</span>,如果当前赢的局数 / 总局书 小于等于<span class="math inline">\(x\)</span>,那么他就会赢，否则它就会输。 给定<span class="math inline">\(a,b,n\)</span>，求他能赢多少局。
-    
-    <a class="article-more-a" href="/2022/04/23/ICPC2022KunMingK/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/04/23/ICPC2022KunMingK/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-cf1665E" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/04/18/cf1665E/" target="_blank">cf1665E</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/04/18/cf1665E/" class="archive-article-date">
-        <time datetime="2022-04-18T03:37:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-18</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="题目大意">题目大意</h2>
-<p>给定<span class="math inline">\(n(1 \le n \le 10^5)\)</span>个数<span class="math inline">\(a_i(0 \le a_i \le 2^{30})\)</span>。有<span class="math inline">\(q(1 \le q \le 10^5)\)</span>次询问：求<span class="math inline">\(l,r\)</span>内任选两个数，它们与运算后的最小值是多少。
-    
-    <a class="article-more-a" href="/2022/04/18/cf1665E/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">位运算</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">主席树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/04/18/cf1665E/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-PythonCourse7" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/04/18/PythonCourse7/" target="_blank">Python 字符串，相关函数详解</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/04/18/PythonCourse7/" class="archive-article-date">
-        <time datetime="2022-04-18T00:26:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-18</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <span id="more"></span>
-<h2 id="字符串编码">字符串编码</h2>
-<ul>
-<li>GBK2312 是我国制定的中文编码，用<strong>两个字节表示中文</strong></li>
-<li>Unicode 把所有语言同一到一套编码里，不会出现乱码,<strong>两个字节表示一个字符，偏僻字用四个</strong></li>
-<li>UTF-8对全世界需要用到的字符进行了编码，是“可变长编码”，用一个字节表示字母，三个字节表示中文，还有一些是两字节或四字节。</li>
-</ul>
-<p>Python3.x版本默认使用UTF-8格式编码</p>
-<h2 id="转义字符">转义字符</h2>
-<p>在字符串前面加上'r',或者'R',表示后面的字符串不进行任何转义。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path = <span class="string">r&#x27;C:\windows\python.exe&#x27;</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="字符串的格式化">字符串的格式化</h2>
-<h3 id="进行格式化">% 进行格式化</h3>
-<h4 id="格式">格式</h4>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;%d %s&#x27;</span> % (a, b)) </span><br></pre></td></tr></table></figure>
-<h4 id="符号含义">符号含义</h4>
-<p>'-' 指定左对齐 '+' 正数前面加+号 '.n' 指定精度 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="string">&#x27;%.2f&#x27;</span> % <span class="number">0</span>。<span class="number">33333</span></span><br><span class="line"><span class="number">0.33</span></span><br></pre></td></tr></table></figure> ### 格式字符 和C++基本相同， * %d 十进制整数 * %e 以e为底的指数 * %o 八进制整数</p>
-<h3 id="format方法进行格式化">format()方法进行格式化</h3>
-<p>基本语法是通过'{}',':'替换之前的'%' <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="string">&#x27;&#123;:%&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="number">3.5</span>)</span><br><span class="line"><span class="string">&#x27;350.0000%&#x27;</span></span><br></pre></td></tr></table></figure></p>
-<p><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-format.html">各类格式字符含义</a></p>
-<h4 id="指定位置参数">指定位置参数</h4>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&#123;&#125;&#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;World&#x27;</span>) <span class="comment"># 按默认位置</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0&#125;&#123;1&#125;&#123;0&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;World&#x27;</span><span class="string">&#x27;) # 指定位置</span></span><br><span class="line"><span class="string">&#x27;</span>World Hello World’</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">&quot;my name is &#123;name&#125;, my age is &#123;age&#125;, and my QQ is</span></span><br><span class="line"><span class="string">&#123;qq&#125;&quot;</span>.<span class="built_in">format</span>(name = <span class="string">&quot;Dong Fuguo&quot;</span>,age = <span class="number">40</span>,qq = <span class="string">&quot;30646****&quot;</span>)) <span class="comment"># 变量命名</span></span><br><span class="line">my name <span class="keyword">is</span> Dong Fuguo, my age <span class="keyword">is</span> <span class="number">40</span>, <span class="keyword">and</span> my QQ <span class="keyword">is</span> <span class="number">30646</span>****</span><br></pre></td></tr></table></figure>
-<h4 id="字符串前加f">字符串前加f</h4>
-<p>与format方法基本类似 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>name = <span class="string">&#x27;Dong&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>age = <span class="number">39</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&#x27;My name is <span class="subst">&#123;name&#125;</span>, and I am <span class="subst">&#123;age&#125;</span> years old.&#x27;</span></span><br><span class="line"><span class="string">&#x27;My name is Dong, and I am 39 years old.&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>width = <span class="number">10</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>precision = <span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>value = <span class="number">11</span>/<span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&#x27;result:<span class="subst">&#123;value:&#123;width&#125;</span>.<span class="subst">&#123;precision&#125;</span>&#125;&#x27;</span><span class="comment"># 可以指定宽度和精度</span></span><br><span class="line"><span class="string">&#x27;result: 3.667&#x27;</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="常用函数">常用函数</h2>
-<h3 id="findrfindcount-indexrindex">find,rfind,count, index,rindex</h3>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">find(<span class="built_in">str</span>,beg=<span class="number">0</span>,end=<span class="built_in">len</span>(<span class="built_in">str</span>))</span><br><span class="line">rfind(<span class="built_in">str</span>,beg=<span class="number">0</span>,end=<span class="built_in">len</span>(<span class="built_in">str</span>)))</span><br><span class="line">index(<span class="built_in">str</span>,beg=<span class="number">0</span>,end=<span class="built_in">len</span>(<span class="built_in">str</span>)))</span><br><span class="line">rindex(<span class="built_in">str</span>,beg=<span class="number">0</span>,end=<span class="built_in">len</span>(<span class="built_in">str</span>)))</span><br><span class="line">count()</span><br></pre></td></tr></table></figure>
-<ul>
-<li>find()和rfind方法分别用来查找一个字符串在另一个字符串指定范围（默认是整个字符串）中首次和最后一次出现的位置，如果不存在则返回-1</li>
-<li>index()和rindex()方法用来返回一个字符串在另一个字符串指定范围中首次和最后一次出现的位置，如果不存在则<strong>抛出异常</strong></li>
-<li>count()方法用来返回一个字符串在当前字符串中出现的次数</li>
-</ul>
-<h3 id="splitrsplitpartitionrpartition">split()、rsplit()、partition()、rpartition()</h3>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">split(<span class="built_in">str</span>=<span class="string">&quot;&quot;</span>, num=string.count(<span class="built_in">str</span>))、rsplit(<span class="built_in">str</span>=<span class="string">&quot;&quot;</span>,num=string.count(<span class="built_in">str</span>))</span><br></pre></td></tr></table></figure>
-<ul>
-<li>split()和rsplit()方法分别用来以指定字符为分隔符，把当前字符串从左往右或从右往左分隔成多个字符串，并返回包含分隔结果的列表</li>
-<li>partition()和rpartition()用来以指定字符串为分隔符将原字符串<strong>分隔为3部分</strong>，即<strong>分隔符前的字符串、分隔符字符串、分隔符后的字符串</strong>，如果指定的分隔符不在原字符串中，则返回<strong>原字符串和两个空字符串</strong>。把字符串 string 分 成 一 个 3 元 素 的 元组(string_pre_str,str,string_post_str)</li>
-</ul>
-<h3 id="join">join</h3>
-<p>返回通过指定字符连接序列中元素后生成的新字符串。 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>li = [<span class="string">&quot;apple&quot;</span>,<span class="string">&quot;peach&quot;</span>,<span class="string">&quot;banana&quot;</span>,<span class="string">&quot;pear&quot;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;,&#x27;</span>.join(li)</span><br><span class="line"><span class="string">&#x27;apple,peach,banana,pear&#x27;</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="loweruppercapitalizetitleswapcase">lower()、upper()、capitalize()、title()、swapcase()</h3>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s =</span><br><span class="line"><span class="string">&quot;What is Your Name?&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.lower() <span class="comment">#返回小写字符串</span></span><br><span class="line"><span class="string">&#x27;what is your name?&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.upper() <span class="comment">#返回大写字符串</span></span><br><span class="line"><span class="string">&#x27;WHAT IS YOUR NAME?&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.capitalize() <span class="comment">#字符串首字符大写&#x27;What is your name?&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.title() <span class="comment">#每个单词的首字母大写&#x27;What Is Your Name?&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.swapcase() <span class="comment">#大小写互换</span></span><br><span class="line"><span class="string">&#x27;wHAT IS yOUR nAME?&#x27;</span></span><br></pre></td></tr></table></figure>
-<h3 id="replacemaketranstranslate">replace()、maketrans()、translate()</h3>
-<h4 id="replace">replace</h4>
-<p>查找替换replace(old, new[, max])，类似于Word中的“全部替换”功能 * old -- 将被替换的子字符串 * new -- 新字符串，用于替换old子字符串 * max -- 可选字符串, 替换不超过 max 次</p>
-<p>注意：返回的是一个新字符串 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s =<span class="string">&quot;中国，中国&quot;</span></span><br><span class="line">&gt;&gt;&gt; <span class="built_in">print</span>(s)</span><br><span class="line">中国，中国</span><br><span class="line">&gt;&gt;&gt; s2 = s.<span class="built_in">replace</span>(<span class="string">&quot;中国&quot;</span>,<span class="string">&quot;中华人民共和国&quot;</span>)</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">print</span>(s2)</span><br><span class="line">中华人民共和国，中华人民共和国</span><br></pre></td></tr></table></figure></p>
-<h4 id="maketranstranslate">maketrans()、translate()</h4>
-<p>字符串对象的maketrans()方法用来生成字符映射表，而translate()方法用来根据映射表中定义的对应关系转换字符串并替换其中的字符，使用这两个方法的组合可以同时处理多个字符。</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建映射表，将字符&quot;abcdef123&quot;一一对应地转换为&quot;uvwxyz@#$&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>table =</span><br><span class="line"><span class="string">&#x27;&#x27;</span>.maketrans(<span class="string">&#x27;abcdef123&#x27;</span>,<span class="string">&#x27;uvwxyz@#$&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s =<span class="string">&quot;Python is a greate programming language. I like it!&quot;</span></span><br><span class="line"><span class="comment">#按映射表进行替换</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.translate(table)</span><br><span class="line"><span class="string">&#x27;Python is u gryuty progrumming lunguugy. I liky it!&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>一些常用的全体字母，并实现凯撒加密 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">lower = string.ascii_lowercase <span class="comment">#小写字母</span></span><br><span class="line">upper = string.ascii_uppercase <span class="comment">#大写字母</span></span><br><span class="line">before = string.ascii_letters</span><br><span class="line">after = lower[k:] + lower[:k] + upper[k:] + upper[:k]</span><br><span class="line">table =<span class="string">&#x27;&#x27;</span>.maketrans(before, after) <span class="comment">#创建映射表 </span></span><br><span class="line"><span class="keyword">return</span> s.translate(table)</span><br></pre></td></tr></table></figure></p>
-<h3 id="striprstriplstrip">strip()、rstrip()、lstrip()</h3>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s =<span class="string">&quot; abc &quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.strip() <span class="comment">#删除空白字符</span></span><br><span class="line"><span class="string">&#x27;abc&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;\n\nhello world \n\n&#x27;</span>.strip() <span class="comment">#删除空白字符</span></span><br><span class="line"><span class="string">&#x27;hello world&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;aaaassddf&quot;</span>.strip(<span class="string">&quot;a&quot;</span>) <span class="comment">#删除指定字符</span></span><br><span class="line"><span class="string">&#x27;ssddf&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;aaaassddf&quot;</span>.strip(<span class="string">&quot;af&quot;</span>)</span><br><span class="line"><span class="string">&#x27;ssdd&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;aaaassddfaaa&quot;</span>.rstrip(<span class="string">&quot;a&quot;</span>) <span class="comment">#删除字符串右端指定字符</span></span><br><span class="line"><span class="string">&#x27;aaaassddf&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;aaaassddfaaa&quot;</span>.lstrip(<span class="string">&quot;a&quot;</span>) <span class="comment">#删除字符串左端指定字符</span></span><br><span class="line"><span class="string">&#x27;ssddfaaa&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>注意，这三个函数的参数指定的字符串并不作为一个整体对待，而是在原字符串的两侧、右侧、左侧删除参数字符串中包含的所有字符 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;aabbccddeeeffg&#x27;</span>.strip(<span class="string">&#x27;gbaefcd&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="startswithendswith">startswith()、endswith()</h3>
-<p>s.startswith(t, beg=0,end=len(string))、s.endswith(t,beg=0,end=len(string))，判断字符串是否以指定字符串开始或结束 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">&#x27;Beautiful is better than ugly.&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.startswith(<span class="string">&#x27;Be&#x27;</span>) <span class="comment">#检测整个字符串</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.startswith(<span class="string">&#x27;Be&#x27;</span>, <span class="number">5</span>) <span class="comment">#指定检测范围起始位置</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.startswith(<span class="string">&#x27;Be&#x27;</span>, <span class="number">0</span>, <span class="number">5</span>) <span class="comment">#指定检测范围起始和结束位置</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="isalnumisalphaisdigitisspaceisupperislower">isalnum()、isalpha()、isdigit()、isspace()、isupper()、islower()</h3>
-<p>isalnum()、isalpha()、isdigit()、isspace()、isupper()、islower()，用来测试字符串是否为数字或字母、是否为字母、是否为数字字符、是否为空白字符、是否为大写字母以及是否为小写字母。 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;1234abcd&#x27;</span>.isalnum()</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;1234abcd&#x27;</span>.isalpha() <span class="comment">#全部为英文字母时返回True</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;1234abcd&#x27;</span>.isdigit() <span class="comment">#全部为数字时返回True</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;abcd&#x27;</span>.isalpha()</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;1234.0&#x27;</span>.isdigit()</span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="centerljustrjust">center()、ljust()、rjust()</h3>
-<p>center()、ljust()、rjust()，返回指定宽度的新字符串，原字符串居中、左对齐或右对齐出现在新字符串中，如果指定宽度大于字符串长度，则使用指定的字符（默认为空格）进行填充。 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;Hello world!&#x27;</span>.center(<span class="number">20</span>) <span class="comment">#居中对齐，以空格进行填充</span></span><br><span class="line"><span class="string">&#x27; Hello world! &#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;Hello world!&#x27;</span>.center(<span class="number">20</span>,<span class="string">&#x27;=&#x27;</span>) <span class="comment">#居中对齐，以字符=进行填充</span></span><br><span class="line"><span class="string">&#x27;====Hello world!====&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;Hello world!&#x27;</span>.ljust(<span class="number">20</span>,<span class="string">&#x27;=&#x27;</span>) <span class="comment">#左对齐</span></span><br><span class="line"><span class="string">&#x27;Hello world!========&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;Hello world!&#x27;</span>.rjust(<span class="number">20</span>,<span class="string">&#x27;=&#x27;</span>) <span class="comment">#右对齐</span></span><br><span class="line"><span class="string">&#x27;========Hello world!&#x27;</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="字符串支持的运算符">字符串支持的运算符</h2>
-<h3 id="section">+</h3>
-<p>生成新的字符串 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;hello &#x27;</span> + <span class="string">&#x27;world&#x27;</span></span><br><span class="line"><span class="string">&#x27;hello world&#x27;</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="in">in</h3>
-<p>成员判断，关键字in <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;a&quot;</span> <span class="keyword">in</span> <span class="string">&quot;abcde&quot;</span> <span class="comment">#测试一个字符中是否存在于另一个字符串中</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;ab&#x27;</span> <span class="keyword">in</span> <span class="string">&#x27;abcde&#x27;</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;ac&#x27;</span> <span class="keyword">in</span> <span class="string">&#x27;abcde&#x27;</span> <span class="comment">#关键字in左边的字符串作为一个整体对待</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;j&quot;</span> <span class="keyword">in</span> <span class="string">&quot;abcde&quot;</span></span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="section-1">*</h3>
-<p>Python字符串支持与整数的乘法运算，表示序列重复，也就是字符串内容的重复，得到新字符串 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;abcd&#x27;</span> * <span class="number">3</span></span><br><span class="line"><span class="string">&#x27;abcdabcdabcd&#x27;</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="适用于字符串对象的内置函数">适用于字符串对象的内置函数</h2>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x =</span><br><span class="line"><span class="string">&#x27;Hello world.&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">len</span>(x) <span class="comment">#字符串长度</span></span><br><span class="line"><span class="number">12</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">max</span>(x) <span class="comment">#最大字符</span></span><br><span class="line"><span class="string">&#x27;w&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">min</span>(x)</span><br><span class="line"><span class="string">&#x27; &#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">list</span>(<span class="built_in">zip</span>(x,x)) <span class="comment">#zip()也可以作用于字符串</span></span><br><span class="line">[(<span class="string">&#x27;H&#x27;</span>,<span class="string">&#x27;H&#x27;</span>), (<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;e&#x27;</span>), (<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;l&#x27;</span>), (<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;l&#x27;</span>), (<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;o&#x27;</span>), (<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;&#x27;</span>,(<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27;w&#x27;</span>), (<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;o&#x27;</span>), (<span class="string">&#x27;r&#x27;</span>,<span class="string">&#x27;r&#x27;</span>), (<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;l&#x27;</span>), (<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;d&#x27;</span>), (<span class="string">&#x27;.&#x27;</span>,<span class="string">&#x27;.&#x27;</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">sorted</span>(x)</span><br><span class="line">[<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;.&#x27;</span>,<span class="string">&#x27;H&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,<span class="string">&#x27;w&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">list</span>(<span class="built_in">reversed</span>(x))</span><br><span class="line">[<span class="string">&#x27;.&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;H&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">list</span>(<span class="built_in">enumerate</span>(x))</span><br><span class="line">[(<span class="number">0</span>,<span class="string">&#x27;H&#x27;</span>), (<span class="number">1</span>,<span class="string">&#x27;e&#x27;</span>), (<span class="number">2</span>,<span class="string">&#x27;l&#x27;</span>), (<span class="number">3</span>,<span class="string">&#x27;l&#x27;</span>), (<span class="number">4</span>,<span class="string">&#x27;o&#x27;</span>), (<span class="number">5</span>,<span class="string">&#x27; &#x27;</span>), (<span class="number">6</span>,<span class="string">&#x27;w&#x27;</span>),(<span class="number">7</span>,<span class="string">&#x27;o&#x27;</span>), (<span class="number">8</span>,<span class="string">&#x27;r&#x27;</span>), (<span class="number">9</span>,<span class="string">&#x27;l&#x27;</span>), (<span class="number">10</span>,<span class="string">&#x27;d&#x27;</span>), (<span class="number">11</span>,<span class="string">&#x27;.&#x27;</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">list</span>(<span class="built_in">map</span>(add, x, x))</span><br><span class="line">[<span class="string">&#x27;HH&#x27;</span>,<span class="string">&#x27;ee&#x27;</span>,<span class="string">&#x27;ll&#x27;</span>,<span class="string">&#x27;ll&#x27;</span>,<span class="string">&#x27;oo&#x27;</span>,<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;ww&#x27;</span>,<span class="string">&#x27;oo&#x27;</span>,<span class="string">&#x27;rr&#x27;</span>,<span class="string">&#x27;ll&#x27;</span>,<span class="string">&#x27;dd&#x27;</span>,<span class="string">&#x27;..&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/04/18/PythonCourse7/">展开全文 >></a>
     </p>
     
 

@@ -6,22 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://miku39393939.github.io">
-  <title>水蓝络合物的博客</title>
+  <title>PythonCourse8 文件内容操作 | 水蓝络合物的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-    
-    <!-- <meta name="keywords" content="">
-    <meta name="description" content="是一个退役OIer，现役ACMer，苦逼带学牲，正在学习AI以及制作游戏"> -->
-  
-  <meta name="description" content="是一个退役OIer，现役ACMer，苦逼带学牲，正在学习AI以及制作游戏">
-<meta property="og:type" content="website">
-<meta property="og:title" content="水蓝络合物的博客">
-<meta property="og:url" content="https://miku39393939.github.io/page/7/index.html">
+  <meta name="description" content="文件的分类  文本文件:储存的是常规字符串文件，通常以&#39;&#39;作为每行的结尾。(常规字符串指的是其他编辑器可以直接编辑，且人类可以直接阅读的文本，如英文字母、汉字、数字字符串) 二进制文件: 二进制文件把对象内容以字节串(bytes)进行存储，无法用记事本或其他普通字处理软件直接进行编辑，通常也无法被人类直接阅读和理解，需要使用专门的软件进行解码后读取、显示、修改或执行。常见的如图形图像文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PythonCourse8 文件内容操作">
+<meta property="og:url" content="https://miku39393939.github.io/2022/05/09/PythonCourse8/index.html">
 <meta property="og:site_name" content="水蓝络合物的博客">
-<meta property="og:description" content="是一个退役OIer，现役ACMer，苦逼带学牲，正在学习AI以及制作游戏">
+<meta property="og:description" content="文件的分类  文本文件:储存的是常规字符串文件，通常以&#39;&#39;作为每行的结尾。(常规字符串指的是其他编辑器可以直接编辑，且人类可以直接阅读的文本，如英文字母、汉字、数字字符串) 二进制文件: 二进制文件把对象内容以字节串(bytes)进行存储，无法用记事本或其他普通字处理软件直接进行编辑，通常也无法被人类直接阅读和理解，需要使用专门的软件进行解码后读取、显示、修改或执行。常见的如图形图像文件">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-09T00:21:36.000Z">
+<meta property="article:modified_time" content="2022-05-09T03:04:05.829Z">
 <meta property="article:author" content="水蓝络合物">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="水蓝络合物的博客" type="application/atom+xml">
@@ -215,811 +215,153 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-
-  
-    <article id="post-OR" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-PythonCourse8" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/08/10/OR/" target="_blank">OR</a>
-  
+    <h1 class="article-title" itemprop="name">
+      PythonCourse8 文件内容操作
     </h1>
   
 
 
   
   
-<a href="/2021/08/10/OR/" class="archive-article-date">
-        <time datetime="2021-08-10T02:26:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-10</time>
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2022/05/09/PythonCourse8/" class="archive-article-date">
+        <time datetime="2022-05-09T00:21:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-09</time>
 </a>
 
   
   
     
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">2.5k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">10分</span>
+    </span>
+  </span>
+</div>
+
 
   
   </header>
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h3 id="题目大意">题目大意</h3>
-<p>给定两个非负数组<span class="math inline">\(b[2...n],c[2...n]\)</span>，构造出数组<span class="math inline">\(a[1...n]\)</span>满足：<span class="math inline">\(a[i-1]|a[i] = b[i],a[i-1]+a[i]=c[i]\)</span>。求出满足要求的数组<span class="math inline">\(a\)</span>的数量。<span class="math inline">\((1\le n \le 10^5, 1\le b[i],c[i] \le 10^9)\)</span>​</p>
-    
-    <a class="article-more-a" href="/2021/08/10/OR/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">位运算</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/08/10/OR/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Tree-Xor" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/08/07/Tree-Xor/" target="_blank">Tree-Xor</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/08/07/Tree-Xor/" class="archive-article-date">
-        <time datetime="2021-08-07T06:26:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h3><p>给定一棵有n个节点的树，每个节点的权值$a[i]$​​​​未知，满足$l[i]\le a[i]\le r[i]$​​​​，其中$l[i],r[i]$​​​​为给定数值。每条边的权值为已知，其值为它连接的两个边的权值的异或值。求出满足条件的$a[i](1\le i\le n)）$​​​​​的数量。($1\le n\le 10^5, 1\le l[i] \le r[i]\le 2^{30}$​​​)</p>
-    
-    <a class="article-more-a" href="/2021/08/07/Tree-Xor/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线段树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/08/07/Tree-Xor/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Average" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/08/05/Average/" target="_blank">Average</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/08/05/Average/" class="archive-article-date">
-        <time datetime="2021-08-05T02:00:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h3><p>题目等价为：给定两个分别由n和m个数的序列a，b。分别找出长度不少于x和y的连续序列，使它们的平均值之和最大。</p>
-    
-    <a class="article-more-a" href="/2021/08/05/Average/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">二分答案</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/08/05/Average/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Inverse-Pair" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/08/04/Inverse-Pair/" target="_blank">Inverse Pair</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/08/04/Inverse-Pair/" class="archive-article-date">
-        <time datetime="2021-08-04T12:33:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-04</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h3><p>给定一个1~n的排列，你可以给其中任意个数加上1，使得到的新序列的逆序对个数尽量少。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>由于是一个排列，即<strong>每个数仅会出现一次</strong>。</p>
-<p>我们考虑什么情况下把一个数X加上1之后，会让逆序对减少，那么肯定是这个数的左面存在比它大一的数，此时，把X加一之后，逆序对的数量就会减少1，因为<strong>比它大1的数只有一个，在X加上1之后，就与X相等了，比它大2及以上的数，还是比X大，而比X小的数，还是比X小</strong>。</p>
-    
-    <a class="article-more-a" href="/2021/08/04/Inverse-Pair/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">树状数组</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">归并排序</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">逆序对</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/08/04/Inverse-Pair/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Journey-among-Railway-Stations" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/08/03/Journey-among-Railway-Stations/" target="_blank">Journey among Railway Stations</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/08/03/Journey-among-Railway-Stations/" class="archive-article-date">
-        <time datetime="2021-08-03T02:57:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-03</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h3><p>n个点在一条直线上，每个点到下一个点需要$t_i$时间，每个点允许通过的时间段是$[u_i,v_i]$。</p>
-<p>接下来有m个操作，分为以下三类：</p>
+    <span id="more"></span>
+<h2 id="文件的分类">文件的分类</h2>
 <ul>
-<li>问从x点是否能到达y点。</li>
-<li>将第i个点到下一个点的时间更改为$t_i`$</li>
-<li>将第i个点的允许通过时间改为$[u_i<code>,v_i</code>]$​</li>
+<li>文本文件:储存的是<strong>常规字符串文件</strong>，通常以''作为每行的结尾。(<strong>常规字符串指的是其他编辑器可以直接编辑，且人类可以直接阅读的文本，如英文字母、汉字、数字字符串</strong>)</li>
+<li>二进制文件: <strong>二进制文件把对象内容以字节串(bytes)进行存储，无法用记事本或其他普通字处理软件直接进行编辑</strong>，通常也无法被人类直接阅读和理解，需要使用专门的软件进行解码后读取、显示、修改或执行。常见的如图形图像文件、音视频文件、可执行文件、资源文件、各种数据库文件、各类office文档等都属于二进制文件。</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11166/J">题目链接</a></p>
-    
-    <a class="article-more-a" href="/2021/08/03/Journey-among-Railway-Stations/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线段树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/08/03/Journey-among-Railway-Stations/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Increasing-Subsequence" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/07/30/Increasing-Subsequence/" target="_blank">Increasing Subsequence</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/07/30/Increasing-Subsequence/" class="archive-article-date">
-        <time datetime="2021-07-30T03:15:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-30</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p>给定一个n个数的排列a（从1到n，每个数都会出现且仅有一次），Alice和Bob轮流选一个数，Alice先选。</p>
-<p>每次选数需要满足以下要求：</p>
+<h4 id="文件操作基本流程">文件操作基本流程</h4>
+<p>四个主要步骤: 打开。操作，保存，关闭。</p>
+<h2 id="内置函数open">内置函数open</h2>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">open</span>(file, mode=<span class="string">&#x27;r&#x27;</span>, buffering=-<span class="number">1</span>, encoding=<span class="literal">None</span>, errors=<span class="literal">None</span>,newline=<span class="literal">None</span>, closefd=<span class="literal">True</span>, opener=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>当前选的数必须在<strong>当前选数的人</strong>上次选的数的右面。</p>
-</li>
-<li><p>当前选的数的大小，必须比 <strong>所有人选出来的数</strong> 要大。</p>
-</li>
+<li>file参数指定了被打开的文件名称。</li>
+<li>mode参数指定了打开文件后的处理方式。</li>
+<li>buffering参数指定了读写文件的缓存模式。0表示不缓存，1表示缓存，如大于1则表示缓冲区的大小。默认值是缓存模式。</li>
+<li>encoding参数指定对文本进行编码和解码的方式，<strong>只适用于文本模式</strong>，可以使用Python支持的任何格式，如GBK、utf8、CP936等等。</li>
 </ul>
-<p>如果有多个数同时满足要求，那么每个数被选的概率是均等的。</p>
-<p>求 两人进行选数的期望次数，如果结果是A/B，那么就写成 $A \times B^{998244351} % 998244353$​​。的形式。</p>
-<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11166/I">原题来自牛客竞赛</a></p>
-    
-    <a class="article-more-a" href="/2021/07/30/Increasing-Subsequence/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">期望DP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/07/30/Increasing-Subsequence/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Game-of-Swapping-Numbers" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/07/28/Game-of-Swapping-Numbers/" target="_blank">Game of Swapping Numbers</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/07/28/Game-of-Swapping-Numbers/" class="archive-article-date">
-        <time datetime="2021-07-28T12:23:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-28</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h3><p>给出有n个数的数组a，b，以及自然数k，你必须恰好交换a中任意两个数k次，且在此基础上，使$\sum |a_i - b_i|$​​最大。</p>
-    
-    <a class="article-more-a" href="/2021/07/28/Game-of-Swapping-Numbers/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/07/28/Game-of-Swapping-Numbers/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-HashFunction" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/07/28/HashFunction/" target="_blank">Hash Function</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/07/28/HashFunction/" class="archive-article-date">
-        <time datetime="2021-07-28T06:20:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-28</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="hash-function">Hash Function</h2>
-<h3 id="题目大意">题目大意</h3>
-<p>给出n个不同的自然数<span class="math inline">\(a_1,a_2,...a_n\)</span>，求出最小的自然数m，使 <span class="math display">\[
-a_1\mod{m},\quad a_2\mod{m},...,\quad a_n\mod{m},  
-\]</span> 依然互不相等。 ( $n  $ )</p>
-<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11166/H">原题链接</a>
-    
-    <a class="article-more-a" href="/2021/07/28/HashFunction/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">卷积</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数论</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">快速傅里叶变换</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/07/28/HashFunction/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-BilibiliBarage" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/05/31/BilibiliBarage/" target="_blank">爬取b站弹幕并做统计</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/05/31/BilibiliBarage/" class="archive-article-date">
-        <time datetime="2021-05-30T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-31</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="弹幕获取原理"><a href="#弹幕获取原理" class="headerlink" title="弹幕获取原理"></a>弹幕获取原理</h3><ul>
-<li>b站弹幕是储存在特定的页面上，根据视频的‘cid’可以获取页面位置，所以需要先获取视频的‘cid’，再打开弹幕页面，进而处理。其弹幕储存的页面url格式为: <a target="_blank" rel="noopener" href="http://comment.bilibili.com/">http://comment.bilibili.com/</a> <strong>cid</strong> .xml  （网站一）</li>
-<li>那么如何根据BV号来确定cid呢？b站视频的很多数据都储存在某个特定网站，其中BV号就储存在其中其页面url为 <a target="_blank" rel="noopener" href="https://api.bilibili.com/x/player/pagelist?bvid=(%E6%AD%A4%E5%A4%84%E4%B8%BABV%E5%8F%B7)&amp;jsonp=jsonp">https://api.bilibili.com/x/player/pagelist?bvid=(此处为BV号)&amp;jsonp=jsonp</a> （网站二）</li>
-<li>那么具体操作就很简单了,先打开网站二。从中获得cid，然后根据cid获得弹幕储存页面，之后爬取就可以了</li>
+<h3 id="文件打开模式">文件打开模式</h3>
+<ul>
+<li>r: 读模式（默认模式，可省略），如果文件不存在则抛出异常</li>
+<li>w: 写模式，如果文件已存在，先清空原有内容</li>
+<li>x: 写模式，创建新文件，如果文件已存在则抛出异常</li>
+<li>a: 追加模式，不覆盖文件中原有内容</li>
+<li>b: 二进制模式（可与其他模式组合使用）</li>
+<li>t: 文本模式（默认模式，可省略）</li>
+<li>+:读、写模式（可与其他模式组合使用）</li>
+<li>r+：可读可写，若文件不存在，报错；w+: 可读可写，若文件不存在，创建</li>
 </ul>
-    
-    <a class="article-more-a" href="/2021/05/31/BilibiliBarage/#more">more >></a>
-    
-    
+<h3 id="open函数">open函数</h3>
+<p>如果执行正常，open()函数返回1个文件对象，通过该文件对象可以对文件进行读写操作。如果指定文件不存在、访问权限不够、磁盘空间不足或其他原因导致创建文件对象失败则抛出异常。</p>
+<p>当对文件内容操作完以后，<strong>一定要关闭文件对象</strong>，这样才能保证所做的任何修改都确实被保存到文件中。 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f1 = <span class="built_in">open</span>( <span class="string">&#x27;file1.txt&#x27;</span>,<span class="string">&#x27;r&#x27;</span> ) <span class="comment"># 以读模式打开文件</span></span><br><span class="line">f1.close()</span><br></pre></td></tr></table></figure></p>
+<h3 id="文件对象属性与常用方法">文件对象属性与常用方法</h3>
+<ul>
+<li>close() 把缓冲区的内容写入文件，同时关闭文件，并释放文件对象</li>
+<li>flush() 把缓冲区的内容写入文件，但不关闭文件</li>
+<li>read([size]) 从文本文件中读取size个字符（Python 3.x）的内容作为结果返回，或从二进制文件中读取指定数量的字节并返回，如果省略size则表示读取所有内容</li>
+<li>readline() 从文本文件中读取一行内容作为结果返回</li>
+<li>readlines() 把文本文件中的每行文本作为一个字符串存入列表中，返回该列表</li>
+<li>seek(offset[,whence])把文件指针移动到新的字节位置，offset表示相对于whence的位置。whence为0表示从文件头开始计算，1表示从当前位置开始计算，2表示从文件尾开始计算，默认为0</li>
+<li>tell() 返回文件指针的当前位置</li>
+<li>write(s) 把s的内容写入文件</li>
+<li>writelines(s) 把字符串列表写入文本文件，不添加换行符</li>
+</ul>
+<h2 id="上下文管理语句with">上下文管理语句with</h2>
+<p>在实际开发中，读写文件应优先考虑使用上下文管理语句with，关键字with可以自动管理资源，不论因为什么原因（哪怕是代码引发了异常）跳出with块，<strong>总能保证文件被正确关闭</strong>，并且可以在代码块执行完毕后自动还原进入该代码块时的上下文，常用于<strong>文件操作、数据库连接、网络连接、多线程与多进程同步时的锁对象管理</strong>等场合。 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(filename, mode, encoding) <span class="keyword">as</span> fp:</span><br></pre></td></tr></table></figure></p>
+<h2 id="操作示例">操作示例</h2>
+<h4 id="向文本文件中写入内容然后再读出">向文本文件中写入内容，然后再读出</h4>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s =<span class="string">&#x27;Hello world\n我永远喜欢鹿乃\nmikudaisuki\n&#x27;</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;sample.txt&#x27;</span>,<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> fp: <span class="comment">#默认使用cp936编码</span></span><br><span class="line">    fp.write(s)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;sample.txt&#x27;</span>) <span class="keyword">as</span> fp: <span class="comment">#默认使用cp936编码</span></span><br><span class="line">    <span class="built_in">print</span>(fp.read())</span><br></pre></td></tr></table></figure>
+<h4 id="遍历并输出文本文件的所有行内容">遍历并输出文本文件的所有行内容。</h4>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;sample.txt&#x27;</span>) <span class="keyword">as</span> fp: <span class="comment">#假设文件采用CP936编码</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> fp: <span class="comment">#文件对象可以直接迭代</span></span><br><span class="line">        <span class="built_in">print</span>(line)</span><br></pre></td></tr></table></figure>
+<h4 id="假设文件data.txt中有若干整数每行一个整数编写程序读取所有整数将其按降序排序后再写入文本文件data_asc.txt中">假设文件data.txt中有若干整数，每行一个整数，编写程序读取所有整数，将其按降序排序后再写入文本文件data_asc.txt中。</h4>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;data.txt&#x27;</span>,<span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    data = fp.readlines() <span class="comment">#读取所有行，存入列表</span></span><br><span class="line">data = [<span class="built_in">int</span>(item) <span class="keyword">for</span> item <span class="keyword">in</span> data] <span class="comment">#列表推导式，转换为数字</span></span><br><span class="line">data.sort(reverse=<span class="literal">True</span>) <span class="comment">#降序排序</span></span><br><span class="line">data = [<span class="built_in">str</span>(item)+<span class="string">&#x27;\n&#x27;</span> <span class="keyword">for</span> item <span class="keyword">in</span> data] <span class="comment">#将结果转换为字符串</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;data_desc.txt&#x27;</span>,<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> fp: <span class="comment">#将结果写入文件</span></span><br><span class="line">    fp.writelines(data)</span><br></pre></td></tr></table></figure>
+<h4 id="统计文本文件中最长行的长度和该行的内容">统计文本文件中最长行的长度和该行的内容。</h4>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;sample.txt&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    result = [<span class="number">0</span>,<span class="string">&#x27;&#x27;</span>]</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> fp:</span><br><span class="line">        t = <span class="built_in">len</span>(line)</span><br><span class="line">        <span class="keyword">if</span> t &gt; result[<span class="number">0</span>]:</span><br><span class="line">            result = [t, line]</span><br><span class="line"><span class="built_in">print</span>(result)</span><br></pre></td></tr></table></figure>
+<h2 id="二进制文件操作">二进制文件操作</h2>
+<p>对于二进制文件，不能使用记事本或其他文本编辑软件直接进行正常读写，也不能通过Python的文件对象直接读取和理解二进制文件的内容。必须<strong>正确理解二进制文件结构和序列化规则，然后设计正确的反序列化规则</strong>，才能准确地理解二进制文件内容。 所谓序列化，简单地说就是把内存中的数据在不丢失其类型信息的情况下转成二进制形式的过程，<strong>对象序列化后的数据经过正确的反序列化过程应该能够准确无误地恢复为原来的对象。</strong></p>
+<h3 id="pickle模块">pickle模块</h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 写入</span></span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line">data = (<span class="string">&quot;胡桃&quot;</span>, <span class="number">2333</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;sample_pickle.dat&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        pickle.dump(<span class="built_in">len</span>(data), f) <span class="comment">#要序列化的对象个数</span></span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> data:</span><br><span class="line">            pickle.dump(item, f) <span class="comment">#序列化数据并写入文件</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;写文件异常&#x27;</span>)</span><br><span class="line"><span class="comment"># 读取</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;sample_pickle.dat&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    n = pickle.load(f)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        x = pickle.load(f) <span class="comment">#读取并反序列化每个数据</span></span><br><span class="line">        <span class="built_in">print</span>(x) </span><br></pre></td></tr></table></figure>
+<h3 id="struct模块">struct模块</h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> struct</span><br><span class="line">sn = struct.pack(<span class="string">&#x27;if?&#x27;</span>, <span class="number">123</span>, <span class="number">114.514</span>, <span class="literal">True</span>) </span><br><span class="line">s = <span class="string">&quot;胡桃我真的好喜欢你啊！&quot;</span></span><br><span class="line"><span class="comment"># 序列化，i表示整数，f表示实数，?表示逻辑值</span></span><br><span class="line"><span class="comment"># i -&gt; i, f -&gt; 114.514 , ? -&gt; True</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;sample_struct.dat&#x27;</span>,<span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(sn)</span><br><span class="line">    f.write(s.encode()) <span class="comment">#字符串需要编码为字节串再写入文件</span></span><br></pre></td></tr></table></figure>
+<p>读取 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;sample_struct.dat&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    sn = f.read(<span class="number">9</span>)</span><br><span class="line">    n, x, b1 = struct.unpack(<span class="string">&#x27;if?&#x27;</span>, sn) <span class="comment">#使用指定格式反序列化</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;n=&#x27;</span>,n,<span class="string">&#x27;x=&#x27;</span>,x， <span class="string">&#x27;b1=&#x27;</span>, b1)</span><br><span class="line">    s = f.read(<span class="number">9</span>).decode()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;s=&#x27;</span>, s)</span><br></pre></td></tr></table></figure></p>
+<h3 id="shelve模块">shelve模块</h3>
+<p>写入 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> shelve</span><br><span class="line">zhangsan = &#123;<span class="string">&#x27;age&#x27;</span>:<span class="number">38</span>,<span class="string">&#x27;sex&#x27;</span>:<span class="string">&#x27;Male&#x27;</span>,<span class="string">&#x27;address&#x27;</span>:<span class="string">&#x27;SDIBT&#x27;</span>&#125;</span><br><span class="line">lisi = &#123;<span class="string">&#x27;age&#x27;</span>:<span class="number">40</span>,<span class="string">&#x27;sex&#x27;</span>:<span class="string">&#x27;Male&#x27;</span>,<span class="string">&#x27;qq&#x27;</span>:<span class="string">&#x27;1234567&#x27;</span>,<span class="string">&#x27;tel&#x27;</span>:<span class="string">&#x27;7654321&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">with</span> shelve.<span class="built_in">open</span>(<span class="string">&#x27;shelve_test.dat&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    fp[<span class="string">&#x27;zhangsan&#x27;</span>] = zhangsan <span class="comment"># 像操作字典一样把数据写入文件</span></span><br><span class="line">    fp[<span class="string">&#x27;lisi&#x27;</span>] = lisi</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        fp[<span class="built_in">str</span>(i)] = <span class="built_in">str</span>(i)</span><br></pre></td></tr></table></figure> 读取 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> shelve.<span class="built_in">open</span>(<span class="string">&#x27;shelve_test.dat&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    <span class="built_in">print</span>(fp[<span class="string">&#x27;zhangsan&#x27;</span>]) <span class="comment">#读取并显示文件内容</span></span><br><span class="line">    <span class="built_in">print</span>(fp[<span class="string">&#x27;zhangsan&#x27;</span>][<span class="string">&#x27;age&#x27;</span>])</span><br><span class="line">    <span class="built_in">print</span>(fp[<span class="string">&#x27;lisi&#x27;</span>][<span class="string">&#x27;qq&#x27;</span>])</span><br><span class="line">    <span class="built_in">print</span>(fp[<span class="string">&#x27;3&#x27;</span>])</span><br></pre></td></tr></table></figure> 结果 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#x27;sex&#x27;: &#x27;Male&#x27;,&#x27;address&#x27;: &#x27;SDIBT&#x27;,&#x27;age&#x27;: 38&#125;</span><br><span class="line">38</span><br><span class="line">1234567</span><br><span class="line">3</span><br></pre></td></tr></table></figure></p>
+<h3 id="marshal模块">marshal模块</h3>
+<p>写入 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> marshal <span class="comment">#导入模块</span></span><br><span class="line">x = [<span class="number">30</span>, <span class="number">5.0</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], (<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>), &#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">3</span>&#125;, &#123;<span class="number">8</span>, <span class="number">9</span>, <span class="number">7</span>&#125;]</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;test.dat&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> fp: <span class="comment">#创建二进制文件</span></span><br><span class="line">    marshal.dump(<span class="built_in">len</span>(x), fp) <span class="comment">#先写入对象个数</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> x:</span><br><span class="line">        marshal.dump(item,fp) <span class="comment">#把列表中的对象依次序列化并写入文件</span></span><br></pre></td></tr></table></figure> 读取 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;test.dat&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> fp: <span class="comment">#打开二进制文件</span></span><br><span class="line">    n = marshal.load(fp) <span class="comment">#获取对象个数</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="built_in">print</span>(marshal.load(fp)) <span class="comment">#反序列化，输出结果</span></span><br></pre></td></tr></table></figure> 结果 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">30</span><br><span class="line">5.0</span><br><span class="line">[1, 2, 3]</span><br><span class="line">(4, 5, 6)</span><br><span class="line">&#123;&#x27;a&#x27;: 1,</span><br><span class="line">&#x27;b&#x27;: 2,</span><br><span class="line">&#x27;c&#x27;: 3&#125;</span><br><span class="line">&#123;8, 9, 7&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="操作excel文件">操作Excel文件</h2>
+<h3 id="使用扩展库openpyxl读写excel-2007以及更高版本的文件">使用扩展库openpyxl读写Excel 2007以及更高版本的文件。</h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> openpyxl</span><br><span class="line"><span class="keyword">from</span> openpyxl <span class="keyword">import</span> Workbook</span><br><span class="line">fn = <span class="string">r&#x27;f:\test.xlsx&#x27;</span> <span class="comment">#文件名</span></span><br><span class="line">wb = Workbook() <span class="comment">#创建工作簿</span></span><br><span class="line">ws = wb.create_sheet(title=<span class="string">&#x27;你好，世界&#x27;</span>) <span class="comment">#创建工作表</span></span><br><span class="line">ws[<span class="string">&#x27;A1&#x27;</span>] = <span class="string">&#x27;这是第一个单元格&#x27;</span> <span class="comment">#单元格赋值</span></span><br><span class="line">ws[<span class="string">&#x27;B1&#x27;</span>] = <span class="number">3.1415926</span></span><br><span class="line">wb.save(fn) <span class="comment">#保存Excel文件</span></span><br><span class="line">wb = openpyxl.load_workbook(fn) <span class="comment">#打开已有的Excel文件</span></span><br><span class="line">ws = wb.worksheets[<span class="number">1</span>] <span class="comment">#打开指定索引的工作表</span></span><br><span class="line"><span class="built_in">print</span>(ws[<span class="string">&#x27;A1&#x27;</span>].value) <span class="comment">#读取并输出指定单元格的值ws.append([1,2,3,4,5]) #添加一行数据</span></span><br><span class="line">ws.merge_cells(<span class="string">&#x27;F2:F3&#x27;</span>) <span class="comment">#合并单元格</span></span><br><span class="line">ws[<span class="string">&#x27;F2&#x27;</span>] = <span class="string">&quot;=sum(A2:E2)&quot;</span> <span class="comment">#写入公式</span></span><br><span class="line"><span class="keyword">for</span> r <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>,<span class="number">15</span>):</span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>,<span class="number">8</span>):</span><br><span class="line">ws.cell(row=r, column=c, value=r*c) <span class="comment">#写入单元格数据</span></span><br><span class="line">wb.save(fn)</span><br></pre></td></tr></table></figure>
+<h3 id="把记事本文件test.txt转换成excel-2007文件假设test.txt文件中第一行为表头从第二行开始是实际数据并且表头和数据行中的不同字段信息都是用逗号分隔">把记事本文件test.txt转换成Excel 2007+文件。假设test.txt文件中第一行为表头，从第二行开始是实际数据，并且表头和数据行中的不同字段信息都是用逗号分隔。</h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> openpyxl <span class="keyword">import</span> Workbook</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>(<span class="params">txtFileName</span>):</span></span><br><span class="line">    new_XlsxFileName = txtFileName[:-<span class="number">3</span>] + <span class="string">&#x27;xlsx&#x27;</span></span><br><span class="line">    wb = Workbook()</span><br><span class="line">    ws = wb.worksheets[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(txtFileName) <span class="keyword">as</span> fp:</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> fp:</span><br><span class="line">            line = line.strip().split(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">            ws.append(line)</span><br><span class="line">    wb.save(new_XlsxFileName)</span><br><span class="line">main(<span class="string">&#x27;test.txt&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
     
 
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          水蓝络合物
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https://miku39393939.github.io/2022/05/09/PythonCourse8/" title="PythonCourse8 文件内容操作" target="_blank">https://miku39393939.github.io/2022/05/09/PythonCourse8/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
     
 
   </div>
@@ -1035,113 +377,8 @@ a_1\mod{m},\quad a_2\mod{m},...,\quad a_n\mod{m},
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">BeautiSoup</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Python字符处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/05/31/BilibiliBarage/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-d3-scaleLinear" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/05/25/d3-scaleLinear/" target="_blank">d3比例尺scaleLinear和坐标轴的使用</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/05/25/d3-scaleLinear/" class="archive-article-date">
-        <time datetime="2021-05-25T10:59:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-25</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>假如我们在制作柱状图时，不能确定数据的变化范围，或者数据变化过大，就可以使用比例尺。</p>
-<p>比例尺，顾名思义，就是把一组数据映射到一个集合中。</p>
-    
-    <a class="article-more-a" href="/2021/05/25/d3-scaleLinear/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
         		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">d3</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">scaleLinear</a>
-        		</li>
       		
 		</ul>
 	</div>
@@ -1149,16 +386,85 @@ a_1\mod{m},\quad a_2\mod{m},...,\quad a_n\mod{m},
     
 
     
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/05/25/d3-scaleLinear/">展开全文 >></a>
-    </p>
+
     
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://miku39393939.github.io/2022/05/09/PythonCourse8/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
 
     
     <div class="clearfix"></div>
   </div>
   </div>
 </article>
+
+
+<nav id="article-nav">
+  
+    <a href="/2022/05/09/PythonCourse9/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          PythonCourse9 文件与文件夹操作
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/08/CS-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C# 值类型，引用类型</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -1179,12 +485,14 @@ a_1\mod{m},\quad a_2\mod{m},...,\quad a_n\mod{m},
 
 
 
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/">Next &amp;raquo;</a>
-    </nav>
-  
+
+
+
+
+
+
+
+
 
 
           </div>
@@ -1224,8 +532,8 @@ a_1\mod{m},\quad a_2\mod{m},...,\quad a_n\mod{m},
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
