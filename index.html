@@ -218,6 +218,287 @@
             
 
   
+    <article id="post-cf1668D" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/05/14/cf1668D/" target="_blank">cf1668D</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/05/14/cf1668D/" class="archive-article-date">
+        <time datetime="2022-05-14T00:51:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-14</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="题目大意">题目大意</h2>
+<p>给定一个长度为<span class="math inline">\(n\)</span>的数组<span class="math inline">\(a(-10^9 \le a_i \le 10^9)\)</span>。 我们可以把它分割成任意个连续的子序列。 每个子序列<span class="math inline">\(s_k = a_l...a_r\)</span>会有一个权值: * <span class="math inline">\(\sum_{j=l}^{r}a_i &gt; 0\)</span>,则权值为<span class="math inline">\(r - l + 1\)</span> * <span class="math inline">\(\sum_{j=l}^{r}a_i = 0\)</span>,则权值为<span class="math inline">\(0\)</span> * <span class="math inline">\(\sum_{j=l}^{r}a_i &gt; 0\)</span>,则权值为<span class="math inline">\(-(r - l + 1)\)</span></p>
+<p>求出让所有子序列权值之和最大的一种分割方法。 <!--mroe--> <a target="_blank" rel="noopener" href="https://codeforces.com/contest/1668/problem/D">题目链接</a> ## 思路 我们可以先按照动态规划的思路来写出状态转移方程,设<span class="math inline">\(f_i\)</span>是在<span class="math inline">\(i\)</span>之前可以获得最大权值,<span class="math inline">\(calc(i,j)\)</span>是计算相应子序列的权值。 那么: <span class="math display">\[f[i] = max(f[j] + calc(j + 1, i)),1 \le j \le i\]</span> 我们继续观察它，假如<span class="math inline">\(a[i]\)</span>加上前面的子序列都是负数，那么我们就完全可以让<span class="math inline">\(a[i]\)</span>单独成一个子序列，这样它对答案的减少只有<span class="math inline">\(-1\)</span>。</p>
+<p>也就是说，我们计算<span class="math inline">\(a[i]\)</span>时，<strong>我们只用考虑位置在它前面且前缀和小于它的位置</strong>。</p>
+<p>但是即使只考虑这些，我们需要遍历所有的<span class="math inline">\(j, j &lt; i\)</span>还是会TLE : (</p>
+<p>不过我们发现，如果我们只考虑在它前面且前缀和小于它的位置，那么上面状态转移方程可以化简为: <span class="math display">\[f[i] = max(f[j] + (i - j),1 \le j \le i\]</span>(因为我们只选择和为正数的子序列) 进一步推导发现<span class="math inline">\(f[i] = max(f[j] - j + i)\)</span> 再往下化简一步: <span class="math display">\[f[i] = max(f[j] - j) + i,1 \le j \le i\]</span></p>
+<p>而<span class="math inline">\(max(f[j] - j)\)</span>可以较快速的求出。</p>
+<p>具体来说，我们用把前缀和sum数组排序，比如<span class="math inline">\(sum[2]\)</span>排序后的位置是<span class="math inline">\(4\)</span>，那么我们更新<span class="math inline">\(f[2]\)</span>的时候就查看树状数组中<span class="math inline">\(4\)</span>之前的最大值。。插入<span class="math inline">\(f[2] - 2\)</span>时，就把放入树状数组中的位置<span class="math inline">\(4\)</span>。</p>
+<p>遍历的时候还是按照原来的顺序，这样既能按照动态规划的正确形式更新答案，也能正确维护树状数组。</p>
+<h2 id="代码">代码</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">5e5</span> + <span class="number">78</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">long</span> <span class="keyword">long</span> INF = <span class="number">0x7f7f7f7f</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> T, n, cnt, order[maxN];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> a[maxN], f[maxN], c[maxN], sum[maxN];</span><br><span class="line">pair&lt;<span class="keyword">long</span> <span class="keyword">long</span>, <span class="keyword">int</span>&gt; t[maxN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> pos, <span class="keyword">long</span> <span class="keyword">long</span> val)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(; pos &lt;= n; pos += (pos &amp; -pos))</span><br><span class="line">        c[pos] = <span class="built_in">max</span>(c[pos], val);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="title">ask</span><span class="params">(<span class="keyword">int</span> pos)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> tmp = -INF;</span><br><span class="line">    <span class="keyword">for</span>(; pos &gt; <span class="number">0</span>; pos -= (pos &amp; -pos))</span><br><span class="line">        tmp = <span class="built_in">max</span>(tmp, c[pos]);</span><br><span class="line">    <span class="keyword">return</span> tmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;a[i]);</span><br><span class="line">            sum[i] = sum[i - <span class="number">1</span>] + a[i];</span><br><span class="line">            t[i] = &#123;sum[i], -i&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            c[i] = f[i] = -INF;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(t + <span class="number">1</span>, t + <span class="number">1</span> + n);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            order[-t[i].second] = i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            f[i] = f[i <span class="number">-1</span>] + (a[i] == <span class="number">0</span> ? <span class="number">0</span> : a[i] / <span class="built_in">abs</span>(a[i]));</span><br><span class="line">            f[i] = <span class="built_in">max</span>(f[i], <span class="built_in">ask</span>(order[i]) + i);</span><br><span class="line">            <span class="keyword">if</span>(sum[i] &gt; <span class="number">0</span>)</span><br><span class="line">                f[i] = i;</span><br><span class="line">            <span class="built_in">add</span>(order[i], f[i] - i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, f[n]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">树状数组</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/05/14/cf1668D/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-cf1659D" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/05/13/cf1659D/" target="_blank">cf1659D</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/05/13/cf1659D/" class="archive-article-date">
+        <time datetime="2022-05-13T06:17:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-13</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="题目大意">题目大意</h2>
+<p>给定一个长度为<span class="math inline">\(n\)</span>由<span class="math inline">\(0,1\)</span>组成的序列。然后进行<span class="math inline">\(n\)</span>次操作，第<span class="math inline">\(i\)</span>次操作会把前<span class="math inline">\(i\)</span>个数升序排序。</p>
+<p>比如<span class="math inline">\(0,1,0,1\)</span>,<span class="math inline">\(4\)</span>次操作形成的序列分别是<span class="math inline">\([0,1,0,1],[0,1,0,1],[0,0,1,1],[0,0,1,1]\)</span>，然后每一位分别相加为<span class="math inline">\([0,2,2,4]\)</span>,设此数组为<span class="math inline">\(c\)</span>。</p>
+<p>现在给定数组<span class="math inline">\(c\)</span>，求原来的数组。<span class="math inline">\(1 \le n \le 2*10^5\)</span>，且保证有解
+    
+    <a class="article-more-a" href="/2022/05/13/cf1659D/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">构造</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/05/13/cf1659D/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-cf1659C" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/05/13/cf1659C/" target="_blank">CFf1659C  Line Empire</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/05/13/cf1659C/" class="archive-article-date">
+        <time datetime="2022-05-13T05:41:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-13</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="题目大意">题目大意</h2>
+<p>在一条坐标轴上有<span class="math inline">\(n\)</span>个点需要占领，每个节点在<span class="math inline">\(x_i\)</span>，初始节点在<span class="math inline">\(0\)</span>处，且基地也在<span class="math inline">\(0\)</span>处 每次行动时，设当前基地在<span class="math inline">\(p\)</span>处,那么可以做以下行动: * 把基地移动到一个已经占领的点<span class="math inline">\(x_i\)</span>，耗费<span class="math inline">\(a * |x_i - p|\)</span> * 占领一个没有被占领的节点，消耗<span class="math inline">\(b * |x_i - p|\)</span></p>
+<p>给定<span class="math inline">\(a,b,x_i(1\le n \le 2*10^5, 1 \le a, b \le 10^5)\)</span>,求占领所有节点的耗费最小值。</p>
+    
+    <a class="article-more-a" href="/2022/05/13/cf1659C/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">前缀和</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/05/13/cf1659C/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-PythonCourse9" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -576,6 +857,18 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s1; <span class="comment">//特殊引用类型</span></span><br><span class="line">string s = <span class="string">&quot;胡桃,刻晴,甘雨&quot;</span>;</span><br><span class="line">string[] arr = s.<span class="built_in">Split</span>(<span class="string">&#x27;,&#x27;</span>); <span class="comment">// 分割</span></span><br></pre></td></tr></table></figure>
 <h3 id="控制台输入输出">控制台输入输出</h3>
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Console.WriteLine(<span class="string">&quot;233&quot;</span>); <span class="comment">// 换行输出</span></span><br><span class="line">Console.Write(<span class="string">&quot;233&quot;</span>);  <span class="comment">//不换行输出</span></span><br><span class="line">Console.Write(<span class="string">&quot;&#123;1&#125;&#123;2&#125;&quot;</span>,<span class="number">233</span>, <span class="number">2333</span>); <span class="comment">//格式化输出</span></span><br></pre></td></tr></table></figure>
+<h2 id="函数的传值传引用">函数的传值传引用</h2>
+<p>如果函数参数是引用类型，那么传递的参数就是引用，如果是值类型，那么就是传值。</p>
+<p>如果对值类型进行传递引用: #### 使用ref 1. 定义函数时，使用ref修饰形参 2. 调用函数时，使用ref修饰实参变量 3. 实参必须初始化 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Swap</span><span class="params">(ref <span class="keyword">int</span> a, ref <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="使用out">使用out</h4>
+<ol type="1">
+<li>定义函数时 使用out修饰形参</li>
+<li>调用函数时，使用out修饰实参变量</li>
+<li>实参可以不初始化，但函数体必须对实参进行赋默认值值操作 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Swap</span><span class="params">(out <span class="keyword">int</span> a = <span class="number">1</span>, out <span class="keyword">int</span> b = <span class="number">233</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="数据类型转换-拆箱与装箱">数据类型转换 拆箱与装箱</h3>
+<p>所有类型都直接或间接继承了Object类</p>
+<p>装箱：把其它类型转换为Object类型 拆箱：把Object类型转化为其他类型 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">25</span>;</span><br><span class="line">Object obj = (obj)x; <span class="comment">//装箱</span></span><br><span class="line"><span class="keyword">int</span> y = (<span class="keyword">int</span>)boj; <span class="comment">// 拆箱</span></span><br></pre></td></tr></table></figure> 但在程序开发中要尽量避免拆装箱(会有额外内存消耗)</p>
 
     
 
@@ -949,274 +1242,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2022/04/24/ICPC2022KunMingD/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ICPC2022KunMingB" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/04/24/ICPC2022KunMingB/" target="_blank">ICPC2022KunMingB</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/04/24/ICPC2022KunMingB/" class="archive-article-date">
-        <time datetime="2022-04-24T02:59:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-24</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="题目大意">题目大意</h2>
-<p>给定一个<span class="math inline">\(W*H\)</span>的方格矩阵。和<span class="math inline">\(n\)</span>的小方格阵，每个覆盖了左下角为<span class="math inline">\(x_{i1},y_{i1}\)</span>，右上角为<span class="math inline">\(x_{i2},y_{i2}\)</span>的方格。</p>
-<p>每一步会等概率随机选择一个方格阵(包括被染色的)，把它全部涂黑，问把<span class="math inline">\(W*H\)</span>的方格矩阵全部涂黑的期望步数是多少？
-    
-    <a class="article-more-a" href="/2022/04/24/ICPC2022KunMingB/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数学期望</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/04/24/ICPC2022KunMingB/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ICPC2022KunMingG" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/04/23/ICPC2022KunMingG/" target="_blank">ICPC2022KunMingG</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/04/23/ICPC2022KunMingG/" class="archive-article-date">
-        <time datetime="2022-04-23T08:02:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-23</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="题目大意">题目大意</h2>
-<p>有<span class="math inline">\(n\)</span>个豆子排成一排,每个豆子有<span class="math inline">\(p_i\)</span>的概率被选中.每次随机选一个豆子,将其放到最前面,每次操作的代价是该豆子前面豆子的个数,问在操作无限次后再操作一次,操作代价的期望是多少？</p>
-    
-    <a class="article-more-a" href="/2022/04/23/ICPC2022KunMingG/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数学期望</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/04/23/ICPC2022KunMingG/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ICPC2022KunMingF" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/04/23/ICPC2022KunMingF/" target="_blank">ICPC2022KunMingF</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/04/23/ICPC2022KunMingF/" class="archive-article-date">
-        <time datetime="2022-04-23T04:15:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-23</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="题目大意">题目大意</h2>
-<p>给定一个<span class="math inline">\(n\)</span>个节点的树，每个点有个权值<span class="math inline">\(b_i\)</span>,任选一条路径，路径上的点至少为<span class="math inline">\(2\)</span>个。求<span class="math inline">\(max(\sum\frac{-x^2+b_kx}{v})\)</span>,其中<span class="math inline">\(b_k\)</span>是路径上点的权值，<span class="math inline">\(v\)</span>是路径上点的个数，<span class="math inline">\(x\)</span>是任意一个自己选择的数。</p>
-    
-    <a class="article-more-a" href="/2022/04/23/ICPC2022KunMingF/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/04/23/ICPC2022KunMingF/">展开全文 >></a>
     </p>
     
 
@@ -1637,6 +1662,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">主席树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">前缀和</a>
               </li>
             
             <div class="clearfix"></div>
